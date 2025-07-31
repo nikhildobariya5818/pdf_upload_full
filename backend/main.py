@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-# Import endpoints from both files
 import single_diamond
 import multi_diamond
 
@@ -28,11 +27,6 @@ app.post("/upload-multi-pdf/")(multi_diamond.upload_multi_pdf)
 def hello():
     return {"message": "hello"}
 
-# Optional root endpoint
-@app.get("/")
-def home():
-    return {"message": "GIA PDF API is running with Single & Multi endpoints"}
-# Optional root endpoint
 @app.get("/")
 def home():
     return {"message": "GIA PDF API is running with Single & Multi endpoints"}

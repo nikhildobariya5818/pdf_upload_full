@@ -34,14 +34,15 @@ def generate_unique_barcode(number_of_digits, start_digit, save_path, barcode_ty
     else:
         raise ValueError("Unsupported barcode type")
     writer_options = {
-        'write_text': False,
-        'module_width': 0.8,
-        'module_height': 35.0,
-        'quiet_zone': 1.0,
+        'write_text': False,           # No text below the barcode
+        'module_width': 2.5,           # <-- Increase this value for THICKER bars
+        'module_height': 50.0,         # <-- Can also increase height if desired
+        'quiet_zone': 2.0,             # Margin around barcode (increase if needed)
         'font_size': 0
     }
     filename = code.save(save_path, options=writer_options)
     return number, filename
+
 
 def extract_report_date(text):
     # Pattern matches "March 02, 2022"

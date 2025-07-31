@@ -6,6 +6,8 @@ import json
 import os
 import shutil
 from fastapi.middleware.cors import CORSMiddleware
+import qrcode
+
 app = FastAPI()
 
 app.add_middleware(
@@ -16,6 +18,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+def create_and_save_qr_code(report_number, folder_path):
+    # Construct URL for GIA report check (strip spaces from report number)
+    url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
+    qr = qrcode.make(url)
+    qr_path = os.path.join(folder_path, 'qrcode.png')
+    qr.save(qr_path)
+    return qr_path
 
 def process_gia_pdf(pdf_path):
     """
@@ -45,6 +54,9 @@ def process_gia_pdf(pdf_path):
     # --- Create a dedicated folder for this report ---
     folder_name = gia_report_number.strip().replace(' ', '_')
     os.makedirs(folder_name, exist_ok=True)
+
+    # --- Generate QR code and save it in the folder ---
+    qr_code_path = create_and_save_qr_code(gia_report_number, folder_name)
 
     # --- Determine Report Type ---
     report_type = "GIANATURALDIAMONDGRADINGREPORT"
@@ -90,13 +102,11 @@ def process_gia_pdf(pdf_path):
             [img for img in images if page.get_image_bbox(img).get_area() > 10000],
             key=lambda img: page.get_image_bbox(img).x0
         )
-        
         if len(main_diagrams) > 0:
             proportions_img_path = os.path.join(folder_name, "proportions.png")
             xref = main_diagrams[0][0]
             pix = fitz.Pixmap(doc, xref)
             pix.save(proportions_img_path)
-        
         if len(main_diagrams) > 1:
             clarity_img_path = os.path.join(folder_name, "clarity_characteristics.png")
             xref = main_diagrams[1][0]
@@ -110,6 +120,7 @@ def process_gia_pdf(pdf_path):
         "ADDITIONALGRADINGINFORMATION": additional_info,
         "PROPORTIONS": proportions_img_path.replace("\\", "/") if proportions_img_path else None,
         "CLARITYCHARACTERISTICS": clarity_img_path.replace("\\", "/") if clarity_img_path else None,
+        "QRCODE": qr_code_path.replace("\\", "/") if qr_code_path else None,
         "symbols": symbols
     }
 
@@ -120,7 +131,6 @@ def process_gia_pdf(pdf_path):
 
     doc.close()
     return final_data
-
 
 @app.post("/upload-multi-pdf/")
 async def upload_multi_pdf(file: UploadFile = File(...)):

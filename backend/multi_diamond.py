@@ -21,7 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Create QR code
 def create_and_save_qr_code(report_number, folder_path):
     url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
     qr = qrcode.make(url)
@@ -29,33 +28,33 @@ def create_and_save_qr_code(report_number, folder_path):
     qr.save(qr_path)
     return qr_path
 
-# Generate barcode PNG without number
 def generate_unique_barcode(number_of_digits, start_digit, save_path, barcode_type):
-    # Generate a unique number as a string
     number = str(start_digit) + ''.join(str(random.randint(0, 9)) for _ in range(number_of_digits - 1))
-
-    # Select barcode class
     if barcode_type == 'upca':  # 12 digits
         code = barcode.get('upca', number, writer=ImageWriter())
     elif barcode_type == 'code128':  # For any digit length
         code = barcode.get('code128', number, writer=ImageWriter())
     else:
         raise ValueError("Unsupported barcode type")
-
-    # Barcode style configuration
     writer_options = {
-        'write_text': False,    # Hide numbers
-        'module_width': 0.8,    # Bar width (thicker bars)
-        'module_height': 35.0,  # Bar height
-        'quiet_zone': 1.0,      # Small white margins
-        'font_size': 0          # No font
+        'write_text': False,
+        'module_width': 0.8,
+        'module_height': 35.0,
+        'quiet_zone': 1.0,
+        'font_size': 0
     }
-
-    # Save barcode as PNG
     filename = code.save(save_path, options=writer_options)
     return number, filename
 
-# Process GIA PDF
+# New function to extract the report date
+def extract_report_date(text):
+    # This pattern matches dates like "March 02, 2022"
+    pattern = r"\b([A-Z][a-z]+ \d{2}, \d{4})\b"
+    match = re.search(pattern, text)
+    if match:
+        return match.group(1)
+    return None
+
 def process_gia_pdf(pdf_path):
     try:
         doc = fitz.open(pdf_path)
@@ -150,8 +149,12 @@ def process_gia_pdf(pdf_path):
             pix = fitz.Pixmap(doc, xref)
             pix.save(clarity_img_path)
 
+    # Extract report date
+    report_date = extract_report_date(text)
+
     # Final JSON
     final_data = {
+        "ReportDate": report_date,  # Add the report date here
         report_type: gia_report_data,
         "GRADINGRESULTS": grading_results,
         "ADDITIONALGRADINGINFORMATION": additional_info,
@@ -171,7 +174,6 @@ def process_gia_pdf(pdf_path):
     doc.close()
     return final_data
 
-# FastAPI endpoint
 @app.post("/upload-multi-pdf/")
 async def upload_multi_pdf(file: UploadFile = File(...)):
     temp_pdf_path = file.filename
@@ -180,5 +182,4 @@ async def upload_multi_pdf(file: UploadFile = File(...)):
 
     result = process_gia_pdf(temp_pdf_path)
     os.remove(temp_pdf_path)
-
     return JSONResponse(content=result)

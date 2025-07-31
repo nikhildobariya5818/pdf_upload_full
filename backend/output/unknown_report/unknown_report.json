@@ -1,0 +1,21 @@
+{
+    "GIANATURALDIAMONDGRADINGREPORT": {
+        "GIA Report Number": null,
+        "Shape and Cutting Style": "Square Modified Brilliant",
+        "Measurements": "5.25 x 5.15 x 4.04 mm"
+    },
+    "GRADINGRESULTS": {
+        "Carat Weight": null,
+        "Color Grade": null,
+        "Clarity Grade": null
+    },
+    "ADDITIONALGRADINGINFORMATION": {
+        "polish": "Excellent\nSymmetry",
+        "symmetry": "Excellent\nFluorescence",
+        "fluorescence": "None\nInscription",
+        "inscription": "GIA 5426466687\n5426466687\nKEY TO SYMBOLS"
+    },
+    "PROPORTIONS": "/files/unknown_report/proportions.jpeg",
+    "CLARITY_CHARACTERISTICS": "/files/unknown_report/clarity_characteristics.png",
+    "symbols": []
+}

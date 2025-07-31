@@ -1,0 +1,27 @@
+{
+    "GIANATURALDIAMONDGRADINGREPORT": {
+        "GIA Report Number": "6505136707",
+        "Shape and Cutting Style": "Square Emerald Cut",
+        "Measurements": "5.50 x 5.31 x 3.66 mm"
+    },
+    "GRADINGRESULTS": {
+        "Carat Weight": "1.01 carat",
+        "Color Grade": "D",
+        "Clarity Grade": "VS2",
+        "Cut Grade": null
+    },
+    "ADDITIONALGRADINGINFORMATION": {
+        "polish": "Excellent",
+        "symmetry": "Very Good",
+        "fluorescence": "Medium Blue",
+        "inscription": "GIA 6505136707"
+    },
+    "PROPORTIONS": "6505136707/proportions.png",
+    "CLARITYCHARACTERISTICS": "6505136707/clarity_characteristics.png",
+    "symbols": [
+        {
+            "icon": null,
+            "name": "Crystal\nFeather\nNeedle\nNatural"
+        }
+    ]
+}

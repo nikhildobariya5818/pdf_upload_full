@@ -1,0 +1,27 @@
+{
+    "GIANATURALDIAMONDGRADINGREPORT": {
+        "GIA Report Number": "5426466687",
+        "Shape and Cutting Style": "Square Modified Brilliant",
+        "Measurements": "5.25 x 5.15 x 4.04 mm"
+    },
+    "GRADINGRESULTS": {
+        "Carat Weight": "1.01 carat",
+        "Color Grade": "H",
+        "Clarity Grade": "VS1",
+        "Cut Grade": null
+    },
+    "ADDITIONALGRADINGINFORMATION": {
+        "polish": "Excellent",
+        "symmetry": "Excellent",
+        "fluorescence": "None",
+        "inscription": "GIA 5426466687"
+    },
+    "PROPORTIONS": "5426466687/proportions.png",
+    "CLARITYCHARACTERISTICS": "5426466687/clarity_characteristics.png",
+    "symbols": [
+        {
+            "icon": null,
+            "name": "Feather\nCrystal\nPinpoint"
+        }
+    ]
+}

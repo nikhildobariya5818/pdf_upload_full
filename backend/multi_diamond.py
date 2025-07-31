@@ -102,15 +102,15 @@ def process_gia_pdf(pdf_path):
 
     # Extract Text Data
     gia_report_data = {
-        "GIA Report Number": gia_report_number,
-        "Shape and Cutting Style": find_value(r"Shape and Cutting Style \.+ (.+)"),
+        "GIAReportNumber": gia_report_number,
+        "ShapeandCuttingStyle": find_value(r"Shape and Cutting Style \.+ (.+)"),
         "Measurements": find_value(r"Measurements \.+ (.+)"),
     }
     grading_results = {
-        "Carat Weight": find_value(r"Carat Weight \.+ (.+)"),
-        "Color Grade": find_value(r"Color Grade \.+ (.+)"),
-        "Clarity Grade": find_value(r"Clarity Grade \.+ (.+)"),
-        "Cut Grade": find_value(r"Cut Grade \.+ (.+)"),
+        "CaratWeight": find_value(r"Carat Weight \.+ (.+)"),
+        "ColorGrade": find_value(r"Color Grade \.+ (.+)"),
+        "ClarityGrade": find_value(r"Clarity Grade \.+ (.+)"),
+        "CutGrade": find_value(r"Cut Grade \.+ (.+)"),
     }
     additional_info = {
         "polish": find_value(r"Polish \.+ (.+)"),

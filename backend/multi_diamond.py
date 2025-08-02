@@ -37,7 +37,7 @@ def generate_unique_barcode(number_of_digits, start_digit, save_path):
     number = str(start_digit) + ''.join(str(random.randint(0, 9)) for _ in range(number_of_digits - 1))
 
     # Add spaces for visual width
-    number_with_spaces = f"{' ' * 4}{number}{' ' * 4}"
+    number_with_spaces = f"{' ' * 2}{number}{' ' * 2}"
 
     # Always use Code128 for width control
     barcode_number = number_with_spaces

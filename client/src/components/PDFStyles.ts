@@ -6,7 +6,7 @@ export const baseFont = "Helvetica";
 export const commonStyles = StyleSheet.create({
   sectionContainer: {
     // padding: 20,
-    paddingHorizontal: 20,
+    // paddingHorizontal: 20,
     // marginBottom: 10,
   },
   fieldRow: {
@@ -17,26 +17,29 @@ export const commonStyles = StyleSheet.create({
   },
   fieldLabel: {
     fontFamily: baseFont,
-    fontSize: 10,
+    fontSize: 9,
     color: "#333",
+    letterSpacing: "-0.40",
   },
   ReportDate: {
     fontFamily: baseFont,
-    fontSize: 10,
+    fontSize: 9,
     color: "#333",
     marginBottom: 5,
+    letterSpacing: "-0.40",
   },
   separator: {
     flexGrow: 1,
     borderBottom: "1px dotted #999",
     marginHorizontal: 4,
-    height: 8,
+    height: 10,
   },
   fieldValue: {
     fontFamily: baseFont,
-    fontSize: 10,
+    fontSize: 9,
     color: "#000",
     textAlign: "right",
+    letterSpacing: "-0.40",
   },
   headerText: {
     fontFamily: baseFont,

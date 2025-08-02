@@ -110,7 +110,7 @@ const ReportProcessor = () => {
         ...response.data,
         ...proportions,
       };
-
+      console.log("mergedData", mergedData)
       const blob = await pdf(<InvoicePDF data={mergedData} />).toBlob();
 
       const url = URL.createObjectURL(blob);

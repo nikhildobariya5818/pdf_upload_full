@@ -17,12 +17,13 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
     return (
         <View style={commonStyles.sectionContainer}>
 
-            {/* === Centered diagram images === */}
-            <View style={styles.centeredColumn}>
+            <View style={{ height: '140px', width: '100%', marginTop: '13px' }}>
                 <Image
                     src={`${BASE_URL}/files/clarity_characteristics.png`}
                     style={styles.diagramImage}
                 />
+            </View>
+            <View style={{ height: '156px', width: '100%', marginTop: '13px' }}>
                 <Image
                     src={`${BASE_URL}/files/proportions.png`}
                     style={styles.diagramImage}
@@ -30,9 +31,27 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
             </View>
 
             {/* === Symbol list === */}
-            <Text style={commonStyles.headerText}>KEY TO SYMBOLS</Text>
+            <Text style={{
+                fontSize: 7,
+                marginBottom: 6,
+                color: "#000",
+                letterSpacing: -0.50
+            }}>KEY TO SYMBOLS*</Text>
 
-            <View style={{ marginTop: 2 }}>
+
+            <Text style={{ fontSize: 7, }}>Pinpoint</Text>
+            <View style={{ marginBottom: '117px' }} />
+            <View>
+                <Text style={styles.footerNote}>
+                    * Red symbols denote internal characteristics (inclusions). Green or
+                    black symbols denote external characteristics (blemishes). Diagram is
+                    an approximate representation of the diamond, and symbols shown
+                    indicate type, position, and approximate size of clarity
+                    characteristics. All clarity characteristics may not be shown. Details
+                    of finish are not shown.
+                </Text>
+            </View>
+            {/* <View style={{ marginTop: 2 }}>
                 {symbolList.map((symbol: string, idx: number) => (
                     <View key={idx} style={styles.symbolRow}>
                         <Image
@@ -42,19 +61,19 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                         <Text style={commonStyles.fieldLabel}>{symbol}</Text>
                     </View>
                 ))}
-            </View>
+            </View> */}
             {/* === Container with relative positioning to allow QR overlap === */}
-            <View style={{ position: "relative", marginTop: 40 }}>
-                {/* QR Code absolutely positioned to top-right */}
-                <View style={{ position: "absolute", top: -53, right: 0 }}>
+            {/* <View style={{ position: "relative", marginTop: 40 }}> */}
+            {/* QR Code absolutely positioned to top-right */}
+            {/* <View style={{ position: "absolute", top: -53, right: 0 }}>
                     <Image
                         src={`${BASE_URL}/files/qrcode.png`}
                         style={styles.qrImage}
                     />
-                </View>
+                </View> */}
 
-                {/* Footer note text (will appear underneath QR visually) */}
-                <View style={{ width: "60%" }}>
+            {/* Footer note text (will appear underneath QR visually) */}
+            {/* <View style={{ width: "60%" }}>
                     <Text style={styles.footerNote}>
                         * Red symbols denote internal characteristics (inclusions). Green or
                         black symbols denote external characteristics (blemishes). Diagram is
@@ -64,7 +83,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                         of finish are not shown.
                     </Text>
                 </View>
-            </View>
+            </View> */}
 
             {/* === Barcode and number aligned right === */}
             {/* <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 6 }}>
@@ -76,7 +95,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     <Text style={[commonStyles.ReportDate]}>{data.BARCODE10.number}</Text>
                 </View>
             </View> */}
-            <View style={{ flexDirection: "row", justifyContent: "flex-end", alignItems: "center", marginTop: 6 }}>
+            {/* <View style={{ flexDirection: "row", justifyContent: "flex-end", alignItems: "center", marginTop: 6 }}>
                 <Image
                     src={`${BASE_URL}/files/barcode10.png`}
                     style={styles.barcodeImage}
@@ -84,16 +103,13 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 <Text style={[commonStyles.ReportDate, { marginLeft: 1 }]}>
                     {data.BARCODE10.number}
                 </Text>
-            </View>
+            </View> */}
 
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    centeredColumn: {
-        flexDirection: "column",
-    },
     diagramImage: {
         width: 140,
         height: 140,
@@ -131,8 +147,9 @@ const styles = StyleSheet.create({
         objectFit: "contain",
     },
     footerNote: {
-        fontSize: 6,
+        fontSize: 5,
         lineHeight: 1.3,
+        letterSpacing: -0.3,
         textAlign: "left",
     },
 });

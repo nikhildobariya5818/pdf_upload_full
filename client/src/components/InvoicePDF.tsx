@@ -78,7 +78,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                 </View>
                 {/* Main content row */}
                 <View style={[styles.contentRow]}>
-                    {/* marginTop: '82px' */}
+                    {/* marginTop: '43px' */}
                     <View style={{ width: '215px', marginTop: '43px', marginLeft: '110px' }}>
                         <InvoicePDFSection1 data={data} />
                     </View>

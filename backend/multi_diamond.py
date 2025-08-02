@@ -1,4 +1,4 @@
-from fastapi import File, UploadFile
+from fastapi import File, UploadFile, APIRouter
 from fastapi.responses import JSONResponse
 import fitz  # PyMuPDF
 import re
@@ -13,10 +13,12 @@ import random
 # Ensure output directory exists
 OUTPUT_DIR = 'output'
 
+
 def clear_output_directory():
     if os.path.exists(OUTPUT_DIR):
         shutil.rmtree(OUTPUT_DIR)
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+
 
 def create_and_save_qr_code(report_number, folder_path):
     url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
@@ -25,23 +27,33 @@ def create_and_save_qr_code(report_number, folder_path):
     qr.save(qr_path)
     return qr_path
 
-def generate_unique_barcode(number_of_digits, start_digit, save_path, barcode_type):
+
+def generate_unique_barcode(number_of_digits, start_digit, save_path):
+    """
+    Generate wide Code128 barcodes for both 10 and 12 digits.
+    Both barcodes are visually wide and fully scannable.
+    """
+    # Generate numeric string
     number = str(start_digit) + ''.join(str(random.randint(0, 9)) for _ in range(number_of_digits - 1))
-    if barcode_type == 'upca':  # 12 digits
-        code = barcode.get('upca', number, writer=ImageWriter())
-    elif barcode_type == 'code128':  # Any digit length
-        code = barcode.get('code128', number, writer=ImageWriter())
-    else:
-        raise ValueError("Unsupported barcode type")
+
+    # Add spaces for visual width
+    number_with_spaces = f"{' ' * 6}{number}{' ' * 6}"
+
+    # Always use Code128 for width control
+    barcode_number = number_with_spaces
+    code = barcode.get('code128', barcode_number, writer=ImageWriter())
+
+    # Adjust width based on digits
     writer_options = {
-        'write_text': False,           # No text below the barcode
-        'module_width': 2.5,           # <-- Increase this value for THICKER bars
-        'module_height': 50.0,         # <-- Can also increase height if desired
-        'quiet_zone': 2.0,             # Margin around barcode (increase if needed)
+        'write_text': False,
+        'module_width': 4.0 if number_of_digits == 10 else 3.5,  # 10-digit is slightly wider
+        'module_height': 50.0,
+        'quiet_zone': 15.0,  # Padding around barcode
         'font_size': 0
     }
+
     filename = code.save(save_path, options=writer_options)
-    return number, filename
+    return number_with_spaces, filename
 
 
 def extract_report_date(text):
@@ -52,8 +64,9 @@ def extract_report_date(text):
         return match.group(1)
     return None
 
+
 def process_gia_pdf(pdf_path):
-    clear_output_directory()  # <--- Clear output/ directory at the start
+    clear_output_directory()
 
     try:
         doc = fitz.open(pdf_path)
@@ -73,19 +86,17 @@ def process_gia_pdf(pdf_path):
         doc.close()
         return {"error": "Could not find GIA Report Number in the PDF."}
 
-    # Output paths
+    # Generate QR Code and Barcodes
     qr_code_path = create_and_save_qr_code(gia_report_number, OUTPUT_DIR)
     barcode12_number, barcode12_path = generate_unique_barcode(
         number_of_digits=12,
         start_digit=1,
-        save_path=os.path.join(OUTPUT_DIR, "barcode12"),
-        barcode_type='upca'
+        save_path=os.path.join(OUTPUT_DIR, "barcode12")
     )
     barcode10_number, barcode10_path = generate_unique_barcode(
         number_of_digits=10,
         start_digit=1,
-        save_path=os.path.join(OUTPUT_DIR, "barcode10"),
-        barcode_type='code128'
+        save_path=os.path.join(OUTPUT_DIR, "barcode10")
     )
 
     # Determine Report Type
@@ -93,7 +104,7 @@ def process_gia_pdf(pdf_path):
     if "DOSSIER" in text:
         report_type = "GIANATURALDIAMONDOSSIER"
 
-    # Extract Text Data
+    # Extract Report Data
     gia_report_data = {
         "GIAReportNumber": gia_report_number,
         "ShapeandCuttingStyle": find_value(r"Shape and Cutting Style \.+ (.+)"),
@@ -168,8 +179,8 @@ def process_gia_pdf(pdf_path):
     doc.close()
     return final_data
 
-from fastapi import APIRouter
 
+# FastAPI Router
 router = APIRouter()
 
 @router.post("/upload-multi-pdf/")

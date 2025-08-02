@@ -9,6 +9,7 @@ import qrcode
 import barcode
 from barcode.writer import ImageWriter
 import random
+from PIL import Image
 
 # Ensure output directory exists
 OUTPUT_DIR = 'output'
@@ -22,9 +23,35 @@ def clear_output_directory():
 
 def create_and_save_qr_code(report_number, folder_path):
     url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
-    qr = qrcode.make(url)
+    
+    # Create QRCode object
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=4,
+    )
+    qr.add_data(url)
+    qr.make(fit=True)
+
+    # Make the QR code image (black/white)
+    qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGBA")
+
+    # Convert white to transparent
+    datas = qr_img.getdata()
+    new_data = []
+    for item in datas:
+        # If pixel is white, make it transparent
+        if item[0] > 240 and item[1] > 240 and item[2] > 240:  # white
+            new_data.append((255, 255, 255, 0))
+        else:
+            new_data.append(item)
+    qr_img.putdata(new_data)
+
+    # Save QR with transparent background as PNG
     qr_path = os.path.join(folder_path, 'qrcode.png')
-    qr.save(qr_path)
+    qr_img.save(qr_path, format="PNG")
+
     return qr_path
 
 

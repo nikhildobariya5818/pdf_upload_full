@@ -23,6 +23,11 @@ Font.register({
     ],
 });
 
+Font.register({
+    family: 'MICR',
+    src: '/fonts/micrenc.ttf',
+});
+
 const styles = StyleSheet.create({
     // page: {
     //     width: 1224,

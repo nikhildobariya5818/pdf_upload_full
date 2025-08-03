@@ -238,7 +238,7 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
                 <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>Internal graining is not shown.</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 55, }}>
+            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '66px', }}>
                 <Image
                     src={`${BASE_URL}/files/barcode10.png`}
                     style={{

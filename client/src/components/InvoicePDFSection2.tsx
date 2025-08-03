@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
         width: 90,
         height: 80,
         objectFit: "contain",
-
     },
     imageWrapper: {
         alignItems: 'center',
@@ -62,19 +61,13 @@ export default function InvoicePDFSection2({ data }: any) {
     const additional = data.ADDITIONALGRADINGINFORMATION || {};
     const barcode12Number = data.BARCODE12.number
     //  || data.BARCODE10 || {};
-    const barcode10Number = data.BARCODE10.number
     const proportionsImage = data.PROPORTIONS;
-    const clarityImage = data.CLARITYCHARACTERISTICS;
-    const claritySymbols = data.symbols?.[0]?.name?.replace(/\n/g, ', ') || 'Pinpoint, Feather';
 
     const jobNumber = Math.floor(10000000 + Math.random() * 90000000); // Ensures 8-digit number
     const orCode = Math.floor(10 + Math.random() * 90); // Ensures 2-digit number
 
     return (
-        <View style={{
-            // marginTop: 10,
-            // alignItems: "center",
-        }}>
+        <View>
             <View>
                 <Text
                     style={{
@@ -109,42 +102,10 @@ export default function InvoicePDFSection2({ data }: any) {
                     {data?.country || 'India'}
                 </Text>
             </View>
-            {/* <View style={{
-                flexDirection: "column",
-                width: 143,
-                height: 50,
-                backgroundColor: 'red',
-                marginTop: -5,
-                marginRight: 7,
-                padding: 0, */}
-            {/* // marginBottom: '33px', */}
-            {/* // marginLeft: 144, */}
-            {/* }}> */}
-            {/* <Image
-                    src={`${BASE_URL}/files/barcode12.png`}
-                    style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "contain",
-                    }}
-                /> */}
-            {/* <Text style={{ */}
-            {/* marginLeft: 1, */}
-            {/* // marginTop: '0', */}
-            {/* marginBottom: 20, */}
-            {/* fontSize: "8.80", */}
-            {/* fontFamily: baseFont, */}
-            {/* color: "#000", */}
-            {/* }}> */}
-            {/* {barcode12Number} */}
-            {/* </Text> */}
-            {/* </View> */}
-
             <View style={{
                 //   width: 150, 
                 width: 100, // or whatever fixed size works best
                 height: 30,
-                // backgroundColor: 'red',
                 justifyContent: 'flex-start',
                 marginTop: 7,
                 // marginRight: -50

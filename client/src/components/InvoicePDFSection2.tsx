@@ -5,15 +5,13 @@ import {
     Image,
     StyleSheet,
 } from '@react-pdf/renderer';
-import { baseFont, commonStyles } from './PDFStyles';
+import { baseFont } from './PDFStyles';
 import { BASE_URL } from './ReportProcessor';
-import InvoicePDFSection3 from './InvoicePDFSection3';
 
 const styles = StyleSheet.create({
     diagramImage: {
         width: 90,
         height: 80,
-        // marginVertical: 8,
     },
     imageWrapper: {
         alignItems: 'center',
@@ -23,11 +21,10 @@ const styles = StyleSheet.create({
     fieldLabel: {
         fontFamily: baseFont,
         fontWeight: "normal",
-        // fontSize: 9,
         fontSize: 8,
         color: "#333",
-        // fontWeight: "600",
-        // letterSpacing: "-0.40",
+        letterSpacing: "-0.20",
+
     },
     fieldValue: {
         fontFamily: baseFont,
@@ -35,19 +32,17 @@ const styles = StyleSheet.create({
         fontSize: 8,
         color: "#000",
         textAlign: "right",
-        // letterSpacing: "-0.40",
+        letterSpacing: "-0.20",
+
     },
     separator: {
         flexGrow: 1,
         borderBottom: "1px dotted #999",
-        // marginHorizontal: 4,
-        // height: 10,
     },
     fieldRow: {
         flexDirection: "row",
-        // alignItems: "baseline",
-        // marginBottom: "3.5px",
-        marginTop: "2px",
+        // marginTop: "2px",
+        marginRight: '2.5px',
         width: "100%",
     },
     ReportDate: {
@@ -55,9 +50,7 @@ const styles = StyleSheet.create({
         fontWeight: "normal",
         fontSize: 11,
         color: "#333",
-        // marginBottom: 5,
         marginTop: '15px',
-        // letterSpacing: "-0.40",
     },
 });
 
@@ -76,38 +69,124 @@ export default function InvoicePDFSection2({ data }: any) {
     const orCode = Math.floor(10 + Math.random() * 90); // Ensures 2-digit number
 
     return (
-        <View>
-
+        <View style={{
+            // marginTop: 10,
+            // alignItems: "center",
+        }}>
             <View>
-                {barcode12Number && (
-                    <Image src={`${BASE_URL}/files/barcode12.png`} style={commonStyles.barcodeImage} />
-                )}
-                <Text style={[styles.ReportDate]}>{barcode12Number}</Text>
+                <Text
+                    style={{
+                        fontFamily: baseFont,
+                        fontWeight: "normal",
+                        fontSize: 7,
+                        color: "#333",
+                        marginBottom: -1
+                    }}
+                >
+                    {data?.Address || 'Plot No C-70'}
+                </Text>
+                <Text
+                    style={{
+                        fontFamily: baseFont,
+                        fontWeight: "normal",
+                        fontSize: 7,
+                        color: "#333",
+                        marginBottom: -1
+                    }}
+                >
+                    {data?.CityState || 'Mumbai, Gujarat,'}
+                </Text>
+                <Text
+                    style={{
+                        fontFamily: baseFont,
+                        fontWeight: "normal",
+                        fontSize: 7,
+                        color: "#333",
+                    }}
+                >
+                    {data?.country || 'India'}
+                </Text>
+            </View>
+            {/* <View style={{
+                flexDirection: "column",
+                width: 143,
+                height: 50,
+                backgroundColor: 'red',
+                marginTop: -5,
+                marginRight: 7,
+                padding: 0, */}
+            {/* // marginBottom: '33px', */}
+            {/* // marginLeft: 144, */}
+            {/* }}> */}
+            {/* <Image
+                    src={`${BASE_URL}/files/barcode12.png`}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                    }}
+                /> */}
+            {/* <Text style={{ */}
+            {/* marginLeft: 1, */}
+            {/* // marginTop: '0', */}
+            {/* marginBottom: 20, */}
+            {/* fontSize: "8.80", */}
+            {/* fontFamily: baseFont, */}
+            {/* color: "#000", */}
+            {/* }}> */}
+            {/* {barcode12Number} */}
+            {/* </Text> */}
+            {/* </View> */}
+
+            <View style={{
+                width: 150, // or whatever fixed size works best
+                height: 30,
+                // backgroundColor: 'red',
+                justifyContent: 'flex-start',
+                // alignItems: 'center',
+                // alignSelf: 'center' // optional: center horizontally in parent
+            }}>
+                <Image
+                    src={`${BASE_URL}/files/barcode12.png`}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "contain",
+                    }}
+                />
+            </View>
+            <View style={{ marginTop: '-12.5px', }}>
+                <Text style={{
+                    marginLeft: "-1.9px",
+                    // marginTop: '0',
+                    fontSize: 11,
+                    fontFamily: baseFont,
+                    color: "#000",
+                }}>
+                    {barcode12Number}
+                </Text>
             </View>
 
             <View style={{
                 flexDirection: "row",
                 alignItems: "baseline",
-                // marginBottom: "3.5px",
-                // marginTop: "2px",
+                marginTop: '1px',
                 width: "100%",
             }}>
-                <Text style={styles.fieldLabel}>JOB:</Text>
+                <Text style={[styles.fieldLabel, { marginRight: 6 }]}>JOB:</Text>
                 <Text style={styles.fieldLabel}>{jobNumber}</Text>
                 <View style={{
                     flexGrow: 1,
-                    //  marginHorizontal: 4,
                     height: 8,
                 }} />
                 <Text style={styles.fieldLabel}>{orCode}</Text>
             </View>
 
             <View style={{ height: '9px' }} />
-            {/* <Text>{data.reportDate  'February 12, 2024'}</Text> */}
             <Text style={[styles.fieldLabel, {}]}>{data.ReportDate}</Text>
 
 
-            <View style={[styles.fieldRow, { marginTop: '-1px' }]}>
+            <View style={[styles.fieldRow, { marginBottom: 2 }]}>
                 <Text style={styles.fieldLabel}>Report Type</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{data.ReportType}</Text>
@@ -119,24 +198,24 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={styles.fieldValue}>{report.GIAReportNumber}</Text>
             </View>
 
-            <View style={[styles.fieldRow, {}]}>
+            <View style={[styles.fieldRow, { marginBottom: '1.4px' }]}>
                 <Text style={styles.fieldLabel}>Shape</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{report.ShapeandCuttingStyle}</Text>
             </View>
 
-            <View style={[styles.fieldRow, { marginTop: '-1px' }]}>
+            <View style={[styles.fieldRow, { marginBottom: '1.4px' }]}>
                 <Text style={styles.fieldLabel}>Measurements</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{report.Measurements}</Text>
             </View>
-            <View style={[styles.fieldRow, {}]}>
+            <View style={[styles.fieldRow, { marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Carat Weight</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{grading.CaratWeight}</Text>
             </View>
 
-            <View style={[styles.fieldRow, { marginTop: '-1px' }]}>
+            <View style={[styles.fieldRow, { marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Color</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{grading.ColorGrade}</Text>
@@ -148,13 +227,13 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={styles.fieldValue}>{grading.ClarityGrade}</Text>
             </View>
 
-            <View style={[styles.fieldRow, {}]}>
+            <View style={[styles.fieldRow, { marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Cut</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{grading.CutGrade}</Text>
             </View>
 
-            <Text style={commonStyles.paragraphText}>Proportions:</Text>
+            <Text style={[styles.fieldLabel, { marginRight: 2 }]}>Proportions:</Text>
             {proportionsImage && (
                 <View style={styles.imageWrapper}>
                     <Image
@@ -164,48 +243,35 @@ export default function InvoicePDFSection2({ data }: any) {
                 </View>
             )}
 
-            <View style={[styles.fieldRow, { marginTop: '3px', }]}>
+            <View style={[styles.fieldRow, { marginTop: '5.4px', marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Polish</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{additional.polish}</Text>
             </View>
 
-            <View style={[styles.fieldRow, {}]}>
+            <View style={[styles.fieldRow, { marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Symmetry</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{additional.symmetry}</Text>
             </View>
 
-            <View style={[styles.fieldRow, {}]}>
+            <View style={[styles.fieldRow, { marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Fluorescence</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{additional.fluorescence}</Text>
             </View>
 
             <Text style={styles.fieldLabel}>Clarity Characteristics: Pinpoint, Feather</Text>
-            {/* <Text style={styles.fieldLabel}>Comments: Internal graining is not shown.Inscription(s):GIA2487549646</Text> */}
 
-            {/* 
-            <View
-                style={{
-                    width: 300,
-                    height: 200,
-                    alignSelf: 'center',
-                    marginTop: 40,
-                    overflow: 'hidden',
-                }}
-            >
-                <View
-                    style={{
-                        transform: 'rotate(-90deg)',
-                        width: 200,
-                        height: 300,
-                    }}
-                >
-                    <InvoicePDFSection3 data={data} />
-                </View>
-            </View> */}
-            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 75 }}>
+            <View style={[styles.fieldRow, { marginBottom: '2px' }]}>
+                <Text style={styles.fieldLabel}>Inscription(s): </Text>
+                <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text>
+            </View>
+            <View style={[styles.fieldRow]}>
+                <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
+                <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>Internal graining is not shown.</Text>
+            </View>
+            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 55, }}>
                 <Image
                     src={`${BASE_URL}/files/barcode10.png`}
                     style={{
@@ -214,7 +280,14 @@ export default function InvoicePDFSection2({ data }: any) {
                         objectFit: "contain",
                     }}
                 />
-                <Text style={[commonStyles.ReportDate, { marginLeft: 1 }]}>
+                <Text style={{
+                    fontFamily: 'OCR',
+                    fontWeight: "normal",
+                    fontSize: 9,
+                    color: "#333",
+                    marginBottom: '4.9px'
+                    , marginLeft: '6.6px'
+                }}>
                     {data.BARCODE10.number}
                 </Text>
             </View>

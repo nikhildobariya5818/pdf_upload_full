@@ -101,10 +101,10 @@ export default function InvoicePDF({ data }: { data: any }) {
                 {/* Main content row */}
                 <View style={[styles.contentRow]}>
                     {/* marginTop: '43px' */}
-                    <View style={{ width: '215px', marginTop: '57px', marginLeft: '109px' }}>
+                    <View style={{ width: '215px', marginTop: '42px', marginLeft: '109px' }}>
                         <InvoicePDFSection1 data={data} />
                     </View>
-                    <View style={{ width: '236px', height: '100%', marginLeft: '32px', marginTop: '43px' }}>
+                    <View style={{ width: '236px', height: '100%', marginLeft: '32px', marginTop: '28px' }}>
                         <View>
                             <View>
                                 <InvoicePDFSection4 data={data} />
@@ -132,40 +132,10 @@ export default function InvoicePDF({ data }: { data: any }) {
                             </View>
                         </View>
                     </View>
-                    <View style={{ width: '215px', marginTop: '43px', marginLeft: '21px' }}>
+                    <View style={{ width: '215px', marginTop: '28px', marginLeft: '21px' }}>
                         <InvoicePDFSection5 data={data} />
                     </View>
-                    <View style={{ width: '184px', marginLeft: '34px', marginTop: '8px' }}>
-                        <Text
-                            style={{
-                                fontFamily: baseFont,
-                                fontWeight: "normal",
-                                fontSize: 7,
-                                color: "#333",
-                            }}
-                        >
-                            {data?.Address || 'Base Address: 1234 Diamond Street, Surat, Gujarat, India'}
-                        </Text>
-                        <Text
-                            style={{
-                                fontFamily: baseFont,
-                                fontWeight: "normal",
-                                fontSize: 7,
-                                color: "#333",
-                            }}
-                        >
-                            {data?.CityState || 'Surat, Gujarat,'}
-                        </Text>
-                        <Text
-                            style={{
-                                fontFamily: baseFont,
-                                fontWeight: "normal",
-                                fontSize: 7,
-                                color: "#333",
-                            }}
-                        >
-                            {data?.country || 'India'}
-                        </Text>
+                    <View style={{ width: '184px', marginLeft: '32px', marginTop: '7px' }}>
                         <InvoicePDFSection2 data={data} />
                     </View>
                 </View>

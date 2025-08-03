@@ -2,36 +2,84 @@ import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
 import { commonStyles } from "./PDFStyles";
 import { BASE_URL } from "./ReportProcessor";
 
-
 export default function InvoicePDFSection5({ data }: { data: any }) {
-
     return (
-        <View style={commonStyles.sectionContainer}>
-            <View style={{ backgroundColor: 'pink', marginTop: '400px', width: '62px', height: '62px', marginLeft: '100px' }}>
-                <Text>QRCODE</Text>
+        <View>
+            {/* QR Code Section (DO NOT TOUCH) */}
+            <View style={styles.qrContainer}>
+                <Image
+                    src={`${BASE_URL}/files/qrcode.png`}
+                    style={styles.qrImage}
+                />
             </View>
-            <View style={{ alignItems: 'center', marginTop: '32px' }}>
-                <Text>Barcode</Text>
-            </View>
-            {/* <View style={{ position: "relative", marginTop: 40 }}> */}
-            {/* QR Code absolutely positioned to top-right */}
-            {/* <View style={{ position: "absolute", top: -53, right: 0 }}>
-                    <Image
-                        src={`${BASE_URL}/files/qrcode.png`}
-                        style={styles.qrImage}
-                    />
-                </View> */}
 
-            {/* === Barcode and number aligned right === */}
-            {/* <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 6 }}>
-                <View style={{ alignItems: "flex-end" }}>
-                    <Image
-                        src={`${BASE_URL}/files/barcode10.png`}
-                        style={styles.barcodeImage}
-                    />
-                    <Text style={[commonStyles.ReportDate]}>{data.BARCODE10.number}</Text>
-                </View>
-            </View> */}
+
+            {/* <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '-14px' }}> */}
+            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '-14px', marginRight: '10px' }}>
+                <Image
+                    src={`${BASE_URL}/files/barcode10.png`}
+                    style={{
+                        width: 98,
+                        height: 10,
+                        objectFit: "contain",
+                    }}
+                />
+                <Text style={[commonStyles.ReportDate, { marginLeft: 2 }]}>
+                    {data.BARCODE10.number}
+                </Text>
+            </View>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    qrContainer: {
+        marginTop: 406.9,
+        width: 100,
+        height: 100,
+        marginLeft: 135,
+    },
+    qrImage: {
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+    },
+    // barcodeContainer: {
+    //     marginLeft: 30,
+    //     marginTop: -47,
+    //     width: '97px',
+    //     height: '81px',
+    // },
+    barcodeContainer: {
+        position: 'absolute',
+        top: 460,
+        left: 30,
+        width: '97px',
+        height: '81px',
+    },
+    // barcodeContainer: {
+    //     marginLeft: 30,
+    //     marginTop: -47,
+    //     width: '97px',
+    //     height: '81px',
+    //     justifyContent: 'center',
+    // },
+    // barcodeImage: {
+    //     width: 60, // adjust as needed
+    //     height: 40,
+    //     objectFit: 'contain',
+    // },
+    barcodeText: {
+        fontSize: 8,
+        marginLeft: 6,
+    },
+    // barcodeText: {
+    //     fontSize: 6,
+    //     marginBottom: 2,
+    // },
+    barcodeImage: {
+        width: "100%",
+        height: "80%",
+        objectFit: "contain",
+    },
+});

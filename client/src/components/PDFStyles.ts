@@ -1,7 +1,7 @@
 // PDFStyles.ts
 import { StyleSheet } from "@react-pdf/renderer";
 
-export const baseFont = "Helvetica";
+export const baseFont = "DINPro";
 
 export const commonStyles = StyleSheet.create({
   sectionContainer: {
@@ -12,21 +12,25 @@ export const commonStyles = StyleSheet.create({
   fieldRow: {
     flexDirection: "row",
     alignItems: "baseline",
-    marginBottom: 6,
+    marginBottom: "3.5px",
     width: "100%",
   },
   fieldLabel: {
     fontFamily: baseFont,
+    fontWeight: "normal",
+    // fontSize: 9,
     fontSize: 9,
     color: "#333",
-    letterSpacing: "-0.40",
+    // fontWeight: "600",
+    // letterSpacing: "-0.40",
   },
   ReportDate: {
     fontFamily: baseFont,
+    fontWeight: "normal",
     fontSize: 9,
     color: "#333",
     marginBottom: 5,
-    letterSpacing: "-0.40",
+    // letterSpacing: "-0.40",
   },
   separator: {
     flexGrow: 1,
@@ -36,10 +40,11 @@ export const commonStyles = StyleSheet.create({
   },
   fieldValue: {
     fontFamily: baseFont,
+    fontWeight: "bold",
     fontSize: 9,
     color: "#000",
     textAlign: "right",
-    letterSpacing: "-0.40",
+    // letterSpacing: "-0.40",
   },
   headerText: {
     fontFamily: baseFont,
@@ -58,8 +63,8 @@ export const commonStyles = StyleSheet.create({
     color: "#000",
   },
   barcodeImage: {
-    width: 100,
-    height: 30,
+    width: "80%",
+    height: "100%",
     objectFit: "contain",
   },
   paragraphText: {

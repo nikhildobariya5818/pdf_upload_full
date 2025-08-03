@@ -9,7 +9,7 @@ export default function InvoicePDFSection1({ data }: any) {
     return (
         <>
 
-            <View style={commonStyles.sectionContainer}>
+            <View>
                 {data.ReportDate && (
                     <Text style={[commonStyles.ReportDate]}>{data.ReportDate}</Text>
                 )}
@@ -69,7 +69,7 @@ export default function InvoicePDFSection1({ data }: any) {
                 )}
 
                 {/* Spacer */}
-                <View style={{ height: 33 }} />
+                <View style={{ height: 34 }} />
                 <View style={commonStyles.fieldRow}>
                     <Text style={commonStyles.fieldLabel}>Polish</Text>
                     <View style={commonStyles.separator} />
@@ -82,13 +82,13 @@ export default function InvoicePDFSection1({ data }: any) {
                     <Text style={commonStyles.fieldValue}>{additional.symmetry}</Text>
                 </View>
 
-                <View style={[commonStyles.fieldRow, { marginBottom: 0 }]}>
+                <View style={[commonStyles.fieldRow,]}>
                     <Text style={commonStyles.fieldLabel}>Fluorescence</Text>
                     <View style={commonStyles.separator} />
                     <Text style={commonStyles.fieldValue}>{additional.fluorescence}</Text>
                 </View>
 
-                <View style={[commonStyles.fieldRow, { marginBottom: 0 }]}>
+                <View style={[commonStyles.fieldRow,]}>
                     <Text style={commonStyles.fieldLabel}>Inscription(s): </Text>
                     <Text style={[commonStyles.fieldLabel, { marginLeft: 2 }]}>{additional.inscription}</Text>
                 </View>

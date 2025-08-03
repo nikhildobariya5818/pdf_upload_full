@@ -1,10 +1,10 @@
 import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
-import { commonStyles } from "./PDFStyles";
 import { BASE_URL } from "./ReportProcessor";
+import { baseFont } from "./PDFStyles";
 
 const getImageFilename = (symbol: string) => {
     const cleaned = symbol.trim().replace(/\s+/g, "_").replace("*", "");
-    return `/img/${cleaned}.png`;
+    return `/img/${cleaned}.jpg`;
 };
 
 export default function InvoicePDFSection4({ data }: { data: any }) {
@@ -15,8 +15,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
         .filter(Boolean);
 
     return (
-        <View style={commonStyles.sectionContainer}>
-
+        <View>
             <View style={{ height: '140px', width: '100%', marginTop: '13px' }}>
                 <Image
                     src={`${BASE_URL}/files/clarity_characteristics.png`}
@@ -31,18 +30,74 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
             </View>
 
             {/* === Symbol list === */}
-            <Text style={{
-                fontSize: 7,
-                marginBottom: 6,
-                color: "#000",
-                letterSpacing: -0.50
-            }}>KEY TO SYMBOLS*</Text>
+            <Text
+                //  style={{
+                //     fontSize: 7,
+                //     marginBottom: 6,
+                //     color: "#000",
+                //     letterSpacing: -0.50
+                // }}
+                // style={[commonStyles.fieldValue, { marginRight: 198 }]}
+                style={{
+                    fontFamily: baseFont,
+                    fontWeight: "bold",
+                    fontSize: 7.8,
+                    color: "#000",
+                    marginLeft: 16,
+                    // textAlign: "right",
+                    letterSpacing: -1
+                }}
+            >KEY TO SYMBOLS*</Text>
 
 
-            <Text style={{ fontSize: 7, }}>Pinpoint</Text>
-            <View style={{ marginBottom: '117px' }} />
+            {/* <View style={{ marginTop: '3px', marginRight: 37 }}>
+                {symbolList.map((symbol: string, idx: number) => (
+                    <View style={styles.symbolRow}>
+                        <Image
+                            src={getImageFilename(symbol)}
+                            style={styles.symbolIcon}
+                        />
+                    </View>
+                ))}
+            </View> */}
+            <View
+                style={{
+                    flexDirection: "row",
+                    marginTop: '5px',
+                    marginLeft: 13,
+                    gap: 10,
+                }}
+            >
+                {/* Column 1 */}
+                <View style={{ flexDirection: "column", flex: 1, gap: 4 }}>
+                    {symbolList.slice(0, 4).map((symbol: string, idx: number) => (
+                        <View key={idx} style={styles.symbolRow}>
+                            <Image src={getImageFilename(symbol)} style={styles.symbolIcon} />
+                        </View>
+                    ))}
+                </View>
+
+                {/* Column 2 */}
+                <View style={{ flexDirection: "column", flex: 1, gap: 4 }}>
+                    {symbolList.slice(4, 8).map((symbol: string, idx: number) => (
+                        <View key={idx + 4} style={styles.symbolRow}>
+                            <Image src={getImageFilename(symbol)} style={styles.symbolIcon} />
+                        </View>
+                    ))}
+                </View>
+            </View>
+
+            <View style={{ marginBottom: '72.4px' }} />
             <View>
-                <Text style={styles.footerNote}>
+                <Text style={{
+                    fontFamily: baseFont,
+                    fontWeight: "bold",
+                    fontSize: 5,
+                    // lineHeight: 1.3,
+                    // letterSpacing: -0.3,
+                    textAlign: "left",
+                    marginLeft: 2,
+                }}>
                     * Red symbols denote internal characteristics (inclusions). Green or
                     black symbols denote external characteristics (blemishes). Diagram is
                     an approximate representation of the diamond, and symbols shown
@@ -51,105 +106,31 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     of finish are not shown.
                 </Text>
             </View>
-            {/* <View style={{ marginTop: 2 }}>
-                {symbolList.map((symbol: string, idx: number) => (
-                    <View key={idx} style={styles.symbolRow}>
-                        <Image
-                            src={getImageFilename(symbol)}
-                            style={styles.symbolIcon}
-                        />
-                        <Text style={commonStyles.fieldLabel}>{symbol}</Text>
-                    </View>
-                ))}
-            </View> */}
-            {/* === Container with relative positioning to allow QR overlap === */}
-            {/* <View style={{ position: "relative", marginTop: 40 }}> */}
-            {/* QR Code absolutely positioned to top-right */}
-            {/* <View style={{ position: "absolute", top: -53, right: 0 }}>
-                    <Image
-                        src={`${BASE_URL}/files/qrcode.png`}
-                        style={styles.qrImage}
-                    />
-                </View> */}
-
-            {/* Footer note text (will appear underneath QR visually) */}
-            {/* <View style={{ width: "60%" }}>
-                    <Text style={styles.footerNote}>
-                        * Red symbols denote internal characteristics (inclusions). Green or
-                        black symbols denote external characteristics (blemishes). Diagram is
-                        an approximate representation of the diamond, and symbols shown
-                        indicate type, position, and approximate size of clarity
-                        characteristics. All clarity characteristics may not be shown. Details
-                        of finish are not shown.
-                    </Text>
-                </View>
-            </View> */}
-
-            {/* === Barcode and number aligned right === */}
-            {/* <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 6 }}>
-                <View style={{ alignItems: "flex-end" }}>
-                    <Image
-                        src={`${BASE_URL}/files/barcode10.png`}
-                        style={styles.barcodeImage}
-                    />
-                    <Text style={[commonStyles.ReportDate]}>{data.BARCODE10.number}</Text>
-                </View>
-            </View> */}
-            {/* <View style={{ flexDirection: "row", justifyContent: "flex-end", alignItems: "center", marginTop: 6 }}>
-                <Image
-                    src={`${BASE_URL}/files/barcode10.png`}
-                    style={styles.barcodeImage}
-                />
-                <Text style={[commonStyles.ReportDate, { marginLeft: 1 }]}>
-                    {data.BARCODE10.number}
-                </Text>
-            </View> */}
-
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     diagramImage: {
-        width: 140,
-        height: 140,
+        width: '100%',
+        height: '100%',
         objectFit: "contain",
     },
     symbolRow: {
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 2,
     },
     symbolIcon: {
-        width: 6,
-        height: 6,
-        marginRight: 6,
-        objectFit: 'cover'
+        width: '51%',
+        height: '51%',
+        objectFit: 'contain'
     },
-    // footerNote: {
-    //     fontSize: 6,
-    //     marginTop: 12,
-    //     lineHeight: 1.3,
-    // },
-    barcodeImage: {
-        width: 120,
-        height: 20,
-        objectFit: "contain",
-    },
-    // qrImage: {
-    //     width: 60,
-    //     height: 60,
-    //     objectFit: "contain",
-    // },
     qrImage: {
         width: 60,
         height: 60,
         objectFit: "contain",
     },
     footerNote: {
-        fontSize: 5,
-        lineHeight: 1.3,
-        letterSpacing: -0.3,
-        textAlign: "left",
+
     },
 });

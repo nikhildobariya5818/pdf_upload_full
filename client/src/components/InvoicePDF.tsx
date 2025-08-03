@@ -3,10 +3,25 @@ import { Document, Page, View, StyleSheet, Text, Image } from '@react-pdf/render
 import InvoicePDFSection1 from './InvoicePDFSection1';
 import InvoicePDFSection2 from './InvoicePDFSection2';
 import InvoicePDFSection4 from './InvoicePDFSection4';
-import InvoicePDFSection3 from './InvoicePDFSection3';
-import { baseFont, commonStyles } from './PDFStyles';
+import { baseFont } from './PDFStyles';
 import InvoicePDFSection5 from './InvoicePDFSection5';
+import { Font } from '@react-pdf/renderer';
+const dinProRegular = '/fonts/DINPro-Light_13935.ttf';
+const dinProBold = '/fonts/DINPro-Medium_13936.ttf';
 
+Font.register({
+    family: 'DINPro',
+    fonts: [
+        {
+            src: dinProRegular,
+            fontWeight: 'normal',
+        },
+        {
+            src: dinProBold,
+            fontWeight: 'bold',
+        },
+    ],
+});
 
 const styles = StyleSheet.create({
     // page: {
@@ -49,7 +64,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: '100%',
         textAlign: 'center',
-        marginTop: '158px'
+        marginTop: '157px'
     },
     titleText: {
         fontFamily: baseFont,
@@ -57,7 +72,7 @@ const styles = StyleSheet.create({
         color: "#000",
         // textAlign: 'center',
         // marginRight: '40%',
-        marginRight: '252px',
+        marginRight: '257px',
     },
     contentRow: {
         flexDirection: 'row',
@@ -79,7 +94,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                 {/* Main content row */}
                 <View style={[styles.contentRow]}>
                     {/* marginTop: '43px' */}
-                    <View style={{ width: '215px', marginTop: '43px', marginLeft: '110px' }}>
+                    <View style={{ width: '215px', marginTop: '42px', marginLeft: '109px' }}>
                         <InvoicePDFSection1 data={data} />
                     </View>
                     <View style={{ width: '234px', height: '100%', marginLeft: '32px', marginTop: '43px' }}>
@@ -95,19 +110,34 @@ export default function InvoicePDF({ data }: { data: any }) {
                     <View style={{ width: '215px', marginTop: '43px', marginLeft: '21px' }}>
                         <InvoicePDFSection5 data={data} />
                     </View>
-                    <View style={{ width: '184px', marginLeft: '32px' }}>
+                    <View style={{ width: '184px', marginLeft: '34px', marginTop: '8px' }}>
                         <Text
-                            style={commonStyles.fieldLabel}
+                            style={{
+                                fontFamily: baseFont,
+                                fontWeight: "normal",
+                                fontSize: 7,
+                                color: "#333",
+                            }}
                         >
                             {data?.Address || 'Base Address: 1234 Diamond Street, Surat, Gujarat, India'}
                         </Text>
                         <Text
-                            style={commonStyles.fieldLabel}
+                            style={{
+                                fontFamily: baseFont,
+                                fontWeight: "normal",
+                                fontSize: 7,
+                                color: "#333",
+                            }}
                         >
                             {data?.CityState || 'Surat, Gujarat,'}
                         </Text>
                         <Text
-                            style={commonStyles.fieldLabel}
+                            style={{
+                                fontFamily: baseFont,
+                                fontWeight: "normal",
+                                fontSize: 7,
+                                color: "#333",
+                            }}
                         >
                             {data?.country || 'India'}
                         </Text>

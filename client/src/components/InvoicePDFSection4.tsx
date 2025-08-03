@@ -16,16 +16,18 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
 
     return (
         <View>
-            <View style={{ height: '140px', width: '100%', marginTop: '13px' }}>
+            <View style={{ height: '140px', width: '100%', marginTop: '13px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
                     src={`${BASE_URL}/files/clarity_characteristics.png`}
-                    style={styles.diagramImage}
+                    // style={styles.diagramImage}
+                    style={{ width: 180, height: '100%', objectFit: 'contain' }}
                 />
             </View>
-            <View style={{ height: '156px', width: '100%', marginTop: '13px' }}>
+            <View style={{ height: '156px', width: '100%', marginTop: '13px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
                     src={`${BASE_URL}/files/proportions.png`}
-                    style={styles.diagramImage}
+                    // style={styles.diagramImage}
+                    style={{ width: 190, height: '100%', objectFit: 'contain' }}
                 />
             </View>
 
@@ -44,6 +46,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     fontSize: 7.8,
                     color: "#000",
                     marginLeft: 16,
+                    marginTop: 13,
                     // textAlign: "right",
                     letterSpacing: -1
                 }}
@@ -87,12 +90,13 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 </View>
             </View>
 
-            <View style={{ marginBottom: '72.4px' }} />
+            {/* <View style={{ marginBottom: '72.4px' }} /> */}
+            <View style={{ marginBottom: '72.4px', }} />
             <View>
                 <Text style={{
                     fontFamily: baseFont,
                     fontWeight: "bold",
-                    fontSize: 5,
+                    fontSize: 4,
                     // lineHeight: 1.3,
                     // letterSpacing: -0.3,
                     textAlign: "left",

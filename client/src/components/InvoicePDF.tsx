@@ -91,7 +91,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                 <Image src={'/basiSctucutre.jpg'} style={styles.backgroundImage} />
                 {/* Title section */}
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>{data.GIANATURALDIAMONDGRADINGREPORT.GIAReportNumber}</Text>
+                    <Text style={styles.titleText}>{data?.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}</Text>
                 </View>
                 {/* Main content row */}
                 <View style={[styles.contentRow]}>
@@ -99,13 +99,32 @@ export default function InvoicePDF({ data }: { data: any }) {
                     <View style={{ width: '215px', marginTop: '57px', marginLeft: '109px' }}>
                         <InvoicePDFSection1 data={data} />
                     </View>
-                    <View style={{ width: '234px', height: '100%', marginLeft: '32px', marginTop: '43px' }}>
+                    <View style={{ width: '236px', height: '100%', marginLeft: '32px', marginTop: '43px' }}>
                         <View>
                             <View>
                                 <InvoicePDFSection4 data={data} />
                             </View>
-                            <View>
-                                <Text>DIA</Text>
+                            <View
+                                style={{
+                                    width: 30,
+                                    height: 20,
+                                    // marginTop: 5,
+                                    // marginLeft: 200,
+                                    marginLeft: 230,
+                                    transform: 'rotate(-90deg)',
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontFamily: baseFont,
+                                        fontWeight: 'bold',
+                                        fontSize: 9,
+                                        color: '#000',
+                                        textAlign: 'right',
+                                    }}
+                                >
+                                    DIA
+                                </Text>
                             </View>
                         </View>
                     </View>

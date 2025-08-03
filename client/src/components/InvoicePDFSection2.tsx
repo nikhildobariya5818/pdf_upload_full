@@ -12,6 +12,8 @@ const styles = StyleSheet.create({
     diagramImage: {
         width: 90,
         height: 80,
+        objectFit: "contain",
+
     },
     imageWrapper: {
         alignItems: 'center',
@@ -139,10 +141,13 @@ export default function InvoicePDFSection2({ data }: any) {
             {/* </View> */}
 
             <View style={{
-                width: 150, // or whatever fixed size works best
+                //   width: 150, 
+                width: 100, // or whatever fixed size works best
                 height: 30,
                 // backgroundColor: 'red',
                 justifyContent: 'flex-start',
+                marginTop: 7,
+                // marginRight: -50
                 // alignItems: 'center',
                 // alignSelf: 'center' // optional: center horizontally in parent
             }}>
@@ -150,14 +155,15 @@ export default function InvoicePDFSection2({ data }: any) {
                     src={`${BASE_URL}/files/barcode12.png`}
                     style={{
                         width: "100%",
-                        height: "100%",
+                        //  height: "100%",
+                        height: "50%",
                         objectFit: "contain",
                     }}
                 />
             </View>
-            <View style={{ marginTop: '-12.5px', }}>
+            <View style={{ marginTop: '-18.5px', }}>
                 <Text style={{
-                    marginLeft: "-1.9px",
+                    // marginLeft: "-1.9px",
                     // marginTop: '0',
                     fontSize: 11,
                     fontFamily: baseFont,
@@ -227,11 +233,11 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={styles.fieldValue}>{grading.ClarityGrade}</Text>
             </View>
 
-            <View style={[styles.fieldRow, { marginBottom: 1 }]}>
+            {grading.CutGrade && <View style={[styles.fieldRow, { marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Cut</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{grading.CutGrade}</Text>
-            </View>
+            </View>}
 
             <Text style={[styles.fieldLabel, { marginRight: 2 }]}>Proportions:</Text>
             {proportionsImage && (

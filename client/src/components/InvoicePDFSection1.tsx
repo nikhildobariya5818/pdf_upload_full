@@ -1,6 +1,6 @@
 // InvoicePDFSection1.tsx
 import { View, Text } from "@react-pdf/renderer";
-import { commonStyles } from "./PDFStyles";
+import { baseFont, commonStyles } from "./PDFStyles";
 
 export default function InvoicePDFSection1({ data }: any) {
     const report = data.GIANATURALDIAMONDGRADINGREPORT || {};
@@ -11,7 +11,14 @@ export default function InvoicePDFSection1({ data }: any) {
 
             <View>
                 {data.ReportDate && (
-                    <Text style={[commonStyles.ReportDate]}>{data.ReportDate}</Text>
+                    <Text style={{
+                        fontFamily: baseFont,
+                        fontWeight: "normal",
+                        fontSize: 9,
+                        color: "#333",
+                        marginBottom: '4px',
+                        letterSpacing: "-0.20",
+                    }}>{data.ReportDate}</Text>
                 )}
                 <View style={commonStyles.fieldRow}>
                     <Text style={commonStyles.fieldLabel}>GIA Report Number</Text>
@@ -30,7 +37,7 @@ export default function InvoicePDFSection1({ data }: any) {
                     <Text style={commonStyles.fieldValue}>{report.Measurements}</Text>
                 </View>
                 {/* Spacer */}
-                <View style={{ height: 33 }} />
+                <View style={{ height: '34px' }} />
                 <View style={commonStyles.fieldRow}>
                     <Text style={commonStyles.fieldLabel}>Carat Weight</Text>
                     <View style={commonStyles.separator} />
@@ -54,7 +61,7 @@ export default function InvoicePDFSection1({ data }: any) {
                     <View style={commonStyles.separator} />
                     <Text style={commonStyles.fieldValue}>{grading.CutGrade}</Text>
                 </View> */}
-                {grading.CutGrade ? (
+                {/* {grading.CutGrade ? (
                     <View style={commonStyles.fieldRow}>
                         <Text style={commonStyles.fieldLabel}>Cut Grade</Text>
                         <View style={commonStyles.separator} />
@@ -66,7 +73,23 @@ export default function InvoicePDFSection1({ data }: any) {
                         <View style={commonStyles.separator} />
                         <Text style={commonStyles.fieldValue}> </Text>
                     </View>
-                )}
+                )} */}
+                <View style={commonStyles.fieldRow}>
+                    {grading.CutGrade ? (
+                        <>
+                            <Text style={commonStyles.fieldLabel}>Cut Grade</Text>
+                            <View style={commonStyles.separator} />
+                            <Text style={commonStyles.fieldValue}>{grading.CutGrade}</Text>
+                        </>
+                    ) : (
+                        <>
+                            <Text style={[commonStyles.fieldLabel, { color: 'transparent' }]}>Cut Grade</Text>
+                            {/* <View style={commonStyles.separator} /> */}
+                            <Text style={[commonStyles.fieldValue, { color: 'transparent' }]}>-</Text>
+                        </>
+                    )}
+                </View>
+
 
                 {/* Spacer */}
                 <View style={{ height: 34 }} />
@@ -82,19 +105,19 @@ export default function InvoicePDFSection1({ data }: any) {
                     <Text style={commonStyles.fieldValue}>{additional.symmetry}</Text>
                 </View>
 
-                <View style={[commonStyles.fieldRow,]}>
+                <View style={[commonStyles.fieldRow, { marginBottom: 2 }]}>
                     <Text style={commonStyles.fieldLabel}>Fluorescence</Text>
                     <View style={commonStyles.separator} />
                     <Text style={commonStyles.fieldValue}>{additional.fluorescence}</Text>
                 </View>
 
-                <View style={[commonStyles.fieldRow,]}>
+                <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}>
                     <Text style={commonStyles.fieldLabel}>Inscription(s): </Text>
-                    <Text style={[commonStyles.fieldLabel, { marginLeft: 2 }]}>{additional.inscription}</Text>
+                    <Text style={[commonStyles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text>
                 </View>
-                <View style={[commonStyles.fieldRow, { marginBottom: 0 }]}>
-                    <Text style={commonStyles.fieldValue}>Comments: </Text>{" "}
-                    <Text style={[commonStyles.fieldLabel, { marginLeft: 2 }]}>Internal graining is not shown.</Text>
+                <View style={[commonStyles.fieldRow]}>
+                    <Text style={[commonStyles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
+                    <Text style={[commonStyles.fieldLabel, { marginLeft: '1px' }]}>Internal graining is not shown.</Text>
                 </View>
             </View>
         </>

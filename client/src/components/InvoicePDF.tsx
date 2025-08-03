@@ -64,7 +64,9 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: '100%',
         textAlign: 'center',
-        marginTop: '157px'
+        // marginTop: '157px'
+        // backgroundColor: 'red',
+        paddingTop: '156px',
     },
     titleText: {
         fontFamily: baseFont,
@@ -94,7 +96,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                 {/* Main content row */}
                 <View style={[styles.contentRow]}>
                     {/* marginTop: '43px' */}
-                    <View style={{ width: '215px', marginTop: '42px', marginLeft: '109px' }}>
+                    <View style={{ width: '215px', marginTop: '57px', marginLeft: '109px' }}>
                         <InvoicePDFSection1 data={data} />
                     </View>
                     <View style={{ width: '234px', height: '100%', marginLeft: '32px', marginTop: '43px' }}>

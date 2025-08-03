@@ -4,11 +4,6 @@ import { StyleSheet } from "@react-pdf/renderer";
 export const baseFont = "DINPro";
 
 export const commonStyles = StyleSheet.create({
-  sectionContainer: {
-    // padding: 20,
-    // paddingHorizontal: 20,
-    // marginBottom: 10,
-  },
   fieldRow: {
     flexDirection: "row",
     alignItems: "baseline",
@@ -18,11 +13,9 @@ export const commonStyles = StyleSheet.create({
   fieldLabel: {
     fontFamily: baseFont,
     fontWeight: "normal",
-    // fontSize: 9,
     fontSize: 9,
     color: "#333",
-    // fontWeight: "600",
-    // letterSpacing: "-0.40",
+    letterSpacing: "-0.20",
   },
   ReportDate: {
     fontFamily: baseFont,
@@ -30,12 +23,11 @@ export const commonStyles = StyleSheet.create({
     fontSize: 9,
     color: "#333",
     marginBottom: 5,
-    // letterSpacing: "-0.40",
   },
   separator: {
     flexGrow: 1,
     borderBottom: "1px dotted #999",
-    marginHorizontal: 4,
+    marginHorizontal: "2px",
     height: 10,
   },
   fieldValue: {
@@ -44,7 +36,7 @@ export const commonStyles = StyleSheet.create({
     fontSize: 9,
     color: "#000",
     textAlign: "right",
-    // letterSpacing: "-0.40",
+    letterSpacing: "-0.20",
   },
   headerText: {
     fontFamily: baseFont,

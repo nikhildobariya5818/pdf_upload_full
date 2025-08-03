@@ -24,8 +24,8 @@ Font.register({
 });
 
 Font.register({
-    family: 'MICR',
-    src: '/fonts/micrenc.ttf',
+    family: 'OCR',
+    src: '/fonts/OCR-a___.ttf',
 });
 
 const styles = StyleSheet.create({
@@ -113,18 +113,17 @@ export default function InvoicePDF({ data }: { data: any }) {
                                 style={{
                                     width: 30,
                                     height: 20,
-                                    // marginTop: 5,
-                                    // marginLeft: 200,
-                                    marginLeft: 230,
+                                    marginTop: '1.4px',
+                                    marginLeft: '233.80px',
                                     transform: 'rotate(-90deg)',
                                 }}
                             >
                                 <Text
                                     style={{
-                                        fontFamily: baseFont,
-                                        fontWeight: 'bold',
-                                        fontSize: 9,
-                                        color: '#000',
+                                        fontFamily: "OCR",
+                                        fontWeight: 'light',
+                                        fontSize: 7.19,
+                                        // color: '#000',
                                         textAlign: 'right',
                                     }}
                                 >

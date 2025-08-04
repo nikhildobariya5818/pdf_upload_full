@@ -67,7 +67,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 style={{
                     flexDirection: "row",
                     marginTop: '5px',
-                    marginLeft: 13,
+                    marginLeft: 3,
                     gap: 10,
                 }}
             >
@@ -102,7 +102,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     textAlign: "left",
                     marginLeft: 2,
                 }}>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Red symbols denote internal characteristics (inclusions). Green or
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*Red symbols denote internal characteristics (inclusions). Green or
                     black symbols denote external characteristics  {"\n"} (blemishes). Diagram is
                     an approximate representation of the diamond, and symbols shown
                     indicate type, position, and  {"\n"}approximate size of clarity

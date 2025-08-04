@@ -102,7 +102,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                 {/* Main content row */}
                 <View style={[styles.contentRow]}>
                     {/* marginLeft: '109px' */}
-                    <View style={{ width: '215px', marginTop: '42px', marginLeft: '113px' }}>
+                    <View style={{ width: '215px', marginTop: '42px', marginLeft: '112px' }}>
                         <InvoicePDFSection1 data={data} />
                     </View>
                     {/* marginLeft: '32px' */}
@@ -115,7 +115,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                                 style={{
                                     width: 30,
                                     height: 20,
-                                    marginTop: '1.4px',
+                                    marginTop: '-8.4px',
                                     //    marginLeft: '233.80px',
                                     marginLeft: '225.80px',
                                     transform: 'rotate(-90deg)',
@@ -140,7 +140,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                         <InvoicePDFSection5 data={data} />
                     </View>
                     {/* marginLeft: '32px', */}
-                    <View style={{ width: '184px', marginLeft: '36px', marginTop: '7px' }}>
+                    <View style={{ width: '184px', marginLeft: '34px', marginTop: '7px' }}>
                         <View>
                             <InvoicePDFSection2 data={data} />
                         </View>
@@ -148,8 +148,8 @@ export default function InvoicePDF({ data }: { data: any }) {
                             width: 70,
                             height: 170,
                             // marginTop: '55px',
-                            marginLeft: 50,
-                            marginTop: 5,
+                            marginLeft: '48.5px',
+                            marginTop: 86,
                             // marginLeft: 70,
                             transform: 'rotate(-90deg)',
                             // marginBottom: 63,

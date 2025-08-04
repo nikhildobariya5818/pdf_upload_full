@@ -21,6 +21,21 @@ def clear_output_directory():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
+def remove_white_background(image_path):
+    """Remove white background from an image and save with transparency."""
+    img = Image.open(image_path).convert("RGBA")
+    datas = img.getdata()
+    new_data = []
+    for item in datas:
+        # Turn white pixels transparent
+        if item[0] > 240 and item[1] > 240 and item[2] > 240:
+            new_data.append((255, 255, 255, 0))
+        else:
+            new_data.append(item)
+    img.putdata(new_data)
+    img.save(image_path, "PNG")
+
+
 def create_and_save_qr_code(report_number, folder_path):
     url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
     
@@ -41,7 +56,6 @@ def create_and_save_qr_code(report_number, folder_path):
     datas = qr_img.getdata()
     new_data = []
     for item in datas:
-        # If pixel is white, make it transparent
         if item[0] > 240 and item[1] > 240 and item[2] > 240:  # white
             new_data.append((255, 255, 255, 0))
         else:
@@ -56,15 +70,12 @@ def create_and_save_qr_code(report_number, folder_path):
 
 
 def generate_unique_barcode(number_of_digits, start_digit, save_path):
-    """
-    Generate wide Code128 barcodes for both 10 and 12 digits.
-    Both barcodes are visually wide and fully scannable.
-    """
+    """Generate wide Code128 barcodes for both 10 and 12 digits with transparent background."""
     # Generate numeric string
     number = str(start_digit) + ''.join(str(random.randint(0, 9)) for _ in range(number_of_digits - 1))
 
     # Add spaces for visual width
-    number_with_spaces = f"{' ' * 2}{number}{' ' * 2}"
+    number_with_spaces = f"{' ' * 4}{number}{' ' * 4}"
 
     # Always use Code128 for width control
     barcode_number = number_with_spaces
@@ -73,13 +84,17 @@ def generate_unique_barcode(number_of_digits, start_digit, save_path):
     # Adjust width based on digits
     writer_options = {
         'write_text': False,
-        'module_width': 4.0 if number_of_digits == 10 else 3.5,  # 10-digit is slightly wider
+        'module_width': 3.0 if number_of_digits == 10 else 3.5,  # 10-digit is slightly wider
         'module_height': 50.0,
         'quiet_zone': 15.0,  # Padding around barcode
         'font_size': 0
     }
 
     filename = code.save(save_path, options=writer_options)
+
+    # Make barcode background transparent
+    remove_white_background(filename)
+
     return number_with_spaces, filename
 
 
@@ -161,7 +176,7 @@ def process_gia_pdf(pdf_path):
         characteristics = re.findall(r"\s*([a-zA-Z\s]+)\s*", key_to_symbols_text.split("Red symbols denote")[0])
         symbols.extend([{"icon": None, "name": char.strip()} for char in characteristics if char.strip()])
 
-    # Extract and Save Images
+    # Extract and Save Images with transparent background
     proportions_img_path = None
     clarity_img_path = None
     images = page.get_images(full=True)
@@ -175,11 +190,13 @@ def process_gia_pdf(pdf_path):
             xref = main_diagrams[0][0]
             pix = fitz.Pixmap(doc, xref)
             pix.save(proportions_img_path)
+            remove_white_background(proportions_img_path)
         if len(main_diagrams) > 1:
             clarity_img_path = os.path.join(OUTPUT_DIR, "clarity_characteristics.png")
             xref = main_diagrams[1][0]
             pix = fitz.Pixmap(doc, xref)
             pix.save(clarity_img_path)
+            remove_white_background(clarity_img_path)
 
     # Extract report date
     report_date = extract_report_date(text)

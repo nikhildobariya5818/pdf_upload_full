@@ -101,11 +101,12 @@ export default function InvoicePDF({ data }: { data: any }) {
                 </View>
                 {/* Main content row */}
                 <View style={[styles.contentRow]}>
-                    {/* marginTop: '43px' */}
-                    <View style={{ width: '215px', marginTop: '42px', marginLeft: '109px' }}>
+                    {/* marginLeft: '109px' */}
+                    <View style={{ width: '215px', marginTop: '42px', marginLeft: '113px' }}>
                         <InvoicePDFSection1 data={data} />
                     </View>
-                    <View style={{ width: '236px', height: '100%', marginLeft: '32px', marginTop: '28px' }}>
+                    {/* marginLeft: '32px' */}
+                    <View style={{ width: '236px', height: '100%', marginLeft: '36px', marginTop: '28px' }}>
                         <View>
                             <View>
                                 <InvoicePDFSection4 data={data} />
@@ -115,7 +116,8 @@ export default function InvoicePDF({ data }: { data: any }) {
                                     width: 30,
                                     height: 20,
                                     marginTop: '1.4px',
-                                    marginLeft: '233.80px',
+                                    //    marginLeft: '233.80px',
+                                    marginLeft: '225.80px',
                                     transform: 'rotate(-90deg)',
                                 }}
                             >
@@ -133,10 +135,12 @@ export default function InvoicePDF({ data }: { data: any }) {
                             </View>
                         </View>
                     </View>
-                    <View style={{ width: '215px', marginTop: '28px', marginLeft: '21px' }}>
+                    {/* marginLeft: '21px' */}
+                    <View style={{ width: '215px', marginTop: '28px', marginLeft: '14px' }}>
                         <InvoicePDFSection5 data={data} />
                     </View>
-                    <View style={{ width: '184px', marginLeft: '32px', marginTop: '7px' }}>
+                    {/* marginLeft: '32px', */}
+                    <View style={{ width: '184px', marginLeft: '36px', marginTop: '7px' }}>
                         <View>
                             <InvoicePDFSection2 data={data} />
                         </View>

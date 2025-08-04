@@ -238,7 +238,7 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
                 <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>Internal graining is not shown.</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '66px', }}>
+            {/* <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '66px', }}>
                 <Image
                     src={`${BASE_URL}/files/barcode10.png`}
                     style={{
@@ -257,7 +257,41 @@ export default function InvoicePDFSection2({ data }: any) {
                 }}>
                     {data.BARCODE10.number}
                 </Text>
+            </View> */}
+            <View
+                style={{
+                    position: 'absolute',
+                    // bottom: 0, // or whatever exact offset you need
+                    top: '395px',
+                    left: 0,
+                    right: 0,
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}
+            >
+                <Image
+                    src={`${BASE_URL}/files/barcode10.png`}
+                    style={{
+                        width: 100,
+                        height: 10,
+                        objectFit: "contain",
+                    }}
+                />
+                <Text
+                    style={{
+                        fontFamily: 'OCR',
+                        fontWeight: "normal",
+                        fontSize: 9,
+                        color: "#333",
+                        marginBottom: '4.9px',
+                        marginLeft: '6.6px',
+                    }}
+                >
+                    {data.BARCODE10.number}
+                </Text>
             </View>
+
         </View>
     );
 }

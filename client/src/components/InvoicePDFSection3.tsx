@@ -1,6 +1,6 @@
 // InvoicePDFSection3.tsx
-import { View, Text } from '@react-pdf/renderer';
-import { commonStyles } from './PDFStyles';
+import { View, Text, StyleSheet } from '@react-pdf/renderer';
+import { baseFont, commonStyles } from './PDFStyles';
 
 export default function InvoicePDFSection3({ data }: any) {
     const GIA = data.GIANATURALDIAMONDGRADINGREPORT || {};
@@ -35,60 +35,60 @@ export default function InvoicePDFSection3({ data }: any) {
 
         >
             {/* Date */}
-            {data.ReportDate && <Text style={commonStyles.ReportDate}>{data.ReportDate}</Text>}
+            {data.ReportDate && <Text style={styles.ReportDate}>{data.ReportDate}</Text>}
 
             {/* Report Type */}
             {data.ReportType && (
 
-                <View style={commonStyles.fieldRow}>
-                    <Text style={commonStyles.fieldLabel}>Report Type</Text>
-                    <View style={commonStyles.separator} />
-                    <Text style={commonStyles.fieldValue}>{data.ReportType}</Text>
+                <View style={[styles.fieldRow]}>
+                    <Text style={styles.fieldLabel}>Report Type</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{data.ReportType}</Text>
                 </View>
             )}
             {/* GIA Report No */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>GIA Report No</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{reportNo}</Text>
+            <View style={[styles.fieldRow, { marginTop: '3.8px' }]}>
+                <Text style={styles.fieldLabel}>GIA Report No</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{reportNo}</Text>
             </View>
 
             {/* Shape */}
-            <Text style={[commonStyles.fieldValue, { textAlign: 'left', marginVertical: 2 }]}>
+            <Text style={[styles.fieldValue, { textAlign: 'left', marginTop: '7px' }]}>
                 {shape}
             </Text>
 
             {/* Measurements */}
-            <Text style={[commonStyles.fieldValue, { textAlign: 'left', marginVertical: 2 }]}>
+            <Text style={[styles.fieldValue, { textAlign: 'left', marginTop: '3.6px' }]}>
                 {measurements}
             </Text>
 
             {/* Carat Weight */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Carat Weight</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{carat}</Text>
+            <View style={[styles.fieldRow, { marginBottom: '6px' }]}>
+                <Text style={styles.fieldLabel}>Carat Weight</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{carat}</Text>
             </View>
 
             {/* Color */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Color</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{color}</Text>
+            <View style={[styles.fieldRow, { marginBottom: '13px' }]}>
+                <Text style={styles.fieldLabel}>Color</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{color}</Text>
             </View>
 
             {/* Clarity */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Clarity</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{clarity}</Text>
+            <View style={styles.fieldRow}>
+                <Text style={styles.fieldLabel}>Clarity</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{clarity}</Text>
             </View>
 
             {/* Cut */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Cut</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{cut}</Text>
+            <View style={styles.fieldRow}>
+                <Text style={styles.fieldLabel}>Cut</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{cut}</Text>
             </View>
 
             {/* Proportions: TBL / TD */}
@@ -97,8 +97,8 @@ export default function InvoicePDFSection3({ data }: any) {
                 <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>TD: {data.TD}</Text>
             </View>} */}
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 2 }}>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica', marginBottom: 2 }}>TBL: {data.TBL}%</Text>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica', marginBottom: 2 }}>TD: {data.TD}%</Text>
+                <Text style={styles.miniField}>TBL: {data.TBL}%</Text>
+                <Text style={styles.miniField}>TD: {data.TD}%</Text>
             </View>
             {/*: CA / PA */}
             {/* {<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
@@ -107,10 +107,10 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>} */}
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica', marginBottom: 2 }}>
+                <Text style={styles.miniField}>
                     CA: {data.CA}&#176;
                 </Text>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica', marginBottom: 2 }}>
+                <Text style={styles.miniField}>
                     PA: {data.PA}&#176;
                 </Text>
             </View>
@@ -122,56 +122,99 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>} */}
 
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>ST: {data.ST}%</Text>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>LH: {data.LH}%</Text>
+                <Text style={{ fontSize: 5, fontFamily: baseFont }}>ST: {data.ST}%</Text>
+                <Text style={{ fontSize: 5, fontFamily: baseFont }}>LH: {data.LH}%</Text>
             </View>
 
             {/* Girdle */}
-            {<View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Girdle</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{data.ClarityGrade || "--"}</Text>
+            {<View style={styles.fieldRow}>
+                <Text style={styles.fieldLabel}>Girdle</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{data.ClarityGrade || "--"}</Text>
             </View>}
 
             {/* Culet */}
-            {<View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Culet</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{data.CutGrade || '--'}</Text>
+            {<View style={styles.fieldRow}>
+                <Text style={styles.fieldLabel}>Culet</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{data.CutGrade || '--'}</Text>
             </View>
             }
             {/* Polish */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Polish</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{polish}</Text>
+            <View style={styles.fieldRow}>
+                <Text style={styles.fieldLabel}>Polish</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{polish}</Text>
             </View>
 
             {/* Symmetry */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Symmetry</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{symmetry}</Text>
+            <View style={styles.fieldRow}>
+                <Text style={styles.fieldLabel}>Symmetry</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{symmetry}</Text>
             </View>
 
             {/* Fluorescence */}
-            <View style={commonStyles.fieldRow}>
-                <Text style={commonStyles.fieldLabel}>Fluorescence</Text>
-                <View style={commonStyles.separator} />
-                <Text style={commonStyles.fieldValue}>{fluorescence}</Text>
+            <View style={styles.fieldRow}>
+                <Text style={styles.fieldLabel}>Fluorescence</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{fluorescence}</Text>
             </View>
 
             {/* Clarity Characteristics */}
-            {<Text style={{ fontSize: 10, fontFamily: 'Helvetica', marginTop: 6 }}>
+            {<Text style={{ fontSize: 5, fontFamily: baseFont, marginTop: 6 }}>
                 Clarity char:  Pinpoint, Feather Internal graining is not shown.
             </Text>}
 
             {/* GIA Note */}
-            {data.giaNote && <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>{data.giaNote || '---'}</Text>
+            {data.giaNote && <Text style={{ fontSize: 5, fontFamily: baseFont }}>{data.giaNote || '---'}</Text>
             }
             {/* Additional Clarity Note */}
-            {data.giaNote && <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>{data.clarityNote || "---"}</Text>
+            {data.giaNote && <Text style={{ fontSize: 5, fontFamily: baseFont }}>{data.clarityNote || "---"}</Text>
             }
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    fieldRow: {
+        flexDirection: "row",
+        alignItems: "baseline",
+        marginBottom: "3.5px",
+        width: "100%",
+    },
+    fieldLabel: {
+        fontFamily: baseFont,
+        fontWeight: "normal",
+        fontSize: 5,
+        // color: "#333",
+        color: 'red',
+        letterSpacing: "-0.20",
+    },
+    ReportDate: {
+        fontFamily: baseFont,
+        fontWeight: "normal",
+        fontSize: 5,
+        color: "#333",
+        // marginBottom: 5,
+    },
+    separator: {
+        flexGrow: 1,
+        borderBottom: "1px dotted #999",
+        marginHorizontal: "2px",
+        height: 10,
+    },
+    fieldValue: {
+        fontFamily: baseFont,
+        fontWeight: "bold",
+        fontSize: 5,
+        // color: "#000",
+        color: 'red',
+        textAlign: "right",
+        letterSpacing: "-0.20",
+    },
+    miniField: {
+        fontSize: 5,
+        fontFamily: baseFont
+    }
+})

@@ -6,6 +6,7 @@ import InvoicePDFSection4 from './InvoicePDFSection4';
 import { baseFont } from './PDFStyles';
 import InvoicePDFSection5 from './InvoicePDFSection5';
 import { Font } from '@react-pdf/renderer';
+import InvoicePDFSection3 from './InvoicePDFSection3';
 const dinProRegular = '/fonts/DINPro-Light_13935.ttf';
 const dinProBold = '/fonts/DINPro-Medium_13936.ttf';
 
@@ -136,7 +137,22 @@ export default function InvoicePDF({ data }: { data: any }) {
                         <InvoicePDFSection5 data={data} />
                     </View>
                     <View style={{ width: '184px', marginLeft: '32px', marginTop: '7px' }}>
-                        <InvoicePDFSection2 data={data} />
+                        <View>
+                            <InvoicePDFSection2 data={data} />
+                        </View>
+                        {/* <View style={{
+                            width: 70,
+                            height: 170,
+                            // marginTop: '55px',
+                            marginLeft: 50,
+                            marginTop: 5,
+                            // marginLeft: 70,
+                            transform: 'rotate(-90deg)',
+                            // marginBottom: 63,
+                            // backgroundColor: 'pink'
+                        }}>
+                            <InvoicePDFSection3 data={data} />
+                        </View> */}
                     </View>
                 </View>
             </Page>

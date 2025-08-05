@@ -30,148 +30,163 @@ export default function InvoicePDFSection3({ data }: any) {
         day: 'numeric',
     });
     return (
-        <View
-        // style={{ padding: 20 }}
+        <View>
+            <View>
+                <Text style={styles.fieldLabel}>{data.ReportDate}</Text>
+            </View>
 
-        >
-            {/* Date */}
-            {data.ReportDate && <Text style={styles.ReportDate}>{data.ReportDate}</Text>}
+            <View style={{
+                flexDirection: "row",
+                alignItems: "baseline",
+                marginTop: '0.50px',
+                width: "100%",
+            }}>
+                <Text style={styles.fieldLabel}>Report Type</Text>
+                <View style={styles.separator} />
+                <Text style={styles.fieldValue}>{data.ReportType}</Text>
+            </View>
 
-            {/* Report Type */}
-            {data.ReportType && (
-
-                <View style={[styles.fieldRow]}>
-                    <Text style={styles.fieldLabel}>Report Type</Text>
-                    <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.ReportType}</Text>
-                </View>
-            )}
-            {/* GIA Report No */}
-            <View style={[styles.fieldRow, { marginTop: '3.8px' }]}>
+            <View style={{
+                flexDirection: "row",
+                alignItems: "baseline",
+                marginTop: '7.48px',
+                width: "100%",
+            }}>
                 <Text style={styles.fieldLabel}>GIA Report No</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{reportNo}</Text>
             </View>
-
-            {/* Shape */}
-            <Text style={[styles.fieldValue, { textAlign: 'left', marginTop: '7px' }]}>
-                {shape}
-            </Text>
-
-            {/* Measurements */}
-            <Text style={[styles.fieldValue, { textAlign: 'left', marginTop: '3.6px' }]}>
-                {measurements}
-            </Text>
-
-            {/* Carat Weight */}
-            <View style={[styles.fieldRow, { marginBottom: '6px' }]}>
-                <Text style={styles.fieldLabel}>Carat Weight</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{carat}</Text>
-            </View>
-
-            {/* Color */}
-            <View style={[styles.fieldRow, { marginBottom: '13px' }]}>
-                <Text style={styles.fieldLabel}>Color</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{color}</Text>
-            </View>
-
-            {/* Clarity */}
-            <View style={styles.fieldRow}>
-                <Text style={styles.fieldLabel}>Clarity</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{clarity}</Text>
-            </View>
-
-            {/* Cut */}
-            <View style={styles.fieldRow}>
-                <Text style={styles.fieldLabel}>Cut</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{cut}</Text>
-            </View>
-
-            {/* Proportions: TBL / TD */}
-            {/* {<View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 6 }}>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>TBL: {data.TBL}</Text>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>TD: {data.TD}</Text>
-            </View>} */}
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 2 }}>
-                <Text style={styles.miniField}>TBL: {data.TBL}%</Text>
-                <Text style={styles.miniField}>TD: {data.TD}%</Text>
-            </View>
-            {/*: CA / PA */}
-            {/* {<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>CA: {data.CA}</Text>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>PA: {data.PA}</Text>
-            </View>} */}
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={styles.miniField}>
-                    CA: {data.CA}&#176;
-                </Text>
-                <Text style={styles.miniField}>
-                    PA: {data.PA}&#176;
+            <View style={{ marginTop: '7.40px' }}>
+                <Text style={{
+                    fontFamily: baseFont,
+                    fontWeight: "bold",
+                    fontSize: 5,
+                    // color: "#000",
+                    color: 'red',
+                    letterSpacing: "-0.20",
+                    textAlign: 'left'
+                }}>
+                    {shape}
                 </Text>
             </View>
-
-            {/*: ST / LH */}
-            {/* {<View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>ST: {data.ST}</Text>
-                <Text style={{ fontSize: 10, fontFamily: 'Helvetica' }}>LH: {data.LH}</Text>
-            </View>} */}
-
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 6 }}>
-                <Text style={{ fontSize: 5, fontFamily: baseFont }}>ST: {data.ST}%</Text>
-                <Text style={{ fontSize: 5, fontFamily: baseFont }}>LH: {data.LH}%</Text>
+            <View style={{ marginTop: '1.30px' }}>
+                <Text style={{
+                    fontFamily: baseFont,
+                    fontWeight: "bold",
+                    fontSize: 5,
+                    // color: "#000",
+                    color: 'red',
+                    letterSpacing: "-0.20",
+                    textAlign: 'left'
+                }}>
+                    {shape}
+                </Text>
+            </View>
+            <View style={{ marginTop: '1px' }}>
+                <View style={[styles.fieldRow]}>
+                    <Text style={styles.fieldLabel}>Carat Weight</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{carat}</Text>
+                </View>
+                <View style={[styles.fieldRow]}>
+                    <Text style={styles.fieldLabel}>Color</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{color}</Text>
+                </View>
+                <View style={[styles.fieldRow, { marginTop: 1 }]}>
+                    <Text style={styles.fieldLabel}>Clarity</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{clarity}</Text>
+                </View>
+                <View style={[styles.fieldRow, { marginTop: '0.60px' }]}>
+                    <Text style={styles.fieldLabel}>Cut</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{cut}</Text>
+                </View>
             </View>
 
-            {/* Girdle */}
-            {<View style={styles.fieldRow}>
-                <Text style={styles.fieldLabel}>Girdle</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{data.ClarityGrade || "--"}</Text>
-            </View>}
-
-            {/* Culet */}
-            {<View style={styles.fieldRow}>
-                <Text style={styles.fieldLabel}>Culet</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{data.CutGrade || '--'}</Text>
+            <View style={{ marginTop: '0.36px' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>
+                    <Text style={styles.fieldValue}>TD: {data.TD}%</Text>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: '1px' }}>
+                    <Text style={styles.fieldValue}>CA: {data.CA}&#176;</Text>
+                    <Text style={styles.fieldValue}>PA: {data.PA}&#176;</Text>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: '0.50px' }}>
+                    <Text style={styles.fieldValue}>ST: {data.ST}%</Text>
+                    <Text style={styles.fieldValue}>LH: {data.LH}%</Text>
+                </View>
+                <View style={[styles.fieldRow]}>
+                    <Text style={styles.fieldLabel}>Girdle</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{data.ClarityGrade}</Text>
+                </View>
+                <View style={[styles.fieldRow, { marginTop: '1px' }]}>
+                    <Text style={styles.fieldLabel}>Culet</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{data.CutGrade || '--'}</Text>
+                </View>
+                <View style={[styles.fieldRow, { marginTop: '0.40px' }]}>
+                    <Text style={styles.fieldLabel}>Polish</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{polish}</Text>
+                </View>
+                <View style={[styles.fieldRow, { marginTop: '1px' }]}>
+                    <Text style={styles.fieldLabel}>Symmetry</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{symmetry}</Text>
+                </View>
+                <View style={[styles.fieldRow, { marginTop: '0.60px' }]}>
+                    <Text style={styles.fieldLabel}>Fluorescence</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{fluorescence}</Text>
+                </View>
             </View>
-            }
-            {/* Polish */}
-            <View style={styles.fieldRow}>
-                <Text style={styles.fieldLabel}>Polish</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{polish}</Text>
+            <View style={{ marginTop: '1px' }}>
+                <View>
+                    <Text style={{
+                        fontFamily: baseFont,
+                        fontWeight: "bold",
+                        fontSize: 5,
+                        // color: "#000",
+                        color: 'red',
+                        textAlign: "left",
+                        letterSpacing: "-0.20",
+                    }}>
+                        Clarity char:  Pinpoint
+                    </Text>
+                </View>
+                <View style={{ marginTop: '0.50px' }}>
+                    <Text style={{
+                        fontFamily: baseFont,
+                        fontWeight: "bold",
+                        fontSize: 5,
+                        // color: "#000",
+                        color: 'red',
+                        textAlign: "left",
+                        letterSpacing: "-0.20",
+                    }}>
+                        Ins:GIA {reportNo}
+                    </Text>
+                </View>
+                <View style={{ marginTop: '1px' }}>
+                    {/* <Text style={{ fontSize: 5, fontFamily: baseFont }}>{data.clarityNote || "---"}</Text> */}
+                    <Text style={{
+                        fontFamily: baseFont,
+                        fontWeight: "bold",
+                        fontSize: 5,
+                        // color: "#000",
+                        color: 'red',
+                        textAlign: "left",
+                        letterSpacing: "-0.20",
+                    }}>
+                        Addition pinpoint are not {"\n"}
+                        shown.
+                    </Text>
+                </View>
             </View>
-
-            {/* Symmetry */}
-            <View style={styles.fieldRow}>
-                <Text style={styles.fieldLabel}>Symmetry</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{symmetry}</Text>
-            </View>
-
-            {/* Fluorescence */}
-            <View style={styles.fieldRow}>
-                <Text style={styles.fieldLabel}>Fluorescence</Text>
-                <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{fluorescence}</Text>
-            </View>
-
-            {/* Clarity Characteristics */}
-            {<Text style={{ fontSize: 5, fontFamily: baseFont, marginTop: 6 }}>
-                Clarity char:  Pinpoint, Feather Internal graining is not shown.
-            </Text>}
-
-            {/* GIA Note */}
-            {data.giaNote && <Text style={{ fontSize: 5, fontFamily: baseFont }}>{data.giaNote || '---'}</Text>
-            }
-            {/* Additional Clarity Note */}
-            {data.giaNote && <Text style={{ fontSize: 5, fontFamily: baseFont }}>{data.clarityNote || "---"}</Text>
-            }
         </View>
     );
 }
@@ -180,12 +195,11 @@ const styles = StyleSheet.create({
     fieldRow: {
         flexDirection: "row",
         alignItems: "baseline",
-        marginBottom: "3.5px",
         width: "100%",
     },
     fieldLabel: {
         fontFamily: baseFont,
-        fontWeight: "normal",
+        fontWeight: "bold",
         fontSize: 5,
         // color: "#333",
         color: 'red',
@@ -193,16 +207,15 @@ const styles = StyleSheet.create({
     },
     ReportDate: {
         fontFamily: baseFont,
-        fontWeight: "normal",
+        fontWeight: "bold",
         fontSize: 5,
         color: "#333",
-        // marginBottom: 5,
     },
     separator: {
         flexGrow: 1,
         borderBottom: "1px dotted #999",
         marginHorizontal: "2px",
-        height: 10,
+        height: '5.70px',
     },
     fieldValue: {
         fontFamily: baseFont,

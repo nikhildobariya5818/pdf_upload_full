@@ -144,11 +144,11 @@ export default function InvoicePDF({ data }: { data: any }) {
                         <View>
                             <InvoicePDFSection2 data={data} />
                         </View>
-                        {/* <View style={{
-                            width: 70,
+                        <View style={{
+                            width: 68,
                             height: 170,
                             // marginTop: '55px',
-                            marginLeft: '48.5px',
+                            marginLeft: '49.5px',
                             marginTop: 86,
                             // marginLeft: 70,
                             transform: 'rotate(-90deg)',
@@ -156,7 +156,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                             // backgroundColor: 'pink'
                         }}>
                             <InvoicePDFSection3 data={data} />
-                        </View> */}
+                        </View>
                     </View>
                 </View>
             </Page>

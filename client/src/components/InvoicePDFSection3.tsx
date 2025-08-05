@@ -8,19 +8,19 @@ export default function InvoicePDFSection3({ data }: any) {
     const ADDITIONAL = data.ADDITIONALGRADINGINFORMATION || {};
     const SYMBOLS = data.symbols || [];
 
-    const reportNo = GIA.GIAReportNumber || '--';
-    const shape = GIA.ShapeandCuttingStyle || '--';
-    const measurements = GIA.Measurements || '--';
+    const reportNo = GIA.GIAReportNumber;
+    const shape = GIA.ShapeandCuttingStyle;
+    const measurements = GIA.Measurements;
 
-    const carat = GRADING.CaratWeight || '--';
-    const color = GRADING.ColorGrade || '--';
-    const clarity = GRADING.ClarityGrade || '--';
-    const cut = GRADING.CutGrade || '--';
+    const carat = GRADING.CaratWeight;
+    const color = GRADING.ColorGrade;
+    const clarity = GRADING.ClarityGrade;
+    const cut = GRADING.CutGrade;
 
-    const polish = ADDITIONAL.polish || '--';
-    const symmetry = ADDITIONAL.symmetry || '--';
-    const fluorescence = ADDITIONAL.fluorescence || '--';
-    const inscription = ADDITIONAL.inscription || '--';
+    const polish = ADDITIONAL.polish;
+    const symmetry = ADDITIONAL.symmetry;
+    const fluorescence = ADDITIONAL.fluorescence;
+    const inscription = ADDITIONAL.inscription;
 
     const clarityChar = SYMBOLS.length > 0 ? SYMBOLS[0]?.name?.replace(/\n/g, ', ') : '--';
 
@@ -29,6 +29,10 @@ export default function InvoicePDFSection3({ data }: any) {
         month: 'long',
         day: 'numeric',
     });
+    const fullValue = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed";
+    const firstLine = fullValue.slice(0, 24); // Tune this for your 30% width
+    const remaining = fullValue.slice(24);
+
     return (
         <View>
             <View>
@@ -95,11 +99,11 @@ export default function InvoicePDFSection3({ data }: any) {
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{clarity}</Text>
                 </View>
-                <View style={[styles.fieldRow,]}>
+                {cut && <View style={styles.fieldRow}>
                     <Text style={styles.fieldLabel}>Cut</Text>
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{cut}</Text>
-                </View>
+                </View>}
             </View>
 
             <View style={{ marginTop: '1px' }}>
@@ -118,16 +122,16 @@ export default function InvoicePDFSection3({ data }: any) {
                     <View style={{ width: 16 }} />
                     <Text style={styles.fieldValue}>LH: {data.LH}%</Text>
                 </View>
-                <View style={[styles.fieldRow]}>
+                {data.ClarityGrade && <View style={[styles.fieldRow]}>
                     <Text style={styles.fieldLabel}>Girdle</Text>
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{data.ClarityGrade}</Text>
-                </View>
-                <View style={[styles.fieldRow, { marginTop: '1px' }]}>
+                </View>}
+                {data.CutGrade && <View style={[styles.fieldRow, { marginTop: '1px' }]}>
                     <Text style={styles.fieldLabel}>Culet</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.CutGrade || '--'}</Text>
-                </View>
+                    <Text style={styles.fieldValue}>{data.CutGrade}</Text>
+                </View>}
                 <View style={[styles.fieldRow, { marginTop: '0.40px' }]}>
                     <Text style={styles.fieldLabel}>Polish</Text>
                     <View style={styles.separator} />
@@ -170,7 +174,6 @@ export default function InvoicePDFSection3({ data }: any) {
                     </Text>
                 </View>
                 <View style={{ marginTop: '1.5px' }}>
-                    {/* <Text style={{ fontSize: 5, fontFamily: baseFont }}>{data.clarityNote || "---"}</Text> */}
                     <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",

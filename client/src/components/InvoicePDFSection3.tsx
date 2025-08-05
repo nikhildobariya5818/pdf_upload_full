@@ -103,16 +103,19 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>
 
             <View style={{ marginTop: '0.36px' }}>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>
+                    <View style={{ width: 10 }} />
                     <Text style={styles.fieldValue}>TD: {data.TD}%</Text>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: '1px' }}>
+                <View style={{ flexDirection: 'row', marginTop: '1px' }}>
                     <Text style={styles.fieldValue}>CA: {data.CA}&#176;</Text>
+                    <View style={{ width: 15 }} />
                     <Text style={styles.fieldValue}>PA: {data.PA}&#176;</Text>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ flexDirection: 'row', }}>
                     <Text style={styles.fieldValue}>ST: {data.ST}%</Text>
+                    <View style={{ width: 16 }} />
                     <Text style={styles.fieldValue}>LH: {data.LH}%</Text>
                 </View>
                 <View style={[styles.fieldRow]}>

@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     separator: {
         flexGrow: 1,
-        borderBottom: "1px dotted #999",
+        borderBottom: "1px dotted #000",
     },
     fieldRow: {
         flexDirection: "row",

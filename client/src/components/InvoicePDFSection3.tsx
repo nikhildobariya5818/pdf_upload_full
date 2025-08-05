@@ -95,14 +95,14 @@ export default function InvoicePDFSection3({ data }: any) {
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{clarity}</Text>
                 </View>
-                <View style={[styles.fieldRow, { marginTop: '0.60px' }]}>
+                <View style={[styles.fieldRow,]}>
                     <Text style={styles.fieldLabel}>Cut</Text>
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{cut}</Text>
                 </View>
             </View>
 
-            <View style={{ marginTop: '0.36px' }}>
+            <View style={{ marginTop: '1px' }}>
                 <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>
                     <View style={{ width: 10 }} />
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
     },
     separator: {
         flexGrow: 1,
-        borderBottom: "1px dotted #999",
+        borderBottom: "1px dotted #000",
         marginHorizontal: "2px",
         height: '5.70px',
     },

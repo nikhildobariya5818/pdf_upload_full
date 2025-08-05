@@ -26,7 +26,7 @@ export const commonStyles = StyleSheet.create({
   },
   separator: {
     flexGrow: 1,
-    borderBottom: "1px dotted #999",
+    borderBottom: "1px dotted #000",
     marginHorizontal: "2px",
     height: 10,
   },

@@ -38,7 +38,6 @@ export default function InvoicePDFSection3({ data }: any) {
             <View style={{
                 flexDirection: "row",
                 alignItems: "baseline",
-                marginTop: '0.50px',
                 width: "100%",
             }}>
                 <Text style={styles.fieldLabel}>Report Type</Text>
@@ -61,8 +60,7 @@ export default function InvoicePDFSection3({ data }: any) {
                     fontFamily: baseFont,
                     fontWeight: "bold",
                     fontSize: 5,
-                    // color: "#000",
-                    color: 'red',
+                    color: "#000",
                     letterSpacing: "-0.20",
                     textAlign: 'left'
                 }}>
@@ -74,8 +72,7 @@ export default function InvoicePDFSection3({ data }: any) {
                     fontFamily: baseFont,
                     fontWeight: "bold",
                     fontSize: 5,
-                    // color: "#000",
-                    color: 'red',
+                    color: "#000",
                     letterSpacing: "-0.20",
                     textAlign: 'left'
                 }}>
@@ -114,7 +111,7 @@ export default function InvoicePDFSection3({ data }: any) {
                     <Text style={styles.fieldValue}>CA: {data.CA}&#176;</Text>
                     <Text style={styles.fieldValue}>PA: {data.PA}&#176;</Text>
                 </View>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: '0.50px' }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.fieldValue}>ST: {data.ST}%</Text>
                     <Text style={styles.fieldValue}>LH: {data.LH}%</Text>
                 </View>
@@ -138,47 +135,44 @@ export default function InvoicePDFSection3({ data }: any) {
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{symmetry}</Text>
                 </View>
-                <View style={[styles.fieldRow, { marginTop: '0.60px' }]}>
+                <View style={[styles.fieldRow, { marginTop: '0.30px' }]}>
                     <Text style={styles.fieldLabel}>Fluorescence</Text>
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{fluorescence}</Text>
                 </View>
             </View>
-            <View style={{ marginTop: '1px' }}>
+            <View style={{ marginTop: '2px' }}>
                 <View>
                     <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",
                         fontSize: 5,
-                        // color: "#000",
-                        color: 'red',
+                        color: "#000",
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
                         Clarity char:  Pinpoint
                     </Text>
                 </View>
-                <View style={{ marginTop: '0.50px' }}>
+                <View>
                     <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",
                         fontSize: 5,
-                        // color: "#000",
-                        color: 'red',
+                        color: "#000",
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
                         Ins:GIA {reportNo}
                     </Text>
                 </View>
-                <View style={{ marginTop: '1px' }}>
+                <View style={{ marginTop: '1.5px' }}>
                     {/* <Text style={{ fontSize: 5, fontFamily: baseFont }}>{data.clarityNote || "---"}</Text> */}
                     <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",
                         fontSize: 5,
-                        // color: "#000",
-                        color: 'red',
+                        color: "#000",
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
@@ -201,8 +195,7 @@ const styles = StyleSheet.create({
         fontFamily: baseFont,
         fontWeight: "bold",
         fontSize: 5,
-        // color: "#333",
-        color: 'red',
+        color: "#333",
         letterSpacing: "-0.20",
     },
     ReportDate: {
@@ -221,8 +214,7 @@ const styles = StyleSheet.create({
         fontFamily: baseFont,
         fontWeight: "bold",
         fontSize: 5,
-        // color: "#000",
-        color: 'red',
+        color: "#000",
         textAlign: "right",
         letterSpacing: "-0.20",
     },

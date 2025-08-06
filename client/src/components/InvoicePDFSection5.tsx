@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
-import { commonStyles } from "./PDFStyles";
 import { BASE_URL } from "./ReportProcessor";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function InvoicePDFSection5({ data }: { data: any }) {
     return (
         <View style={styles.container}>

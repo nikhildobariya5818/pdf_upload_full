@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable jsx-a11y/alt-text */
 import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
 import { BASE_URL } from "./ReportProcessor";
 import { baseFont } from "./PDFStyles";

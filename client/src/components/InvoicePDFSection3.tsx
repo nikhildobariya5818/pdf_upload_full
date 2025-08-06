@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // InvoicePDFSection3.tsx
 import { View, Text, StyleSheet } from '@react-pdf/renderer';
 import { baseFont } from './PDFStyles';
@@ -6,28 +7,28 @@ export default function InvoicePDFSection3({ data }: any) {
     const GIA = data.GIANATURALDIAMONDGRADINGREPORT || {};
     const GRADING = data.GRADINGRESULTS || {};
     const ADDITIONAL = data.ADDITIONALGRADINGINFORMATION || {};
-    const SYMBOLS = data.symbols || [];
+    // const SYMBOLS = data.symbols || [];
 
     const reportNo = GIA.GIAReportNumber;
     const shape = GIA.ShapeandCuttingStyle;
     const measurements = GIA.Measurements;
     const carat = GRADING.CaratWeight;
     const color = GRADING.ColorGrade;
-    const clarity = GRADING.ClarityGrade;
-    const cut = GRADING.CutGrade;
+    // const clarity = GRADING.ClarityGrade;
+    // const cut = GRADING.CutGrade;
 
     const polish = ADDITIONAL.polish;
     const symmetry = ADDITIONAL.symmetry;
     const fluorescence = ADDITIONAL.fluorescence;
-    const inscription = ADDITIONAL.inscription;
+    // const inscription = ADDITIONAL.inscription;
 
-    const clarityChar = SYMBOLS.length > 0 ? SYMBOLS[0]?.name?.replace(/\n/g, ', ') : '--';
+    // const clarityChar = SYMBOLS.length > 0 ? SYMBOLS[0]?.name?.replace(/\n/g, ', ') : '--';
 
-    const todayDate = new Date().toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-    });
+    // const todayDate = new Date().toLocaleDateString('en-US', {
+    //     year: 'numeric',
+    //     month: 'long',
+    //     day: 'numeric',
+    // });
 
     const fieldValue = data?.reportType || '';
     const firstLineLimit = 8; // Adjust this number as per your PDF font size and width

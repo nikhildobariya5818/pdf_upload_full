@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable jsx-a11y/alt-text */
 // InvoicePDF.tsx
 import { Document, Page, View, StyleSheet, Text, Image } from '@react-pdf/renderer';
 import InvoicePDFSection1 from './InvoicePDFSection1';

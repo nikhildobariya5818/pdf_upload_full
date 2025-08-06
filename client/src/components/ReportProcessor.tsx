@@ -56,11 +56,15 @@ const ReportProcessor = () => {
     const file = event.target.files?.[0];
     if (file) {
       if (file.type !== 'application/pdf') {
-        toast("Invalid file type. Please upload a PDF file only.");
+        toast.error("Invalid file type", {
+          // description: "Please upload a PDF file only."
+        });
         return;
       }
       setUploadedFile(file);
-      toast("File uploaded successfully");
+      toast.success("File uploaded successfully", {
+        // description: "Your PDF is ready for processing"
+      });
     }
   };
 
@@ -73,7 +77,9 @@ const ReportProcessor = () => {
 
   const validateForm = () => {
     if (!uploadedFile) {
-      toast("PDF file required");
+      toast.warning("Please upload a PDF file", {
+        // description: "Please upload a PDF file before submitting"
+      });
       return false;
     }
     return true;
@@ -125,7 +131,11 @@ const ReportProcessor = () => {
       a.click();
       URL.revokeObjectURL(url);
 
-      toast("Report processed successfully!");
+      toast.success("Report processed successfully!",
+        //   {
+        //   description: "Your PDF has been generated and downloaded"
+        // }
+      );
 
       // Reset input field so user can re-upload same file again
       if (fileInputRef.current) {
@@ -150,9 +160,11 @@ const ReportProcessor = () => {
         clarityCharacteristics: '',
       });
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error('Upload error:', error);
-      toast("Processing failed");
+      toast.error(`Processing failed. ${error.code === "ERR_NETWORK" ? "Back-end not connected" : "Unable to process your document. Please try again"}`);
+
     } finally {
       setIsLoading(false);
     }

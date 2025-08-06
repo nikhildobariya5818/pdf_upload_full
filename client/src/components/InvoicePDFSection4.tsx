@@ -50,7 +50,6 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     marginLeft: 16,
                     marginTop: 13,
                     // textAlign: "right",
-                    letterSpacing: -1
                 }}
             >KEY TO SYMBOLS*</Text>
 

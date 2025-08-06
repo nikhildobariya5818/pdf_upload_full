@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     },
     separator: {
         flexGrow: 1,
-        borderBottom: "1px dotted #000",
+        borderBottom: "1px dotted #b0b0b0",
         marginHorizontal: "2px",
         height: '5.70px',
     },

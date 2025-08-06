@@ -1,6 +1,6 @@
 // InvoicePDFSection3.tsx
 import { View, Text, StyleSheet } from '@react-pdf/renderer';
-import { baseFont, commonStyles } from './PDFStyles';
+import { baseFont } from './PDFStyles';
 
 export default function InvoicePDFSection3({ data }: any) {
     const GIA = data.GIANATURALDIAMONDGRADINGREPORT || {};
@@ -29,17 +29,20 @@ export default function InvoicePDFSection3({ data }: any) {
         month: 'long',
         day: 'numeric',
     });
-    const fullValue = "Lorem ipsum dolor sit amet consectetur adipiscing elit sed";
-    const firstLine = fullValue.slice(0, 24); // Tune this for your 30% width
-    const remaining = fullValue.slice(24);
 
+    const fieldValue = data.ReportType;
+    const firstLineLimit = 8; // Adjust this number as per your PDF font size and width
+    const firstLine = fieldValue.slice(0, firstLineLimit);
+    const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
     return (
         <View>
             <View>
                 <Text style={styles.fieldLabel}>{data.ReportDate}</Text>
             </View>
 
-            <View style={{
+
+
+            {/* <View style={{
                 flexDirection: "row",
                 alignItems: "baseline",
                 width: "100%",
@@ -47,12 +50,39 @@ export default function InvoicePDFSection3({ data }: any) {
                 <Text style={styles.fieldLabel}>Report Type</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{data.ReportType}</Text>
-            </View>
+            </View> */}
+            {fieldValue &&
+                <View style={{ width: '100%' }}>
+                    {/* First line: label + separator + first part of value */}
+                    <View style={styles.fieldRow}>
+                        <Text style={styles.fieldLabel}>Report Type</Text>
+                        {/* <View style={{
+                            flexGrow: 1,
+                            borderBottom: "1px dotted #000",
+                            marginHorizontal: "2px",
+                            // height: 1, // remove height if causing layout shifts
+                        }} /> */}
+                        <View style={styles.separator} />
+                        <Text style={[styles.fieldValue]} wrap={false}>{firstLine}</Text>
+
+                    </View>
+
+                    {/* Second line: remaining value, right-aligned */}
+                    {remaining && (
+                        <View style={{ width: '100%', }}>
+                            <Text
+                                style={[styles.fieldValue, { textAlign: 'right' }]}
+                            >
+                                {remaining}
+                            </Text>
+                        </View>
+                    )}
+                </View>}
 
             <View style={{
                 flexDirection: "row",
                 alignItems: "baseline",
-                marginTop: '7.48px',
+                marginTop: fieldValue && remaining ? '1px' : '7.48px',
                 width: "100%",
             }}>
                 <Text style={styles.fieldLabel}>GIA Report No</Text>
@@ -80,7 +110,7 @@ export default function InvoicePDFSection3({ data }: any) {
                     letterSpacing: "-0.20",
                     textAlign: 'left'
                 }}>
-                    {shape}
+                    {measurements}
                 </Text>
             </View>
             <View style={{ marginTop: '1px' }}>

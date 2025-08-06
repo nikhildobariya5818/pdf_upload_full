@@ -156,7 +156,7 @@ export default function InvoicePDFSection2({ data }: any) {
             <View style={[styles.fieldRow, { marginBottom: 2 }]}>
                 <Text style={styles.fieldLabel}>Report Type</Text>
                 <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{data.ReportType}</Text>
+                <Text style={styles.fieldValue}>{data.reportType}</Text>
             </View>
 
             <View style={[styles.fieldRow, {}]}>
@@ -194,10 +194,10 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={styles.fieldValue}>{grading.ClarityGrade}</Text>
             </View>
 
-            {grading.CutGrade && <View style={[styles.fieldRow, { marginBottom: 1 }]}>
+            {data.cutGrade && <View style={[styles.fieldRow, { marginBottom: 1 }]}>
                 <Text style={styles.fieldLabel}>Cut</Text>
                 <View style={styles.separator} />
-                <Text style={styles.fieldValue}>{grading.CutGrade}</Text>
+                <Text style={styles.fieldValue}>{data.cutGrade}</Text>
             </View>}
 
             <Text style={[styles.fieldLabel, { marginRight: 2 }]}>Proportions:</Text>
@@ -228,16 +228,16 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={styles.fieldValue}>{additional.fluorescence}</Text>
             </View>
 
-            <Text style={styles.fieldLabel}>Clarity Characteristics: Pinpoint, Feather</Text>
+            {data.clarityCharacteristics && <Text style={styles.fieldLabel}>Clarity Characteristics: {data.clarityCharacteristics}</Text>}
 
             <View style={[styles.fieldRow, { marginBottom: '2px' }]}>
                 <Text style={styles.fieldLabel}>Inscription(s): </Text>
                 <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text>
             </View>
-            <View style={[styles.fieldRow]}>
+            {data.comments && <View style={[styles.fieldRow]}>
                 <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
-                <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>Internal graining is not shown.</Text>
-            </View>
+                <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{data.comments}</Text>
+            </View>}
             {/* <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '66px', }}>
                 <Image
                     src={`${BASE_URL}/files/barcode10.png`}

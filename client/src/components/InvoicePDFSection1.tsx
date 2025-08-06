@@ -75,24 +75,27 @@ export default function InvoicePDFSection1({ data }: any) {
                     </View>
                 )} */}
                 <View style={commonStyles.fieldRow}>
-                    {grading.CutGrade ? (
+                    {/* {grading.CutGrade ? ( */}
+                    {/* // <> */}
+                    {data.cutGrade ?
                         <>
                             <Text style={commonStyles.fieldLabel}>Cut Grade</Text>
                             <View style={commonStyles.separator} />
-                            <Text style={commonStyles.fieldValue}>{grading.CutGrade}</Text>
-                        </>
-                    ) : (
-                        <>
-                            <Text style={[commonStyles.fieldLabel, { color: 'transparent' }]}>Cut Grade</Text>
-                            {/* <View style={commonStyles.separator} /> */}
-                            <Text style={[commonStyles.fieldValue, { color: 'transparent' }]}>-</Text>
-                        </>
-                    )}
+                            <Text style={commonStyles.fieldValue}>{data.cutGrade}</Text></> : ''}
+                    {/* </> */}
+                    {/* // ) : ( */}
+                    {/* //     <>
+                    //         <Text style={[commonStyles.fieldLabel, { color: 'transparent' }]}>Cut Grade</Text>
+                    //         {/* <View style={commonStyles.separator} /> */}
+                    {/* //         <Text style={[commonStyles.fieldValue, { color: 'transparent' }]}>-</Text> */}
+                    {/* //     </> */}
+                    {/* // )} */}
                 </View>
 
 
                 {/* Spacer */}
-                <View style={{ height: 34 }} />
+                {/* <View style={{ height: 34 }} /> */}
+                <View style={{ height: data.cutGrade ? 34 : 45 }} />
                 <View style={commonStyles.fieldRow}>
                     <Text style={commonStyles.fieldLabel}>Polish</Text>
                     <View style={commonStyles.separator} />
@@ -113,12 +116,12 @@ export default function InvoicePDFSection1({ data }: any) {
 
                 <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}>
                     <Text style={commonStyles.fieldLabel}>Inscription(s): </Text>
-                    <Text style={[commonStyles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text>
+                    <Text style={[commonStyles.fieldLabel,]}>GIA  {report.GIAReportNumber}</Text>
                 </View>
-                <View style={[commonStyles.fieldRow]}>
+                {data.comments && <View style={[commonStyles.fieldRow]}>
                     <Text style={[commonStyles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
-                    <Text style={[commonStyles.fieldLabel, { marginLeft: '1px' }]}>Internal graining is not shown.</Text>
-                </View>
+                    <Text style={[commonStyles.fieldLabel, { marginLeft: '1px' }]}> {data.comments}</Text>
+                </View>}
             </View>
         </>
     );

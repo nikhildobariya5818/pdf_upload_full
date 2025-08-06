@@ -11,7 +11,6 @@ export default function InvoicePDFSection3({ data }: any) {
     const reportNo = GIA.GIAReportNumber;
     const shape = GIA.ShapeandCuttingStyle;
     const measurements = GIA.Measurements;
-
     const carat = GRADING.CaratWeight;
     const color = GRADING.ColorGrade;
     const clarity = GRADING.ClarityGrade;
@@ -30,7 +29,7 @@ export default function InvoicePDFSection3({ data }: any) {
         day: 'numeric',
     });
 
-    const fieldValue = data.ReportType;
+    const fieldValue = data?.reportType || '';
     const firstLineLimit = 8; // Adjust this number as per your PDF font size and width
     const firstLine = fieldValue.slice(0, firstLineLimit);
     const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
@@ -127,12 +126,12 @@ export default function InvoicePDFSection3({ data }: any) {
                 <View style={[styles.fieldRow, { marginTop: 1 }]}>
                     <Text style={styles.fieldLabel}>Clarity</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{clarity}</Text>
+                    <Text style={styles.fieldValue}>{GRADING.ClarityGrade}</Text>
                 </View>
-                {cut && <View style={styles.fieldRow}>
+                {data.cutGrade && <View style={styles.fieldRow}>
                     <Text style={styles.fieldLabel}>Cut</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{cut}</Text>
+                    <Text style={styles.fieldValue}>{data.cutGrade}</Text>
                 </View>}
             </View>
 
@@ -179,15 +178,15 @@ export default function InvoicePDFSection3({ data }: any) {
                     </View>
                 )}
 
-                {data.ClarityGrade && <View style={[styles.fieldRow]}>
+                {data.girdle && <View style={[styles.fieldRow]}>
                     <Text style={styles.fieldLabel}>Girdle</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.ClarityGrade}</Text>
+                    <Text style={styles.fieldValue}>{data.girdle}</Text>
                 </View>}
-                {data.CutGrade && <View style={[styles.fieldRow, { marginTop: '1px' }]}>
+                {data.culet && <View style={[styles.fieldRow, { marginTop: '1px' }]}>
                     <Text style={styles.fieldLabel}>Culet</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.CutGrade}</Text>
+                    <Text style={styles.fieldValue}>{data.culet}</Text>
                 </View>}
                 <View style={[styles.fieldRow, { marginTop: '0.40px' }]}>
                     <Text style={styles.fieldLabel}>Polish</Text>
@@ -207,7 +206,7 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>
             <View style={{ marginTop: '2px' }}>
                 <View>
-                    <Text style={{
+                    {data.clarityCharacteristics && <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",
                         fontSize: 5,
@@ -215,8 +214,8 @@ export default function InvoicePDFSection3({ data }: any) {
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
-                        Clarity char:  Pinpoint
-                    </Text>
+                        Clarity char:  {data.clarityCharacteristics}
+                    </Text>}
                 </View>
                 <View>
                     <Text style={{
@@ -239,8 +238,7 @@ export default function InvoicePDFSection3({ data }: any) {
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
-                        Addition pinpoint are not {"\n"}
-                        shown.
+                        {data.comments}
                     </Text>
                 </View>
             </View>

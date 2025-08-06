@@ -17,8 +17,15 @@ interface ProportionData {
   PA: string;
   ST: string;
   LH: string;
-  ReportType: string;
-  Address: string;
+  reportType: string;
+  comments: string;
+  address: string;
+  cityState: string;
+  country: string;
+  cutGrade: string;
+  girdle: string,
+  culet: string,
+  clarityCharacteristics: string,
 }
 
 export const BASE_URL = "http://localhost:8000"
@@ -39,15 +46,22 @@ const ReportProcessor = () => {
   //   Address: '',
   // });
   const [proportions, setProportions] = useState<ProportionData>({
-    TBL: '10.5',
-    TD: '8.3',
-    CA: '12.0',
-    PA: '9.1',
-    ST: '7.4',
-    LH: '11.2',
-    ReportType: 'SampleType',
-    Address: '123 Demo Street, Testville',
-  });
+    TBL: '',
+    TD: '',
+    CA: '',
+    PA: '',
+    ST: '',
+    LH: '',
+    reportType: '',
+    comments: '',
+    address: '',
+    cityState: '',
+    country: '',
+    cutGrade: '',
+    girdle: '',
+    culet: '',
+    clarityCharacteristics: '',
+  })
 
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -128,7 +142,23 @@ const ReportProcessor = () => {
         fileInputRef.current.value = '';
       }
       setUploadedFile(null);
-      // setProportions({ TD: '', TBL: '', CA: '', PA: '', ST: '', LH: '', ReportType: '', Address: '' });
+      setProportions({
+        TBL: '',
+        TD: '',
+        CA: '',
+        PA: '',
+        ST: '',
+        LH: '',
+        reportType: '',
+        comments: '',
+        address: '',
+        cityState: '',
+        country: '',
+        cutGrade: '',
+        girdle: '',
+        culet: '',
+        clarityCharacteristics: '',
+      })
 
     } catch (error: any) {
       console.error('Upload error:', error);

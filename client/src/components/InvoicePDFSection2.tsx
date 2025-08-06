@@ -78,7 +78,7 @@ export default function InvoicePDFSection2({ data }: any) {
                         marginBottom: -1
                     }}
                 >
-                    {data?.Address || 'Plot No C-70'}
+                    {data?.address || '\u00A0'}
                 </Text>
                 <Text
                     style={{
@@ -89,7 +89,7 @@ export default function InvoicePDFSection2({ data }: any) {
                         marginBottom: -1
                     }}
                 >
-                    {data?.CityState || 'Mumbai, Gujarat,'}
+                    {data?.cityState || '\u00A0'}
                 </Text>
                 <Text
                     style={{
@@ -99,7 +99,7 @@ export default function InvoicePDFSection2({ data }: any) {
                         color: "#333",
                     }}
                 >
-                    {data?.country || 'India'}
+                    {data?.country || '\u00A0'}
                 </Text>
             </View>
             <View style={{

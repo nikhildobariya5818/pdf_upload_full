@@ -25,7 +25,8 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     style={{ width: 180, height: '100%', objectFit: 'contain' }}
                 />
             </View>
-            <View style={{ height: '156px', width: '100%', marginTop: '13px', alignItems: 'center', justifyContent: 'center', }}>
+            {/* marginTop: '13px' */}
+            <View style={{ height: '156px', width: '100%', marginTop: '17px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
                     src={`${BASE_URL}/files/proportions.png`}
                     // style={styles.diagramImage}
@@ -48,7 +49,8 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     fontSize: 7.8,
                     color: "#000",
                     marginLeft: 16,
-                    marginTop: 13,
+                    //    marginTop: 13,
+                    marginTop: 9,
                     // textAlign: "right",
                 }}
             >KEY TO SYMBOLS*</Text>
@@ -68,12 +70,16 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 style={{
                     flexDirection: "row",
                     marginTop: '5px',
-                    marginLeft: 3,
+                    //    marginLeft: 3,
+                    marginLeft: 10,
                     gap: 10,
                 }}
             >
                 {/* Column 1 */}
-                <View style={{ flexDirection: "column", flex: 1, gap: 4 }}>
+                <View style={{
+                    flexDirection: "column", flex: 1,
+                    //  gap: 4 
+                }}>
                     {symbolList.slice(0, 4).map((symbol: string, idx: number) => (
                         <View key={idx} style={styles.symbolRow}>
                             <Image src={getImageFilename(symbol)} style={styles.symbolIcon} />
@@ -82,7 +88,10 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 </View>
 
                 {/* Column 2 */}
-                <View style={{ flexDirection: "column", flex: 1, gap: 4 }}>
+                <View style={{
+                    flexDirection: "column", flex: 1,
+                    //  gap: 4 
+                }}>
                     {symbolList.slice(4, 8).map((symbol: string, idx: number) => (
                         <View key={idx + 4} style={styles.symbolRow}>
                             <Image src={getImageFilename(symbol)} style={styles.symbolIcon} />
@@ -121,14 +130,26 @@ const styles = StyleSheet.create({
         height: '100%',
         objectFit: "contain",
     },
+    // symbolRow: {
+    //     flexDirection: "row",
+    //     alignItems: "center",
+    //     backgroundColor: 'red'
+    // },
     symbolRow: {
         flexDirection: "row",
         alignItems: "center",
+        // backgroundColor: 'red',
+        paddingVertical: 0,
+        marginVertical: 0,
+        height: 10, // or any consistent height you want
     },
     symbolIcon: {
-        width: '51%',
-        height: '51%',
-        objectFit: 'contain'
+        width: 20,
+        height: 20,
+        objectFit: 'contain',
+        // width: '51%',
+        // height: '51%',
+        // objectFit: 'contain'
     },
     qrImage: {
         width: 60,

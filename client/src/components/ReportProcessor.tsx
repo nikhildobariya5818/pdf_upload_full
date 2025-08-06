@@ -77,11 +77,11 @@ const ReportProcessor = () => {
       return false;
     }
 
-    const emptyFields = Object.entries(proportions).filter(([_, value]) => !value.trim());
-    if (emptyFields.length > 0) {
-      toast("Missing proportion data");
-      return false;
-    }
+    // const emptyFields = Object.entries(proportions).filter(([_, value]) => !value.trim());
+    // if (emptyFields.length > 0) {
+    //   toast("Missing proportion data");
+    //   return false;
+    // }
 
     return true;
   };

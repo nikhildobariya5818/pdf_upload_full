@@ -137,7 +137,7 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>
 
             <View style={{ marginTop: '1px' }}>
-                <View style={{ flexDirection: 'row' }}>
+                {/* <View style={{ flexDirection: 'row' }}>
                     <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>
                     <View style={{ width: 10 }} />
                     <Text style={styles.fieldValue}>TD: {data.TD}%</Text>
@@ -151,7 +151,34 @@ export default function InvoicePDFSection3({ data }: any) {
                     <Text style={styles.fieldValue}>ST: {data.ST}%</Text>
                     <View style={{ width: 16 }} />
                     <Text style={styles.fieldValue}>LH: {data.LH}%</Text>
-                </View>
+                </View> */}
+                {/* TBL / TD */}
+                {(data.TBL || data.TD) && (
+                    <View style={{ flexDirection: 'row' }}>
+                        {data.TBL && <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>}
+                        {data.TBL && data.TD && <View style={{ width: 10 }} />}
+                        {data.TD && <Text style={styles.fieldValue}>TD: {data.TD}%</Text>}
+                    </View>
+                )}
+
+                {/* CA / PA */}
+                {(data.CA || data.PA) && (
+                    <View style={{ flexDirection: 'row', marginTop: '1px' }}>
+                        {data.CA && <Text style={styles.fieldValue}>CA: {data.CA}&#176;</Text>}
+                        {data.CA && data.PA && <View style={{ width: 15 }} />}
+                        {data.PA && <Text style={styles.fieldValue}>PA: {data.PA}&#176;</Text>}
+                    </View>
+                )}
+
+                {/* ST / LH */}
+                {(data.ST || data.LH) && (
+                    <View style={{ flexDirection: 'row' }}>
+                        {data.ST && <Text style={styles.fieldValue}>ST: {data.ST}%</Text>}
+                        {data.ST && data.LH && <View style={{ width: 16 }} />}
+                        {data.LH && <Text style={styles.fieldValue}>LH: {data.LH}%</Text>}
+                    </View>
+                )}
+
                 {data.ClarityGrade && <View style={[styles.fieldRow]}>
                     <Text style={styles.fieldLabel}>Girdle</Text>
                     <View style={styles.separator} />

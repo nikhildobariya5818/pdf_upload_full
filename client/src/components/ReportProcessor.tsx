@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
 import { Upload, FileText, Check } from 'lucide-react';
 import axios from 'axios';
-import { toast } from "sonner"
+import { toast } from 'sonner';
 import { pdf } from '@react-pdf/renderer';
 import InvoicePDF from './InvoicePDF';
+
 interface ProportionData {
   TBL: string;
   TD: string;
@@ -23,27 +23,17 @@ interface ProportionData {
   cityState: string;
   country: string;
   cutGrade: string;
-  girdle: string,
-  culet: string,
-  clarityCharacteristics: string,
+  girdle: string;
+  culet: string;
+  clarityCharacteristics: string;
 }
 
-export const BASE_URL = "http://localhost:8000"
+export const BASE_URL = "http://localhost:8000";
 
 const ReportProcessor = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  // const [proportions, setProportions] = useState<ProportionData>({
-  //   TBL: '',
-  //   TD: '',
-  //   CA: '',
-  //   PA: '',
-  //   ST: '',
-  //   LH: '',
-  //   ReportType: '',
-  //   Address: '',
-  // });
   const [proportions, setProportions] = useState<ProportionData>({
     TBL: '',
     TD: '',
@@ -60,20 +50,17 @@ const ReportProcessor = () => {
     girdle: '',
     culet: '',
     clarityCharacteristics: '',
-  })
-
+  });
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       if (file.type !== 'application/pdf') {
-        toast("Invalid file type.Please upload a PDF file only.");
+        toast("Invalid file type. Please upload a PDF file only.");
         return;
       }
       setUploadedFile(file);
-
-      toast("File uploaded successfully",
-      );
+      toast("File uploaded successfully");
     }
   };
 
@@ -103,7 +90,6 @@ const ReportProcessor = () => {
       const formData = new FormData();
       formData.append('file', uploadedFile!);
       formData.append('proportions', JSON.stringify(proportions));
-
 
       const response = await axios.post(`${BASE_URL}/upload-multi-pdf/`, formData, {
         headers: {
@@ -162,7 +148,7 @@ const ReportProcessor = () => {
         girdle: '',
         culet: '',
         clarityCharacteristics: '',
-      })
+      });
 
     } catch (error: any) {
       console.error('Upload error:', error);
@@ -172,9 +158,21 @@ const ReportProcessor = () => {
     }
   };
 
-
   return (
-    <div className="min-h-screen bg-gradient-subtle p-6">
+    <div className="min-h-screen bg-gradient-subtle p-6 relative">
+      {/* Full Screen Loader */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <div className="text-center space-y-4">
+            <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto"></div>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-foreground">Processing Report</h3>
+              <p className="text-sm text-muted-foreground">Please wait while we process your document...</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-2xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold text-foreground">Report Processor</h1>
@@ -277,10 +275,15 @@ const ReportProcessor = () => {
                     </div>
                   );
                 })}
-
               </div>
 
-              <Button variant="default" className='w-full' disabled={isLoading}>Submit Report</Button>
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Processing...' : 'Submit Report'}
+              </Button>
             </form>
           </CardContent>
         </Card>

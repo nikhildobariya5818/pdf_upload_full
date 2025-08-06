@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable jsx-a11y/alt-text */
+
 // InvoicePDF.tsx
 import { Document, Page, View, StyleSheet, Text, Image } from '@react-pdf/renderer';
 import InvoicePDFSection1 from './InvoicePDFSection1';
@@ -96,7 +97,7 @@ export default function InvoicePDF({ data }: { data: any }) {
     return (
         <Document>
             <Page size={[1224, 792]} style={styles.page}>
-                <Image src={'/basiSctucutre.jpg'} style={styles.backgroundImage} />
+                {/* <Image src={'/basiSctucutre.jpg'} style={styles.backgroundImage} /> */}
                 {/* Title section */}
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>{data?.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}</Text>

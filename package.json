@@ -1,0 +1,12 @@
+{
+  "name": "pdf_upload_full",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "concurrently \"npm --prefix client run dev\" \"cd backend && uvicorn main:app --reload\"",
+    "build": "npm --prefix client run build",
+    "start": "concurrently \"npm --prefix client run start\" \"cd backend && uvicorn main:app --reload\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.1"
+  }
+}

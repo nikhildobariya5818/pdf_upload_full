@@ -39,7 +39,6 @@ def remove_white_background(image_path):
 def create_and_save_qr_code(report_number, folder_path):
     url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
     
-    # Create QRCode object
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_H,
@@ -49,62 +48,86 @@ def create_and_save_qr_code(report_number, folder_path):
     qr.add_data(url)
     qr.make(fit=True)
 
-    # Make the QR code image (black/white)
     qr_img = qr.make_image(fill_color="black", back_color="white").convert("RGBA")
 
     # Convert white to transparent
     datas = qr_img.getdata()
     new_data = []
     for item in datas:
-        if item[0] > 240 and item[1] > 240 and item[2] > 240:  # white
+        if item[0] > 240 and item[1] > 240 and item[2] > 240:
             new_data.append((255, 255, 255, 0))
         else:
             new_data.append(item)
     qr_img.putdata(new_data)
 
-    # Save QR with transparent background as PNG
     qr_path = os.path.join(folder_path, 'qrcode.png')
     qr_img.save(qr_path, format="PNG")
-
     return qr_path
 
 
 def generate_unique_barcode(number_of_digits, start_digit, save_path):
     """Generate wide Code128 barcodes for both 10 and 12 digits with transparent background."""
-    # Generate numeric string
     number = str(start_digit) + ''.join(str(random.randint(0, 9)) for _ in range(number_of_digits - 1))
 
     # Add spaces for visual width
     number_with_spaces = f"{' ' * 4}{number}{' ' * 4}"
 
-    # Always use Code128 for width control
-    barcode_number = number_with_spaces
-    code = barcode.get('code128', barcode_number, writer=ImageWriter())
+    code = barcode.get('code128', number_with_spaces, writer=ImageWriter())
 
-    # Adjust width based on digits
     writer_options = {
         'write_text': False,
-        'module_width': 3.0 if number_of_digits == 10 else 3.5,  # 10-digit is slightly wider
+        'module_width': 3.0 if number_of_digits == 10 else 3.5,
         'module_height': 50.0,
-        'quiet_zone': 15.0,  # Padding around barcode
+        'quiet_zone': 15.0,
         'font_size': 0
     }
 
     filename = code.save(save_path, options=writer_options)
-
-    # Make barcode background transparent
     remove_white_background(filename)
 
     return number_with_spaces, filename
 
 
 def extract_report_date(text):
-    # Pattern matches "March 02, 2022"
     pattern = r"\b([A-Z][a-z]+ \d{2}, \d{4})\b"
     match = re.search(pattern, text)
     if match:
         return match.group(1)
     return None
+
+
+def extract_key_to_symbols_image(doc, page_index, save_path):
+    """Extract 'KEY TO SYMBOLS' section as image."""
+    page = doc[page_index]
+    text_instances = page.search_for("KEY TO SYMBOLS*")
+    if not text_instances:
+        return None
+    
+    rect = text_instances[0]
+    rect.y1 += 60  # Expand downward to include the explanation
+    rect.x0 -= 5
+    rect.x1 += 5
+    pix = page.get_pixmap(clip=rect, dpi=300)
+    pix.save(save_path)
+    remove_white_background(save_path)
+    return save_path
+
+
+def extract_notes_image(doc, page_index, save_path):
+    """Extract the note text about red/green symbols as image."""
+    page = doc[page_index]
+    text_instances = page.search_for("* Red symbols denote internal characteristics (inclusions). Green or black symbols denote external characteristics")
+    if not text_instances:
+        return None
+
+    rect = text_instances[0]
+    rect.y1 += 25   # Expand down for full text
+    rect.x0 -= 5
+    rect.x1 += 5
+    pix = page.get_pixmap(clip=rect, dpi=300)
+    pix.save(save_path)
+    remove_white_background(save_path)
+    return save_path
 
 
 def process_gia_pdf(pdf_path):
@@ -128,20 +151,12 @@ def process_gia_pdf(pdf_path):
         doc.close()
         return {"error": "Could not find GIA Report Number in the PDF."}
 
-    # Generate QR Code and Barcodes
+    # Generate QR and Barcodes
     qr_code_path = create_and_save_qr_code(gia_report_number, OUTPUT_DIR)
-    barcode12_number, barcode12_path = generate_unique_barcode(
-        number_of_digits=12,
-        start_digit=1,
-        save_path=os.path.join(OUTPUT_DIR, "barcode12")
-    )
-    barcode10_number, barcode10_path = generate_unique_barcode(
-        number_of_digits=10,
-        start_digit=1,
-        save_path=os.path.join(OUTPUT_DIR, "barcode10")
-    )
+    barcode12_number, barcode12_path = generate_unique_barcode(12, 1, os.path.join(OUTPUT_DIR, "barcode12"))
+    barcode10_number, barcode10_path = generate_unique_barcode(10, 1, os.path.join(OUTPUT_DIR, "barcode10"))
 
-    # Determine Report Type
+    # Report Type
     report_type = "GIANATURALDIAMONDGRADINGREPORT"
     if "DOSSIER" in text:
         report_type = "GIANATURALDIAMONDOSSIER"
@@ -176,7 +191,7 @@ def process_gia_pdf(pdf_path):
         characteristics = re.findall(r"\s*([a-zA-Z\s]+)\s*", key_to_symbols_text.split("Red symbols denote")[0])
         symbols.extend([{"icon": None, "name": char.strip()} for char in characteristics if char.strip()])
 
-    # Extract and Save Images with transparent background
+    # Extract and Save Images
     proportions_img_path = None
     clarity_img_path = None
     images = page.get_images(full=True)
@@ -198,6 +213,13 @@ def process_gia_pdf(pdf_path):
             pix.save(clarity_img_path)
             remove_white_background(clarity_img_path)
 
+    # Extract extra images
+    key_to_symbols_img_path = os.path.join(OUTPUT_DIR, "key_to_symbols.png")
+    key_to_symbols_img = extract_key_to_symbols_image(doc, 0, key_to_symbols_img_path)
+
+    notes_img_path = os.path.join(OUTPUT_DIR, "notes.png")
+    notes_img = extract_notes_image(doc, 0, notes_img_path)
+
     # Extract report date
     report_date = extract_report_date(text)
 
@@ -209,6 +231,8 @@ def process_gia_pdf(pdf_path):
         "ADDITIONALGRADINGINFORMATION": additional_info,
         "PROPORTIONS": proportions_img_path.replace("\\", "/") if proportions_img_path else None,
         "CLARITYCHARACTERISTICS": clarity_img_path.replace("\\", "/") if clarity_img_path else None,
+        "KEYTOSYMBOLS": key_to_symbols_img.replace("\\", "/") if key_to_symbols_img else None,
+        "NOTES": notes_img.replace("\\", "/") if notes_img else None,
         "QRCODE": qr_code_path.replace("\\", "/") if qr_code_path else None,
         "symbols": symbols,
         "BARCODE12": {"number": barcode12_number, "image": barcode12_path.replace("\\", "/")},
@@ -236,5 +260,5 @@ async def upload_multi_pdf(file: UploadFile = File(...)):
     os.remove(temp_pdf_path)
     return JSONResponse(content=result)
 
-# For main to register: use "upload_multi_pdf" as in main.py
+
 upload_multi_pdf = upload_multi_pdf

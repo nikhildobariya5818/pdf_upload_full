@@ -31,7 +31,6 @@ interface ProportionData {
 export const BASE_URL = "http://localhost:8000"
 
 const ReportProcessor = () => {
-  const [isDuplicateReport, setIsDuplicateReport] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -90,13 +89,6 @@ const ReportProcessor = () => {
       toast("PDF file required");
       return false;
     }
-
-    // const emptyFields = Object.entries(proportions).filter(([_, value]) => !value.trim());
-    // if (emptyFields.length > 0) {
-    //   toast("Missing proportion data");
-    //   return false;
-    // }
-
     return true;
   };
 
@@ -110,7 +102,6 @@ const ReportProcessor = () => {
     try {
       const formData = new FormData();
       formData.append('file', uploadedFile!);
-      formData.append('reportType', isDuplicateReport ? 'duplicate' : 'single');
       formData.append('proportions', JSON.stringify(proportions));
 
 
@@ -125,13 +116,26 @@ const ReportProcessor = () => {
         ...proportions,
       };
       console.log("mergedData", mergedData)
+
+
+
+      // Get current date in DD/MM/YYYY format
+      const currentDate = new Date();
+      const day = String(currentDate.getDate()).padStart(2, '0');
+      const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+      const year = currentDate.getFullYear();
+      const formattedDate = `${day}-${month}-${year}`;
+
+      // Create the file name with the format reportNumber-DD/MM/YYYY
+      const fileName = `${mergedData.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}/${formattedDate}.pdf`;
+
       const blob = await pdf(<InvoicePDF data={mergedData} />).toBlob();
 
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
       // a.download = `Report-${Date.now()}.pdf`;
-      a.download = `Demo.pdf`;
+      a.download = fileName;
       a.click();
       URL.revokeObjectURL(url);
 
@@ -188,31 +192,6 @@ const ReportProcessor = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* Toggle Switch */}
-            <div className="flex items-center justify-between p-4 bg-accent/50 rounded-lg">
-              <div className="space-y-1">
-                <Label htmlFor="report-type" className="text-sm font-medium">
-                  Report Type
-                </Label>
-                <p className="text-xs text-muted-foreground">
-                  Choose between single or duplicate report processing
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className={`text-sm ${!isDuplicateReport ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
-                  Single Report
-                </span>
-                <Switch
-                  id="report-type"
-                  checked={isDuplicateReport}
-                  onCheckedChange={setIsDuplicateReport}
-                />
-                <span className={`text-sm ${isDuplicateReport ? 'text-primary font-medium' : 'text-muted-foreground'}`}>
-                  Duplicate Report
-                </span>
-              </div>
-            </div>
-
             {/* PDF Upload */}
             <div className="space-y-2">
               <Label htmlFor="pdf-upload" className="text-sm font-medium">

@@ -12,8 +12,8 @@ import { BASE_URL } from './ReportProcessor';
 
 const styles = StyleSheet.create({
     diagramImage: {
-        width: 90,
-        height: 80,
+        width: 130,
+        height: 107,
         objectFit: "contain",
     },
     imageWrapper: {
@@ -66,7 +66,7 @@ export default function InvoicePDFSection2({ data }: any) {
     const proportionsImage = data.PROPORTIONS;
 
     const jobNumber = Math.floor(10000000 + Math.random() * 90000000); // Ensures 8-digit number
-    const orCode = Math.floor(10 + Math.random() * 90); // Ensures 2-digit number
+    const orCode = Math.floor(10 + Math.random() * 30); // Ensures 2-digit number
 
     return (
         <View>
@@ -106,10 +106,17 @@ export default function InvoicePDFSection2({ data }: any) {
             </View>
             <View style={{
                 //   width: 150, 
-                width: 100, // or whatever fixed size works best
-                height: 30,
-                justifyContent: 'flex-start',
-                marginTop: 7,
+                // width: 100, // or whatever fixed size works best
+                height: 60,
+                // backgroundColor: 'red',
+                position: 'absolute',
+                marginTop: '-4px',
+                top: '13px',
+                // left: '2px',
+                width: '80%',
+                // justifyContent: 'flex-start',
+                // marginTop: 7,
+                // backgroundColor: 'red'
                 // marginRight: -50
                 // alignItems: 'center',
                 // alignSelf: 'center' // optional: center horizontally in parent
@@ -118,13 +125,14 @@ export default function InvoicePDFSection2({ data }: any) {
                     src={`${BASE_URL}/files/barcode12.png?t=${Date.now()}`}
                     style={{
                         width: "100%",
+                        // marginRight: 10,
                         //  height: "100%",
-                        height: "50%",
+                        height: "100%",
                         objectFit: "contain",
                     }}
                 />
             </View>
-            <View style={{ marginTop: '-18.5px', }}>
+            <View style={{ marginTop: '18.5px', }}>
                 <Text style={{
                     // marginLeft: "-1.9px",
                     // marginTop: '0',
@@ -212,7 +220,7 @@ export default function InvoicePDFSection2({ data }: any) {
                 </View>
             )}
 
-            <View style={[styles.fieldRow, { marginTop: '5.4px', marginBottom: 1 }]}>
+            <View style={[styles.fieldRow]}>
                 <Text style={styles.fieldLabel}>Polish</Text>
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{additional.polish}</Text>
@@ -264,7 +272,7 @@ export default function InvoicePDFSection2({ data }: any) {
                 style={{
                     position: 'absolute',
                     // bottom: 0, // or whatever exact offset you need
-                    top: '395px',
+                    top: '393px',
                     left: 0,
                     right: 0,
                     flexDirection: "row",

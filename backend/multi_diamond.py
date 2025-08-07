@@ -74,10 +74,21 @@ def generate_unique_barcode(number_of_digits, start_digit, save_path):
 
     code = barcode.get('code128', number_with_spaces, writer=ImageWriter())
 
+    # writer_options = {
+    #     'write_text': False,
+    #     'module_width': 3.0 if number_of_digits == 10 else 3.5,
+    #     'module_height': 50.0,
+    #     'quiet_zone': 15.0,
+    #     'font_size': 0
+    # }
+
+    module_width = 3.0 if number_of_digits == 10 else 3.8
+    module_height = 50.0 if number_of_digits == 10 else 75.0  # Increase for 12-digit
+
     writer_options = {
         'write_text': False,
-        'module_width': 3.0 if number_of_digits == 10 else 3.5,
-        'module_height': 50.0,
+        'module_width': module_width,
+        'module_height': module_height,
         'quiet_zone': 15.0,
         'font_size': 0
     }

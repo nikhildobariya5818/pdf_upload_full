@@ -25,30 +25,31 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     style={{ width: 180, height: '100%', objectFit: 'contain' }}
                 />
             </View>
-            <View style={{ height: '156px', width: '100%', marginTop: '17px', alignItems: 'center', justifyContent: 'center', }}>
+            <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', backgroundColor: 'red', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                 <Image
                     src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
-                    style={{ width: 190, height: '100%', objectFit: 'contain' }}
+                    style={{ width: '5.5cm', height: '100%', objectFit: 'contain' }}
                 />
             </View>
 
             {/* === Symbol list === */}
-            <Text
+            {symbolList.length && <Text
                 style={{
                     fontFamily: baseFont,
                     fontWeight: "bold",
                     fontSize: 7.8,
                     color: "#000",
-                    marginLeft: 16,
-                    marginTop: 9,
+                    marginLeft: 9,
+                    marginTop: 18,
+                    letterSpacing: '-0.51px'
                 }}
-            >KEY TO SYMBOLS*</Text>
-
+            >KEY  TO  SYMBOLS*</Text>
+            }
             <View
                 style={{
                     flexDirection: "row",
-                    marginTop: '5px',
-                    marginLeft: 16,
+                    marginTop: '2px',
+                    marginLeft: 9,
                     gap: 10,
                     width: '40%'
                 }}
@@ -71,24 +72,30 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     {symbolList.slice(4, 8).map((symbol: string, idx: number) => (
                         <View key={idx + 4} style={styles.symbolRow}>
                             <Image src={getImageFilename(symbol)} style={styles.symbolIcon} />
+
                         </View>
                     ))}
                 </View>
             </View>
-            <View
+
+            {symbolList.length && <View
                 fixed
                 style={{
                     position: 'absolute',
                     top: '474px',
-                    left: '-10px',
+                    left: '-3px',
                     width: '100%',
                 }}
             >
-                <Image
+                {/* <Image
                     src={`${BASE_URL}/files/notes.png?t=${Date.now()}`}
                     style={{ width: "100%", height: '100%', objectFit: 'contain' }}
+                /> */}
+                <Image
+                    src={`/img/note.png`}
+                    style={{ width: "100%", height: '100%', objectFit: 'contain' }}
                 />
-            </View>
+            </View>}
             {/* <View>
                 <Text style={{
                     fontFamily: baseFont,
@@ -123,7 +130,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'red',
         paddingVertical: 0,
         marginVertical: 0,
-        height: 18,
+        height: 12,
     },
     symbolIcon: {
         width: 28,

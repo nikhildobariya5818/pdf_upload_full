@@ -177,7 +177,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                                 height: 170,
                                 position: 'absolute',
                                 left: '49.5px',
-                                top: 417,
+                                top: 416,
                                 transform: 'rotate(-90deg)',
                             }}
                         >

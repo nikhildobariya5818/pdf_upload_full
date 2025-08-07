@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     qrContainer: {
         width: 60,
         height: 59,
-        marginBottom: '33px',
+        marginBottom: '31px',
         marginLeft: 144,
         // backgroundColor: 'red'
     },

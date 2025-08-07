@@ -71,8 +71,9 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     flexDirection: "row",
                     marginTop: '5px',
                     //    marginLeft: 3,
-                    marginLeft: 10,
+                    marginLeft: 16,
                     gap: 10,
+                    width: '20%'
                 }}
             >
                 {/* Column 1 */}

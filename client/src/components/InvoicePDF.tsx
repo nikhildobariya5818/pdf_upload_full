@@ -109,12 +109,12 @@ export default function InvoicePDF({ data }: { data: any }) {
                         <InvoicePDFSection1 data={data} />
                     </View>
                     {/* marginLeft: '32px' */}
-                    <View style={{ width: '236px', height: '100%', marginLeft: '36px', marginTop: '28px' }}>
+                    <View style={{ width: '236px', height: '100%', marginLeft: '36px', marginTop: '28px', position: 'relative' }}>
                         <View>
                             <View>
                                 <InvoicePDFSection4 data={data} />
                             </View>
-                            <View
+                            {/* <View
                                 style={{
                                     width: 30,
                                     height: 20,
@@ -130,6 +130,28 @@ export default function InvoicePDF({ data }: { data: any }) {
                                         fontWeight: 'light',
                                         fontSize: 7.19,
                                         // color: '#000',
+                                        textAlign: 'right',
+                                    }}
+                                >
+                                    DIA
+                                </Text>
+                            </View> */}
+                            <View
+                                style={{
+                                    position: 'absolute',
+                                    width: 30,
+                                    height: 20,
+                                    top: 485.4, // absolute from top of this section
+                                    left: 225.8, // absolute from left of this section
+                                    transform: 'rotate(-90deg)',
+                                }}
+                            >
+                                <Text
+                                    style={{
+                                        fontFamily: "OCR",
+                                        fontWeight: 'light',
+                                        fontSize: 7.19,
+                                        //   color: '#000',
                                         textAlign: 'right',
                                     }}
                                 >

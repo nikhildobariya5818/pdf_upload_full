@@ -224,13 +224,13 @@ def process_gia_pdf(pdf_path):
 
     # Save the images to file with correct naming
     if 'PROPORTIONS' in image_mappings:
-        proportions_img_path = os.path.join(OUTPUT_DIR, "proportions.png")
+        proportions_img_path = os.path.join(OUTPUT_DIR, "clarity_characteristics.png")
         pix = fitz.Pixmap(doc, image_mappings['PROPORTIONS'])
         pix.save(proportions_img_path)
         remove_white_background(proportions_img_path)
 
     if 'CLARITYCHARACTERISTICS' in image_mappings:
-        clarity_img_path = os.path.join(OUTPUT_DIR, "clarity_characteristics.png")
+        clarity_img_path = os.path.join(OUTPUT_DIR, "proportions.png")
         pix = fitz.Pixmap(doc, image_mappings['CLARITYCHARACTERISTICS'])
         pix.save(clarity_img_path)
         remove_white_background(clarity_img_path)

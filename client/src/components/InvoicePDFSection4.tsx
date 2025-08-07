@@ -101,8 +101,23 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
             </View>
 
             {/* <View style={{ marginBottom: '72.4px' }} /> */}
-            <View style={{ marginBottom: '84.4px', }} />
+            {/* <View style={{ marginBottom: '84.4px', }} />
             <View style={{ width: '100%', height: '10%', marginLeft: '-10px' }} >
+                <Image
+                    src={`${BASE_URL}/files/notes.png`}
+                    style={{ width: "100%", height: '100%', objectFit: 'contain' }}
+                />
+            </View> */}
+            <View
+                fixed
+                style={{
+                    position: 'absolute',
+                    top: '474px',
+                    left: '-10px',
+                    width: '100%',
+                    // height: 60, // or any fixed height in px
+                }}
+            >
                 <Image
                     src={`${BASE_URL}/files/notes.png`}
                     style={{ width: "100%", height: '100%', objectFit: 'contain' }}

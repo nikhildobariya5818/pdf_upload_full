@@ -118,7 +118,7 @@ export default function InvoicePDF({ data }: { data: any }) {
                                 style={{
                                     width: 30,
                                     height: 20,
-                                    marginTop: '-8.4px',
+                                    marginTop: '104.4px',
                                     //    marginLeft: '233.80px',
                                     marginLeft: '225.80px',
                                     transform: 'rotate(-90deg)',

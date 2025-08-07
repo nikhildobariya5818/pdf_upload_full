@@ -168,11 +168,12 @@ def process_gia_pdf(pdf_path):
         "Measurements": find_value(r"Measurements \.+ (.+)"),
     }
     grading_results = {
-    "CaratWeight": find_value(r"Carat Weight\s*\.\s(.+)"),
-    "ColorGrade": find_value(r"Color Grade\s*\.\s(.+)"),
-    "ClarityGrade": find_value(r"Clarity Grade\s*\.\s(.+)"),
-    "CutGrade": find_value(r"Cut Grade\s*\.\s(.+)"),
-    }
+    "CaratWeight": find_value(r"Carat Weight \.+ (.+)"),
+    "ColorGrade": find_value(r"Color Grade \.+ (.+)"),
+    "ClarityGrade": find_value(r"Clarity Grade \.+ (.+)"),
+    "CutGrade": find_value(r"Cut Grade \.+ (.+)"),
+}
+
     additional_info = {
         "polish": find_value(r"Polish \.+ (.+)"),
         "symmetry": find_value(r"Symmetry \.+ (.+)"),

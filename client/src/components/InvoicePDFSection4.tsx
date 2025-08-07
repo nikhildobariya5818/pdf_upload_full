@@ -101,8 +101,14 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
             </View>
 
             {/* <View style={{ marginBottom: '72.4px' }} /> */}
-            <View style={{ marginBottom: '72.4px', }} />
-            <View>
+            <View style={{ marginBottom: '84.4px', }} />
+            <View style={{ width: '100%', height: '10%', marginLeft: '-10px' }} >
+                <Image
+                    src={`${BASE_URL}/files/notes.png`}
+                    style={{ width: "100%", height: '100%', objectFit: 'contain' }}
+                />
+            </View>
+            {/* <View>
                 <Text style={{
                     fontFamily: baseFont,
                     fontWeight: "bold",
@@ -119,7 +125,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     characteristics. All clarity characteristics may not be shown. Details
                     of finish are not shown.
                 </Text>
-            </View>
+            </View> */}
         </View>
     );
 }

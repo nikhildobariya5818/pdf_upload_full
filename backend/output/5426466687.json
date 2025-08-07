@@ -19,6 +19,8 @@
     },
     "PROPORTIONS": "output/proportions.png",
     "CLARITYCHARACTERISTICS": "output/clarity_characteristics.png",
+    "KEYTOSYMBOLS": "output/key_to_symbols.png",
+    "NOTES": "output/notes.png",
     "QRCODE": "output/qrcode.png",
     "symbols": [
         {
@@ -27,11 +29,11 @@
         }
     ],
     "BARCODE12": {
-        "number": "    103945778772    ",
+        "number": "    124099122647    ",
         "image": "output/barcode12.png"
     },
     "BARCODE10": {
-        "number": "    1090826082    ",
+        "number": "    1155381795    ",
         "image": "output/barcode10.png"
     }
 }

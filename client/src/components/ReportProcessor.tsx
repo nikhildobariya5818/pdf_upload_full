@@ -22,7 +22,6 @@ interface ProportionData {
   address: string;
   cityState: string;
   country: string;
-  cutGrade: string;
   girdle: string;
   culet: string;
   clarityCharacteristics: string;
@@ -43,10 +42,9 @@ const ReportProcessor = () => {
     LH: '',
     reportType: 'Diamond Grading Report',
     comments: '',
-    address: '',
-    cityState: '',
-    country: '',
-    cutGrade: '',
+    address: 'Plot No C-70 Bkc, Bandra (E)',
+    cityState: 'Mumbai, MH 400051',
+    country: 'India',
     girdle: '',
     culet: '',
     clarityCharacteristics: '',
@@ -151,10 +149,9 @@ const ReportProcessor = () => {
         LH: '',
         reportType: 'Diamond Grading Report',
         comments: '',
-        address: '',
-        cityState: '',
-        country: '',
-        cutGrade: '',
+        address: 'Plot No C-70 Bkc, Bandra (E)',
+        cityState: 'Mumbai, MH 400051',
+        country: 'India',
         girdle: '',
         culet: '',
         clarityCharacteristics: '',

@@ -129,10 +129,10 @@ export default function InvoicePDFSection3({ data }: any) {
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{GRADING.ClarityGrade}</Text>
                 </View>
-                {data.cutGrade && <View style={styles.fieldRow}>
+                {GRADING.CutGrade && <View style={styles.fieldRow}>
                     <Text style={styles.fieldLabel}>Cut</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.cutGrade}</Text>
+                    <Text style={styles.fieldValue}>{GRADING.CutGrade}</Text>
                 </View>}
             </View>
 

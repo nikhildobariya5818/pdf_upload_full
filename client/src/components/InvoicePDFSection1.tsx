@@ -78,11 +78,11 @@ export default function InvoicePDFSection1({ data }: any) {
                 <View style={commonStyles.fieldRow}>
                     {/* {grading.CutGrade ? ( */}
                     {/* // <> */}
-                    {data.cutGrade ?
+                    {grading.CutGrade ?
                         <>
                             <Text style={commonStyles.fieldLabel}>Cut Grade</Text>
                             <View style={commonStyles.separator} />
-                            <Text style={commonStyles.fieldValue}>{data.cutGrade}</Text></> : ''}
+                            <Text style={commonStyles.fieldValue}>{grading.CutGrade}</Text></> : ''}
                     {/* </> */}
                     {/* // ) : ( */}
                     {/* //     <>

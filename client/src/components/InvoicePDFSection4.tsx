@@ -15,6 +15,10 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
         .split("\n")
         .map((s: string) => s.trim())
         .filter(Boolean);
+    //  data.GRADINGRESULTS
+
+    //  grading.CutGrade
+    const isCutGrade = data.GRADINGRESULTS.CutGrade ? "100%" : "100%"
 
     return (
         <View>
@@ -25,10 +29,14 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     style={{ width: 180, height: '100%', objectFit: 'contain' }}
                 />
             </View>
-            <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', backgroundColor: 'red', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+            <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                 <Image
                     src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
-                    style={{ width: '5.5cm', height: '100%', objectFit: 'contain' }}
+                    //  style={{ width: '5.5cm', height: '100%', objectFit: 'contain' }}
+                    style={{
+                        width: isCutGrade, height: '85%', objectFit: 'contain',
+                        // ...data.GRADINGRESULTS.CutGrade && { backgroundColor: 'red' }
+                    }}
                 />
             </View>
 

@@ -115,7 +115,7 @@ export default function InvoicePDFSection2({ data }: any) {
                 // alignSelf: 'center' // optional: center horizontally in parent
             }}>
                 <Image
-                    src={`${BASE_URL}/files/barcode12.png`}
+                    src={`${BASE_URL}/files/barcode12.png?t=${Date.now()}`}
                     style={{
                         width: "100%",
                         //  height: "100%",
@@ -206,7 +206,7 @@ export default function InvoicePDFSection2({ data }: any) {
             {proportionsImage && (
                 <View style={styles.imageWrapper}>
                     <Image
-                        src={`${BASE_URL}/files/clarity_characteristics.png`}
+                        src={`${BASE_URL}/files/clarity_characteristics.png?t=${Date.now()}`}
                         style={styles.diagramImage}
                     />
                 </View>
@@ -273,7 +273,7 @@ export default function InvoicePDFSection2({ data }: any) {
                 }}
             >
                 <Image
-                    src={`${BASE_URL}/files/barcode10.png`}
+                    src={`${BASE_URL}/files/barcode10.png?t=${Date.now()}`}
                     style={{
                         width: 100,
                         height: 10,

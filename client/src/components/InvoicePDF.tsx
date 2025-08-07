@@ -33,29 +33,9 @@ Font.register({
 });
 
 const styles = StyleSheet.create({
-    // page: {
-    //     width: 1224,
-    //     height: 792,
-    //     padding: 40,
-    //     fontSize: 10,
-    //     fontFamily: 'Helvetica',
-    //     flexDirection: 'row',
-    //     backgroundColor: '#fff',
-    //     justifyContent: 'flex-start',
-    // },
-    // page: {
-    //     width: 1224,
-    //     height: 792,
-    //     padding: 40,
-    //     fontSize: 10,
-    //     fontFamily: 'Helvetica',
-    //     backgroundColor: '#fff',
-    //     flexDirection: 'column', // set to column so title is on top
-    // },
     page: {
         width: 1224,
         height: 792,
-        // padding: 40,
         fontSize: 10,
         fontFamily: 'Helvetica',
         backgroundColor: '#fff',
@@ -73,23 +53,18 @@ const styles = StyleSheet.create({
     titleContainer: {
         width: '100%',
         textAlign: 'center',
-        // marginTop: '157px'
-        // backgroundColor: 'red',
         paddingTop: '156px',
     },
     titleText: {
         fontFamily: baseFont,
         fontSize: 12,
         color: "#000",
-        // textAlign: 'center',
-        // marginRight: '40%',
         marginRight: '257px',
     },
     contentRow: {
         flexDirection: 'row',
         width: '100%',
         gap: 10,
-        // marginTop: 100
     },
 });
 
@@ -141,8 +116,8 @@ export default function InvoicePDF({ data }: { data: any }) {
                                     position: 'absolute',
                                     width: 30,
                                     height: 20,
-                                    top: 485.4, // absolute from top of this section
-                                    left: 225.8, // absolute from left of this section
+                                    top: 485.4,
+                                    left: 225.8,
                                     transform: 'rotate(-90deg)',
                                 }}
                             >

@@ -20,14 +20,14 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
         <View>
             <View style={{ height: '140px', width: '100%', marginTop: '13px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
-                    src={`${BASE_URL}/files/clarity_characteristics.png`}
+                    src={`${BASE_URL}/files/clarity_characteristics.png?t=${Date.now()}`}
                     // style={styles.diagramImage}
                     style={{ width: 180, height: '100%', objectFit: 'contain' }}
                 />
             </View>
             <View style={{ height: '156px', width: '100%', marginTop: '17px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
-                    src={`${BASE_URL}/files/proportions.png`}
+                    src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
                     style={{ width: 190, height: '100%', objectFit: 'contain' }}
                 />
             </View>
@@ -85,7 +85,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 }}
             >
                 <Image
-                    src={`${BASE_URL}/files/notes.png`}
+                    src={`${BASE_URL}/files/notes.png?t=${Date.now()}`}
                     style={{ width: "100%", height: '100%', objectFit: 'contain' }}
                 />
             </View>

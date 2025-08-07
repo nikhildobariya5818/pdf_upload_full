@@ -1,0 +1,39 @@
+{
+    "ReportDate": "September 06, 2024",
+    "GIANATURALDIAMONDGRADINGREPORT": {
+        "GIAReportNumber": "5503368028",
+        "ShapeandCuttingStyle": "Marquise Brilliant",
+        "Measurements": "11.03 x 5.12 x 3.14 mm"
+    },
+    "GRADINGRESULTS": {
+        "CaratWeight": null,
+        "ColorGrade": null,
+        "ClarityGrade": null,
+        "CutGrade": null
+    },
+    "ADDITIONALGRADINGINFORMATION": {
+        "polish": "Excellent",
+        "symmetry": "Excellent",
+        "fluorescence": "None",
+        "inscription": "GIA 5503368028"
+    },
+    "PROPORTIONS": "output/proportions.png",
+    "CLARITYCHARACTERISTICS": "output/clarity_characteristics.png",
+    "KEYTOSYMBOLS": "output/key_to_symbols.png",
+    "NOTES": "output/notes.png",
+    "QRCODE": "output/qrcode.png",
+    "symbols": [
+        {
+            "icon": null,
+            "name": "Cloud\nPinpoint\nFeather\nCavity\nIndented Natural\nExtra Facet"
+        }
+    ],
+    "BARCODE12": {
+        "number": "    111401210451    ",
+        "image": "output/barcode12.png"
+    },
+    "BARCODE10": {
+        "number": "    1728697051    ",
+        "image": "output/barcode10.png"
+    }
+}

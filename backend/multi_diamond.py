@@ -192,26 +192,49 @@ def process_gia_pdf(pdf_path):
         symbols.extend([{"icon": None, "name": char.strip()} for char in characteristics if char.strip()])
 
     # Extract and Save Images
+        # Extract and Save Images Correctly Based on Section Header Positions
     proportions_img_path = None
     clarity_img_path = None
+
+    proportions_title_rects = page.search_for("PROPORTIONS")
+    clarity_title_rects = page.search_for("CLARITY CHARACTERISTICS")
+
+    proportions_y = proportions_title_rects[0].y0 if proportions_title_rects else None
+    clarity_y = clarity_title_rects[0].y0 if clarity_title_rects else None
+
     images = page.get_images(full=True)
-    if images:
-        main_diagrams = sorted(
-            [img for img in images if page.get_image_bbox(img).get_area() > 10000],
-            key=lambda img: page.get_image_bbox(img).x0
-        )
-        if len(main_diagrams) > 0:
-            proportions_img_path = os.path.join(OUTPUT_DIR, "proportions.png")
-            xref = main_diagrams[0][0]
-            pix = fitz.Pixmap(doc, xref)
-            pix.save(proportions_img_path)
-            remove_white_background(proportions_img_path)
-        if len(main_diagrams) > 1:
-            clarity_img_path = os.path.join(OUTPUT_DIR, "clarity_characteristics.png")
-            xref = main_diagrams[1][0]
-            pix = fitz.Pixmap(doc, xref)
-            pix.save(clarity_img_path)
-            remove_white_background(clarity_img_path)
+    image_mappings = {}
+
+    if proportions_y is not None and clarity_y is not None and images:
+        # Consider only large images (likely diagrams)
+        diagram_images = [img for img in images if page.get_image_bbox(img).get_area() > 10000]
+
+        for img in diagram_images:
+            xref = img[0]
+            rect = page.get_image_bbox(img)
+            img_y = rect.y0
+
+            # Assign based on proximity to section titles
+            if abs(img_y - proportions_y) < abs(img_y - clarity_y):
+                if 'PROPORTIONS' not in image_mappings:
+                    image_mappings['PROPORTIONS'] = xref
+            else:
+                if 'CLARITYCHARACTERISTICS' not in image_mappings:
+                    image_mappings['CLARITYCHARACTERISTICS'] = xref
+
+    # Save the images to file with correct naming
+    if 'PROPORTIONS' in image_mappings:
+        proportions_img_path = os.path.join(OUTPUT_DIR, "proportions.png")
+        pix = fitz.Pixmap(doc, image_mappings['PROPORTIONS'])
+        pix.save(proportions_img_path)
+        remove_white_background(proportions_img_path)
+
+    if 'CLARITYCHARACTERISTICS' in image_mappings:
+        clarity_img_path = os.path.join(OUTPUT_DIR, "clarity_characteristics.png")
+        pix = fitz.Pixmap(doc, image_mappings['CLARITYCHARACTERISTICS'])
+        pix.save(clarity_img_path)
+        remove_white_background(clarity_img_path)
+
 
     # Extract extra images
     key_to_symbols_img_path = os.path.join(OUTPUT_DIR, "key_to_symbols.png")

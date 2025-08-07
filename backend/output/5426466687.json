@@ -6,9 +6,9 @@
         "Measurements": "5.25 x 5.15 x 4.04 mm"
     },
     "GRADINGRESULTS": {
-        "CaratWeight": null,
-        "ColorGrade": null,
-        "ClarityGrade": null,
+        "CaratWeight": "1.01 carat",
+        "ColorGrade": "H",
+        "ClarityGrade": "VS1",
         "CutGrade": null
     },
     "ADDITIONALGRADINGINFORMATION": {
@@ -17,8 +17,8 @@
         "fluorescence": "None",
         "inscription": "GIA 5426466687"
     },
-    "PROPORTIONS": "output/proportions.png",
-    "CLARITYCHARACTERISTICS": "output/clarity_characteristics.png",
+    "PROPORTIONS": "output/clarity_characteristics.png",
+    "CLARITYCHARACTERISTICS": "output/proportions.png",
     "KEYTOSYMBOLS": "output/key_to_symbols.png",
     "NOTES": "output/notes.png",
     "QRCODE": "output/qrcode.png",
@@ -29,11 +29,11 @@
         }
     ],
     "BARCODE12": {
-        "number": "    145659613255    ",
+        "number": "    146278148014    ",
         "image": "output/barcode12.png"
     },
     "BARCODE10": {
-        "number": "    1041370430    ",
+        "number": "    1914813591    ",
         "image": "output/barcode10.png"
     }
 }

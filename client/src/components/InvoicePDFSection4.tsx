@@ -24,14 +24,14 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
         <View>
             <View style={{ height: '140px', width: '100%', marginTop: '13px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
-                    src={`${BASE_URL}/files/clarity_characteristics.png?t=${Date.now()}`}
+                    src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
                     // style={styles.diagramImage}
                     style={{ width: 180, height: '100%', objectFit: 'contain' }}
                 />
             </View>
             <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
                 <Image
-                    src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
+                    src={`${BASE_URL}/files/clarity_characteristics.png?t=${Date.now()}`}
                     //  style={{ width: '5.5cm', height: '100%', objectFit: 'contain' }}
                     style={{
                         width: isCutGrade, height: '85%', objectFit: 'contain',

@@ -170,7 +170,7 @@ export default function InvoicePDFSection3({ data }: any) {
                 </View>}
 
                 {data.table && <View style={[styles.fieldRow]}>
-                    <Text style={styles.fieldLabel}>table</Text>
+                    <Text style={styles.fieldLabel}>Table</Text>
                     <View style={styles.separator} />
                     <Text style={styles.fieldValue}>{data.table}</Text>
                 </View>}

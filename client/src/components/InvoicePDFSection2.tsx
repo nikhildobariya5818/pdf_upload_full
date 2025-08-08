@@ -215,7 +215,7 @@ export default function InvoicePDFSection2({ data }: any) {
             {proportionsImage && (
                 <View style={styles.imageWrapper}>
                     <Image
-                        src={`${BASE_URL}/files/clarity_characteristics.png?t=${Date.now()}`}
+                        src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
                         style={styles.diagramImage}
                     />
                 </View>

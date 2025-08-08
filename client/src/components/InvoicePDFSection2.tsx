@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
 export default function InvoicePDFSection2({ data }: any) {
     const report = data.GIANATURALDIAMONDGRADINGREPORT || {};
     const grading = data.GRADINGRESULTS || {};
+    const symbols = data.symbols || []
     const additional = data.ADDITIONALGRADINGINFORMATION || {};
     const barcode12Number = data.BARCODE12.number
     //  || data.BARCODE10 || {};
@@ -238,15 +239,20 @@ export default function InvoicePDFSection2({ data }: any) {
                 <Text style={styles.fieldValue}>{additional.fluorescence}</Text>
             </View>
 
-            {data.clarityCharacteristics && <Text style={styles.fieldLabel}>Clarity Characteristics: {data.clarityCharacteristics}</Text>}
+            {symbols && symbols.length > 0 && (
+                <Text style={styles.fieldLabel}>
+                    Clarity Characteristics: {symbols.map((s: any) => s.name.replace(/\n/g, ", ")).join(", ")}
+                </Text>
+            )}
+
 
             <View style={[styles.fieldRow, { marginBottom: '2px' }]}>
                 <Text style={styles.fieldLabel}>Inscription(s): </Text>
                 <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text>
             </View>
-            {data.comments && <View style={[styles.fieldRow]}>
+            {additional.comments && <View style={[styles.fieldRow]}>
                 <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
-                <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{data.comments}</Text>
+                <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{additional.comments}</Text>
             </View>}
             {/* <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '66px', }}>
                 <Image

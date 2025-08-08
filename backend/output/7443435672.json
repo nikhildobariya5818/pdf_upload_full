@@ -1,22 +1,22 @@
 {
-    "ReportDate": "March 01, 2024",
+    "ReportDate": "August 08, 2024",
     "GIANATURALDIAMONDGRADINGREPORT": {
-        "GIAReportNumber": "6481665657",
+        "GIAReportNumber": "7443435672",
         "ShapeandCuttingStyle": "Round Brilliant",
-        "Measurements": "6.80 - 6.84 x 4.25 mm"
+        "Measurements": "6.33 - 6.39 x 3.97 mm"
     },
     "GRADINGRESULTS": {
-        "CaratWeight": "1.23 carat",
-        "ColorGrade": "E",
-        "ClarityGrade": "VVS1",
+        "CaratWeight": "1.00 carat",
+        "ColorGrade": "F",
+        "ClarityGrade": "VVS2",
         "CutGrade": "Excellent"
     },
     "ADDITIONALGRADINGINFORMATION": {
         "polish": "Excellent",
         "symmetry": "Excellent",
         "fluorescence": "None",
-        "inscription": ": GIA 6481665657",
-        "comments": "Internal graining is not shown."
+        "inscription": ": GIA 7443435672",
+        "comments": null
     },
     "PROPORTIONS": "output/proportions.png",
     "CLARITYCHARACTERISTICS": "output/clarity_characteristics.png",
@@ -26,15 +26,15 @@
     "symbols": [
         {
             "icon": null,
-            "name": "Feather"
+            "name": "Feather\nPinpoint"
         }
     ],
     "BARCODE12": {
-        "number": "    103468817007    ",
+        "number": "    129495797691    ",
         "image": "output/barcode12.png"
     },
     "BARCODE10": {
-        "number": "    1509275817    ",
+        "number": "    1106903886    ",
         "image": "output/barcode10.png"
     }
 }

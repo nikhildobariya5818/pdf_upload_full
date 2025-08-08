@@ -18,13 +18,14 @@ interface ProportionData {
   ST: string;
   LH: string;
   reportType: string;
-  comments: string;
   address: string;
   cityState: string;
   country: string;
   girdle: string;
   culet: string;
-  clarityCharacteristics: string;
+  depth: string;
+  table: string;
+  // clarityCharacteristics: string;
 }
 
 export const BASE_URL = "http://localhost:8000";
@@ -40,14 +41,15 @@ const ReportProcessor = () => {
     PA: '',
     ST: '',
     LH: '',
+    depth: '',
+    table: '',
     reportType: 'Diamond Grading Report',
-    comments: '',
     address: 'Plot No C-70 Bkc, Bandra (E)',
     cityState: 'Mumbai, MH 400051',
     country: 'India',
     girdle: '',
-    culet: '',
-    clarityCharacteristics: '',
+    culet: 'NON',
+
   });
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -147,14 +149,14 @@ const ReportProcessor = () => {
         PA: '',
         ST: '',
         LH: '',
+        depth: '',
+        table: '',
         reportType: 'Diamond Grading Report',
-        comments: '',
         address: 'Plot No C-70 Bkc, Bandra (E)',
         cityState: 'Mumbai, MH 400051',
         country: 'India',
         girdle: '',
-        culet: '',
-        clarityCharacteristics: '',
+        culet: 'NON',
       });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -265,7 +267,7 @@ const ReportProcessor = () => {
                   </div>
                 ))} */}
                 {Object.entries(proportions).map(([key, value]) => {
-                  const isNumericField = ['TD', 'TBL', 'CA', 'PA', 'ST', 'LH'].includes(key);
+                  const isNumericField = ['TD', 'TBL', 'CA', 'PA', 'ST', 'LH', 'depth', 'table'].includes(key);
 
                   return (
                     <div key={key} className="space-y-2">

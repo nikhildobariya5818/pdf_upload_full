@@ -8,7 +8,7 @@ export default function InvoicePDFSection3({ data }: any) {
     const GRADING = data.GRADINGRESULTS || {};
     const ADDITIONAL = data.ADDITIONALGRADINGINFORMATION || {};
     // const SYMBOLS = data.symbols || [];
-
+    const symbols = data.symbols || []
     const reportNo = GIA.GIAReportNumber;
     const shape = GIA.ShapeandCuttingStyle;
     const measurements = GIA.Measurements;
@@ -137,22 +137,6 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>
 
             <View style={{ marginTop: '1px' }}>
-                {/* <View style={{ flexDirection: 'row' }}>
-                    <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>
-                    <View style={{ width: 10 }} />
-                    <Text style={styles.fieldValue}>TD: {data.TD}%</Text>
-                </View>
-                <View style={{ flexDirection: 'row', marginTop: '1px' }}>
-                    <Text style={styles.fieldValue}>CA: {data.CA}&#176;</Text>
-                    <View style={{ width: 15 }} />
-                    <Text style={styles.fieldValue}>PA: {data.PA}&#176;</Text>
-                </View>
-                <View style={{ flexDirection: 'row', }}>
-                    <Text style={styles.fieldValue}>ST: {data.ST}%</Text>
-                    <View style={{ width: 16 }} />
-                    <Text style={styles.fieldValue}>LH: {data.LH}%</Text>
-                </View> */}
-                {/* TBL / TD */}
                 {(data.TBL || data.TD) && (
                     <View style={{ flexDirection: 'row' }}>
                         {data.TBL && <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>}
@@ -178,6 +162,18 @@ export default function InvoicePDFSection3({ data }: any) {
                         {data.LH && <Text style={styles.fieldValue}>LH: {data.LH}%</Text>}
                     </View>
                 )}
+
+                {data.depth && <View style={[styles.fieldRow]}>
+                    <Text style={styles.fieldLabel}>Depth</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{data.depth}</Text>
+                </View>}
+
+                {data.table && <View style={[styles.fieldRow]}>
+                    <Text style={styles.fieldLabel}>table</Text>
+                    <View style={styles.separator} />
+                    <Text style={styles.fieldValue}>{data.table}</Text>
+                </View>}
 
                 {data.girdle && <View style={[styles.fieldRow]}>
                     <Text style={styles.fieldLabel}>Girdle</Text>
@@ -207,7 +203,7 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>
             <View style={{ marginTop: '2px' }}>
                 <View>
-                    {data.clarityCharacteristics && <Text style={{
+                    {/* {data.clarityCharacteristics && <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",
                         fontSize: 5,
@@ -216,7 +212,14 @@ export default function InvoicePDFSection3({ data }: any) {
                         letterSpacing: "-0.20",
                     }}>
                         Clarity char:  {data.clarityCharacteristics}
-                    </Text>}
+                    </Text>} */}
+
+                    {symbols && symbols.length > 0 && (
+                        <Text style={styles.fieldLabel}>
+                            Clarity Characteristics: {symbols.map((s: any) => s.name.replace(/\n/g, ", ")).join(", ")}
+                        </Text>
+                    )}
+
                 </View>
                 <View>
                     <Text style={{
@@ -230,7 +233,7 @@ export default function InvoicePDFSection3({ data }: any) {
                         Ins:GIA {reportNo}
                     </Text>
                 </View>
-                <View style={{ marginTop: '1.5px' }}>
+                {ADDITIONAL.comments && <View style={{ marginTop: '1.5px' }}>
                     <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",
@@ -239,9 +242,9 @@ export default function InvoicePDFSection3({ data }: any) {
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
-                        {data.comments}
+                        {ADDITIONAL.comments}
                     </Text>
-                </View>
+                </View>}
             </View>
         </View>
     );

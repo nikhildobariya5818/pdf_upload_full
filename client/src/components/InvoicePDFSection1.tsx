@@ -119,9 +119,9 @@ export default function InvoicePDFSection1({ data }: any) {
                     <Text style={commonStyles.fieldLabel}>Inscription(s): </Text>
                     <Text style={[commonStyles.fieldLabel,]}>GIA  {report.GIAReportNumber}</Text>
                 </View>
-                {data.comments && <View style={[commonStyles.fieldRow]}>
+                {additional.comments && <View style={[commonStyles.fieldRow]}>
                     <Text style={[commonStyles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
-                    <Text style={[commonStyles.fieldLabel, { marginLeft: '1px' }]}> {data.comments}</Text>
+                    <Text style={[commonStyles.fieldLabel, { marginLeft: '1px' }]}> {additional.comments}</Text>
                 </View>}
             </View>
         </>

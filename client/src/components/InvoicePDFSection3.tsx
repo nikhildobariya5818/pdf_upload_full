@@ -149,7 +149,7 @@ export default function InvoicePDFSection3({ data }: any) {
                 {(data.CA || data.PA) && (
                     <View style={{ flexDirection: 'row', marginTop: '1px' }}>
                         {data.CA && <Text style={styles.fieldLabel}>CA: {data.CA}&#176;</Text>}
-                        {data.CA && data.PA && <View style={{ width: 15 }} />}
+                        {data.CA && data.PA && <View style={{ width: 17 }} />}
                         {data.PA && <Text style={styles.fieldLabel}>PA: {data.PA}&#176;</Text>}
                     </View>
                 )}
@@ -158,7 +158,7 @@ export default function InvoicePDFSection3({ data }: any) {
                 {(data.ST || data.LH) && (
                     <View style={{ flexDirection: 'row' }}>
                         {data.ST && <Text style={styles.fieldLabel}>ST: {data.ST}%</Text>}
-                        {data.ST && data.LH && <View style={{ width: 16 }} />}
+                        {data.ST && data.LH && <View style={{ width: 17 }} />}
                         {data.LH && <Text style={styles.fieldLabel}>LH: {data.LH}%</Text>}
                     </View>
                 )}

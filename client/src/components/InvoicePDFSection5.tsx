@@ -47,8 +47,9 @@ const styles = StyleSheet.create({
     },
     barcodeRow: {
         flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
+        marginLeft: 18,
+        // alignItems: "center",
+        // justifyContent: "center",
         gap: 4,
     },
     barcodeImage: {

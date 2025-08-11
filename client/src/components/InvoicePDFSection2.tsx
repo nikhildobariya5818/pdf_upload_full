@@ -305,7 +305,7 @@ export default function InvoicePDFSection2({ data }: any) {
                     position: 'absolute',
                     // bottom: 0, // or whatever exact offset you need
                     top: '393px',
-                    left: 0,
+                    left: 15,
                     right: 0,
                     flexDirection: "row",
                     justifyContent: "center",

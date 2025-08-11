@@ -278,7 +278,7 @@ export default function InvoicePDFSection3({ data }: any) {
 
                     {symbols && symbols.length > 0 && (
                         <Text style={styles.fieldLabel}>
-                            Clarity Characteristics: {symbols.map((s: any) => s.name.replace(/\n/g, ", ")).join(", ")}
+                            Clarity char: {symbols.map((s: any) => s.name.replace(/\n/g, ", ")).join(", ")}
                         </Text>
                     )}
 
@@ -295,7 +295,9 @@ export default function InvoicePDFSection3({ data }: any) {
                         Ins:GIA {reportNo}
                     </Text>
                 </View>
-                {ADDITIONAL.comments && <View style={{ marginTop: '1.5px' }}>
+                {ADDITIONAL.comments && <View
+                // style={{ marginTop: '1.5px' }}
+                >
                     <Text style={{
                         fontFamily: baseFont,
                         fontWeight: "bold",

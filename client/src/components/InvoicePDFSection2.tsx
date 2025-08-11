@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         fontFamily: baseFont,
         fontWeight: "bold",
         fontSize: 8,
-        color: "#000",
+        color: "#4B4B4D",
         textAlign: "right",
         letterSpacing: "-0.20",
 

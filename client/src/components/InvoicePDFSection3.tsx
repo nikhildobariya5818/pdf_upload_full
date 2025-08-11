@@ -224,9 +224,9 @@ export default function InvoicePDFSection3({ data }: any) {
                 <View>
                     <Text style={{
                         fontFamily: baseFont,
-                        fontWeight: "normal",
+                        fontWeight: "bold",
                         fontSize: 5,
-                        color: "#000",
+                        color: "#373435",
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
@@ -236,9 +236,9 @@ export default function InvoicePDFSection3({ data }: any) {
                 {ADDITIONAL.comments && <View style={{ marginTop: '1.5px' }}>
                     <Text style={{
                         fontFamily: baseFont,
-                        fontWeight: "normal",
+                        fontWeight: "bold",
                         fontSize: 5,
-                        color: "#000",
+                        color: "#373435",
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
@@ -258,9 +258,9 @@ const styles = StyleSheet.create({
     },
     fieldLabel: {
         fontFamily: baseFont,
-        fontWeight: "normal",
+        fontWeight: "bold",
         fontSize: 5,
-        color: "#333",
+        color: "#373435",
         letterSpacing: "-0.20",
     },
     ReportDate: {

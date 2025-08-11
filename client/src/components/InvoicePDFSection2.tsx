@@ -12,11 +12,13 @@ import { BASE_URL } from './ReportProcessor';
 
 const styles = StyleSheet.create({
     diagramImage: {
-        width: 130,
-        height: 107,
+        width: 180,
+        height: 95,
         objectFit: "contain",
     },
     imageWrapper: {
+        // backgroundColor: 'red',
+        marginTop: -10,
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',

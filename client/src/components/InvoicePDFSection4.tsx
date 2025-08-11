@@ -26,7 +26,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 <Image
                     src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
                     // style={styles.diagramImage}
-                    style={{ width: 180, height: '100%', objectFit: 'contain' }}
+                    style={{ width: 255, height: '100%', objectFit: 'contain' }}
                 />
             </View>
             <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>

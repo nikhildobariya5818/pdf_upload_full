@@ -139,27 +139,27 @@ export default function InvoicePDFSection3({ data }: any) {
             <View style={{ marginTop: '1px' }}>
                 {(data.TBL || data.TD) && (
                     <View style={{ flexDirection: 'row' }}>
-                        {data.TBL && <Text style={styles.fieldValue}>TBL: {data.TBL}%</Text>}
+                        {data.TBL && <Text style={styles.fieldLabel}>TBL: {data.TBL}%</Text>}
                         {data.TBL && data.TD && <View style={{ width: 10 }} />}
-                        {data.TD && <Text style={styles.fieldValue}>TD: {data.TD}%</Text>}
+                        {data.TD && <Text style={styles.fieldLabel}>TD: {data.TD}%</Text>}
                     </View>
                 )}
 
                 {/* CA / PA */}
                 {(data.CA || data.PA) && (
                     <View style={{ flexDirection: 'row', marginTop: '1px' }}>
-                        {data.CA && <Text style={styles.fieldValue}>CA: {data.CA}&#176;</Text>}
+                        {data.CA && <Text style={styles.fieldLabel}>CA: {data.CA}&#176;</Text>}
                         {data.CA && data.PA && <View style={{ width: 15 }} />}
-                        {data.PA && <Text style={styles.fieldValue}>PA: {data.PA}&#176;</Text>}
+                        {data.PA && <Text style={styles.fieldLabel}>PA: {data.PA}&#176;</Text>}
                     </View>
                 )}
 
                 {/* ST / LH */}
                 {(data.ST || data.LH) && (
                     <View style={{ flexDirection: 'row' }}>
-                        {data.ST && <Text style={styles.fieldValue}>ST: {data.ST}%</Text>}
+                        {data.ST && <Text style={styles.fieldLabel}>ST: {data.ST}%</Text>}
                         {data.ST && data.LH && <View style={{ width: 16 }} />}
-                        {data.LH && <Text style={styles.fieldValue}>LH: {data.LH}%</Text>}
+                        {data.LH && <Text style={styles.fieldLabel}>LH: {data.LH}%</Text>}
                     </View>
                 )}
 
@@ -224,7 +224,7 @@ export default function InvoicePDFSection3({ data }: any) {
                 <View>
                     <Text style={{
                         fontFamily: baseFont,
-                        fontWeight: "bold",
+                        fontWeight: "normal",
                         fontSize: 5,
                         color: "#000",
                         textAlign: "left",
@@ -236,7 +236,7 @@ export default function InvoicePDFSection3({ data }: any) {
                 {ADDITIONAL.comments && <View style={{ marginTop: '1.5px' }}>
                     <Text style={{
                         fontFamily: baseFont,
-                        fontWeight: "bold",
+                        fontWeight: "normal",
                         fontSize: 5,
                         color: "#000",
                         textAlign: "left",
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
     },
     fieldLabel: {
         fontFamily: baseFont,
-        fontWeight: "bold",
+        fontWeight: "normal",
         fontSize: 5,
         color: "#333",
         letterSpacing: "-0.20",
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     },
     separator: {
         flexGrow: 1,
-        borderBottom: "1px dotted #4B4B4D",
+        borderBottom: "0.50px dotted #4B4B4D",
         marginHorizontal: "2px",
         height: '5.70px',
     },

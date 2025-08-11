@@ -67,7 +67,7 @@ export default function InvoicePDFSection2({ data }: any) {
     const proportionsImage = data.PROPORTIONS;
 
     const jobNumber = Math.floor(10000000 + Math.random() * 90000000); // Ensures 8-digit number
-    const orCode = Math.floor(10 + Math.random() * 30); // Ensures 2-digit number
+    const orCode = Math.floor(Math.random() * 30) + 1;
 
     return (
         <View>
@@ -248,7 +248,9 @@ export default function InvoicePDFSection2({ data }: any) {
 
             <View style={[styles.fieldRow, { marginBottom: '2px' }]}>
                 <Text style={styles.fieldLabel}>Inscription(s): </Text>
-                <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text>
+                {/* <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text> */}
+                <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>GIA  {report.GIAReportNumber}</Text>
+
             </View>
             {additional.comments && <View style={[styles.fieldRow]}>
                 <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>

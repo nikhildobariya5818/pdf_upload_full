@@ -6,7 +6,7 @@ import { baseFont, commonStyles } from "./PDFStyles";
 
 const getImageFilename = (symbol: string) => {
     const cleaned = symbol.trim().replace(/\s+/g, "_").replace("*", "");
-    return `/img/${cleaned}.png`;
+    return `/sybols/${cleaned}.png`;
 };
 
 export default function InvoicePDFSection4({ data }: { data: any }) {
@@ -76,9 +76,9 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                                 <Text style={{
                                     fontFamily: baseFont,
                                     fontWeight: "bold",
-                                    fontSize: 7,
-                                    color: "#000",
-                                    letterSpacing: "-0.20",
+                                    fontSize: 8.353,
+                                    color: "#2B2A29",
+                                    letterSpacing: "-0.50",
                                 }}>{symbol}</Text>
                             </View>
                         </View>
@@ -96,9 +96,9 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                                 <Text style={{
                                     fontFamily: baseFont,
                                     fontWeight: "bold",
-                                    fontSize: 7,
-                                    color: "#000",
-                                    letterSpacing: "-0.20",
+                                    fontSize: 8.353,
+                                    color: "#2B2A29",
+                                    letterSpacing: "-0.70",
                                 }}>{symbol}</Text>
                             </View>
                         </View>
@@ -158,14 +158,14 @@ const styles = StyleSheet.create({
         // backgroundColor: 'pink',
         paddingVertical: 0,
         marginVertical: 0,
-        height: 12,
+        height: 17,
     },
     symbolIcon: {
         // width: '100%',
         // height: '100%',
         // objectFit: 'cover',
-        width: '10px',
-        height: '10px',
+        width: '14px',
+        height: '14px',
         objectFit: 'contain'
     },
     qrImage: {

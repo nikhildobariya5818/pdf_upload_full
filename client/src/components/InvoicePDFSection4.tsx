@@ -2,11 +2,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
 import { BASE_URL } from "./ReportProcessor";
-import { baseFont } from "./PDFStyles";
+import { baseFont, commonStyles } from "./PDFStyles";
 
 const getImageFilename = (symbol: string) => {
     const cleaned = symbol.trim().replace(/\s+/g, "_").replace("*", "");
-    return `/img/${cleaned}.jpg`;
+    return `/img/${cleaned}.png`;
 };
 
 export default function InvoicePDFSection4({ data }: { data: any }) {
@@ -55,11 +55,12 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 }}
             >KEY  TO  SYMBOLS*</Text>
             }
+
             <View
                 style={{
                     flexDirection: "row",
                     marginTop: '2px',
-                    marginLeft: 9,
+                    marginLeft: 12,
                     gap: 10,
                     width: '40%'
                 }}
@@ -71,6 +72,15 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     {symbolList.slice(0, 4).map((symbol: string, idx: number) => (
                         <View key={idx} style={styles.symbolRow}>
                             <Image src={getImageFilename(symbol)} style={styles.symbolIcon} />
+                            <View style={{ marginLeft: '4px' }}>
+                                <Text style={{
+                                    fontFamily: baseFont,
+                                    fontWeight: "bold",
+                                    fontSize: 7,
+                                    color: "#000",
+                                    letterSpacing: "-0.20",
+                                }}>{symbol}</Text>
+                            </View>
                         </View>
                     ))}
                 </View>
@@ -82,7 +92,15 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     {symbolList.slice(4, 8).map((symbol: string, idx: number) => (
                         <View key={idx + 4} style={styles.symbolRow}>
                             <Image src={getImageFilename(symbol)} style={styles.symbolIcon} />
-
+                            <View>
+                                <Text style={{
+                                    fontFamily: baseFont,
+                                    fontWeight: "bold",
+                                    fontSize: 7,
+                                    color: "#000",
+                                    letterSpacing: "-0.20",
+                                }}>{symbol}</Text>
+                            </View>
                         </View>
                     ))}
                 </View>
@@ -137,18 +155,18 @@ const styles = StyleSheet.create({
     symbolRow: {
         flexDirection: "row",
         alignItems: "center",
-        // backgroundColor: 'red',
+        // backgroundColor: 'pink',
         paddingVertical: 0,
         marginVertical: 0,
         height: 12,
     },
     symbolIcon: {
-        width: 28,
-        height: 28,
-        objectFit: 'contain',
-        // width: '51%',
-        // height: '51%',
-        // objectFit: 'contain'
+        // width: '100%',
+        // height: '100%',
+        // objectFit: 'cover',
+        width: '10px',
+        height: '10px',
+        objectFit: 'contain'
     },
     qrImage: {
         width: 60,

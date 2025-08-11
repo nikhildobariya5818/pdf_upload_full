@@ -137,42 +137,104 @@ export default function InvoicePDFSection3({ data }: any) {
             </View>
 
             <View style={{ marginTop: '1px' }}>
-                {(data.TBL || data.TD) && (
+                {/* {(data.TBL || data.TD) && (
                     <View style={{ flexDirection: 'row' }}>
                         {data.TBL && <Text style={styles.fieldLabel}>TBL: {data.TBL}%</Text>}
                         {data.TBL && data.TD && <View style={{ width: 10 }} />}
                         {data.TD && <Text style={styles.fieldLabel}>TD: {data.TD}%</Text>}
                     </View>
-                )}
+                )} */}
 
                 {/* CA / PA */}
-                {(data.CA || data.PA) && (
+                {/* {(data.CA || data.PA) && (
                     <View style={{ flexDirection: 'row', marginTop: '1px' }}>
                         {data.CA && <Text style={styles.fieldLabel}>CA: {data.CA}&#176;</Text>}
                         {data.CA && data.PA && <View style={{ width: 17 }} />}
                         {data.PA && <Text style={styles.fieldLabel}>PA: {data.PA}&#176;</Text>}
                     </View>
-                )}
+                )} */}
 
                 {/* ST / LH */}
-                {(data.ST || data.LH) && (
+                {/* {(data.ST || data.LH) && (
                     <View style={{ flexDirection: 'row' }}>
                         {data.ST && <Text style={styles.fieldLabel}>ST: {data.ST}%</Text>}
                         {data.ST && data.LH && <View style={{ width: 17 }} />}
                         {data.LH && <Text style={styles.fieldLabel}>LH: {data.LH}%</Text>}
+                    </View>
+                )} */}
+                {/* TBL / TD */}
+                {(data.TBL || data.TD) && (
+                    <View style={{ flexDirection: 'row', width: '100%' }}>
+                        {data.TBL && (
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.fieldLabel}>
+                                    TBL: {data.TBL}%
+                                </Text>
+                            </View>
+                        )}
+                        {data.TD && (
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.fieldLabel}>
+                                    TD: {data.TD}%
+                                </Text>
+                            </View>
+                        )}
+                    </View>
+                )}
+
+                {/* CA / PA */}
+                {(data.CA || data.PA) && (
+                    <View style={{ flexDirection: 'row', width: '100%', marginTop: '1px' }}>
+                        {data.CA && (
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.fieldLabel}>
+                                    CA: {data.CA}&#176;
+                                </Text>
+                            </View>
+                        )}
+                        {data.PA && (
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.fieldLabel}>
+                                    PA: {data.PA}&#176;
+                                </Text>
+                            </View>
+                        )}
+                    </View>
+                )}
+
+
+                {(data.ST || data.LH) && (
+                    <View style={{ flexDirection: 'row', width: '100%' }}>
+                        {/* Column 1: ST */}
+                        {data.ST && (
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.fieldLabel}>
+                                    ST: {data.ST}%
+                                </Text>
+                            </View>
+                        )}
+
+                        {/* Column 2: LH */}
+                        {data.LH && (
+                            <View style={{ flex: 1 }}>
+                                <Text style={styles.fieldLabel}>
+                                    LH: {data.LH}%
+                                </Text>
+                            </View>
+                        )}
                     </View>
                 )}
 
                 {data.depth && <View style={[styles.fieldRow]}>
                     <Text style={styles.fieldLabel}>Depth</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.depth}</Text>
+                    <Text style={styles.fieldValue}>{data.depth}%</Text>
                 </View>}
 
                 {data.table && <View style={[styles.fieldRow]}>
                     <Text style={styles.fieldLabel}>Table</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.table}</Text>
+                    <Text style={styles.fieldValue}>{data.table}%</Text>
                 </View>}
 
                 {data.girdle && <View style={[styles.fieldRow]}>

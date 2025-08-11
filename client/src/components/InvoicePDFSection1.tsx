@@ -1,12 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // InvoicePDFSection1.tsx
-import { View, Text } from "@react-pdf/renderer";
+import { View, Text, Svg, Path } from "@react-pdf/renderer";
 import { baseFont, commonStyles } from "./PDFStyles";
 
+
+export const RoundBracket = ({ side = "left", size = 9, customeMarignTop }: { side?: "left" | "right"; size?: number; customeMarignTop?: any }) => (
+    <Svg
+        width={size}
+        height={size * 1.8}
+        viewBox="0 0 10 15"
+        style={{ marginHorizontal: '-0.50px', alignSelf: "center", marginTop: customeMarignTop ? customeMarignTop : 6 }}
+    >
+        <Path
+            d={
+                side === "left"
+                    ? "M8,1 C3,5 3,10 8,14"
+                    : "M2,1 C7,5 7,10 2,14"
+            }
+            stroke="#000"
+            strokeWidth={0.8}
+            fill="none"
+        />
+    </Svg>
+);
 export default function InvoicePDFSection1({ data }: any) {
     const report = data.GIANATURALDIAMONDGRADINGREPORT || {};
     const grading = data.GRADINGRESULTS || {};
     const additional = data.ADDITIONALGRADINGINFORMATION || {};
+
+
+    const fieldValue = additional.comments || '';
+    const firstLineLimit = 44; // Adjust this number as per your PDF font size and width
+    const firstLine = fieldValue.slice(0, firstLineLimit);
+    const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
     return (
         <>
 
@@ -116,13 +142,27 @@ export default function InvoicePDFSection1({ data }: any) {
                 </View>
 
                 <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}>
-                    <Text style={commonStyles.fieldLabel}>Inscription(s): </Text>
-                    <Text style={[commonStyles.fieldLabel,]}>GIA  {report.GIAReportNumber}</Text>
+                    {/* <Text style={commonStyles.fieldLabel}>Inscription(s): </Text> */}
+                    <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription</Text>
+                    <RoundBracket side="left" size={5} />
+                    <Text style={commonStyles.fieldLabel}>s</Text>
+                    <RoundBracket side="right" size={5} />
+                    <Text style={[commonStyles.fieldLabel,]}>: GIA  {report.GIAReportNumber}</Text>
                 </View>
                 {additional.comments && <View style={[commonStyles.fieldRow]}>
                     <Text style={[commonStyles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
-                    <Text style={[commonStyles.fieldLabel, { marginLeft: '1px' }]}> {additional.comments}</Text>
+                    {/* <Text style={[commonStyles.fieldLabel, { marginLeft: '1px', flex: 1, flexWrap: 'wrap' }]}> {additional.comments}</Text> */}
+                    <Text style={[commonStyles.fieldLabel]} wrap={false}>{firstLine}</Text>
                 </View>}
+                {remaining && (
+                    <View style={{ width: '100%', }}>
+                        <Text
+                            style={[commonStyles.fieldLabel, { textAlign: 'left' }]}
+                        >
+                            {remaining}
+                        </Text>
+                    </View>
+                )}
             </View>
         </>
     );

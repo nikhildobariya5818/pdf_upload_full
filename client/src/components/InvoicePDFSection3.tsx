@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // InvoicePDFSection3.tsx
 import { View, Text, StyleSheet } from '@react-pdf/renderer';
-import { baseFont } from './PDFStyles';
+import { baseFont, commonStyles } from './PDFStyles';
 
 export default function InvoicePDFSection3({ data }: any) {
     const GIA = data.GIANATURALDIAMONDGRADINGREPORT || {};
@@ -34,6 +34,14 @@ export default function InvoicePDFSection3({ data }: any) {
     const firstLineLimit = 8; // Adjust this number as per your PDF font size and width
     const firstLine = fieldValue.slice(0, firstLineLimit);
     const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
+
+
+
+
+    const commandValue = ADDITIONAL.comments || '';
+    const commandValueLimit = 33; // Adjust this number as per your PDF font size and width
+    const commandValuefirstLine = commandValue.slice(0, commandValueLimit);
+    const commandValueremaining = commandValue.length > commandValueLimit ? commandValue.slice(commandValueLimit) : '';
     return (
         <View>
             <View>
@@ -306,8 +314,26 @@ export default function InvoicePDFSection3({ data }: any) {
                         textAlign: "left",
                         letterSpacing: "-0.20",
                     }}>
-                        {ADDITIONAL.comments}
+                        {/* {ADDITIONAL.comments} */}
+                        {commandValuefirstLine}
                     </Text>
+                    {/* <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{commandValuefirstLine}</Text> */}
+                    {commandValueremaining && (
+                        <View style={{ width: '100%', }}>
+                            <Text
+                                style={[{
+                                    fontFamily: baseFont,
+                                    fontWeight: "bold",
+                                    fontSize: 5,
+                                    color: "#373435",
+                                    letterSpacing: "-0.20",
+                                    textAlign: 'left'
+                                }]}
+                            >
+                                {commandValueremaining}
+                            </Text>
+                        </View>
+                    )}
                 </View>}
             </View>
         </View>

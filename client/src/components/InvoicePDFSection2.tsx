@@ -7,8 +7,9 @@ import {
     Image,
     StyleSheet,
 } from '@react-pdf/renderer';
-import { baseFont } from './PDFStyles';
+import { baseFont, commonStyles } from './PDFStyles';
 import { BASE_URL } from './ReportProcessor';
+import { RoundBracket } from './InvoicePDFSection1';
 
 const styles = StyleSheet.create({
     diagramImage: {
@@ -71,6 +72,10 @@ export default function InvoicePDFSection2({ data }: any) {
     const jobNumber = Math.floor(10000000 + Math.random() * 90000000); // Ensures 8-digit number
     const orCode = Math.floor(Math.random() * 30) + 1;
 
+    const fieldValue = additional.comments || '';
+    const firstLineLimit = 44; // Adjust this number as per your PDF font size and width
+    const firstLine = fieldValue.slice(0, firstLineLimit);
+    const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
     return (
         <View>
             <View>
@@ -249,15 +254,32 @@ export default function InvoicePDFSection2({ data }: any) {
 
 
             <View style={[styles.fieldRow, { marginBottom: '2px' }]}>
-                <Text style={styles.fieldLabel}>Inscription(s): </Text>
+                {/* <Text style={styles.fieldLabel}>Inscription(s): </Text> */}
                 {/* <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text> */}
-                <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>GIA  {report.GIAReportNumber}</Text>
-
+                {/* <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription</Text>
+                <RoundBracket side="left" size={5} />
+                <Text style={commonStyles.fieldLabel}>s</Text>
+                <RoundBracket side="right" size={5} />
+                <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>GIA  {additional.inscription}</Text> */}
+                <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription</Text>
+                <RoundBracket side="left" size={5} customeMarignTop={2} />
+                <Text style={commonStyles.fieldLabel}>s</Text>
+                <RoundBracket side="right" size={5} customeMarignTop={2} />
+                <Text style={[commonStyles.fieldLabel,]}>: GIA  {report.GIAReportNumber}</Text>
             </View>
             {additional.comments && <View style={[styles.fieldRow]}>
                 <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
-                <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{additional.comments}</Text>
+                <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{firstLine}</Text>
             </View>}
+            {remaining && (
+                <View style={{ width: '100%', }}>
+                    <Text
+                        style={[commonStyles.fieldLabel, { textAlign: 'left' }]}
+                    >
+                        {remaining}
+                    </Text>
+                </View>
+            )}
             {/* <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: '66px', }}>
                 <Image
                     src={`${BASE_URL}/files/barcode10.png`}

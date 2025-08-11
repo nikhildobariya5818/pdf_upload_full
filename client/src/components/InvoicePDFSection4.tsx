@@ -19,6 +19,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
 
     //  grading.CutGrade
     const isCutGrade = data.GRADINGRESULTS.CutGrade ? "100%" : "100%"
+    const isGrade = data.GRADINGRESULTS.CutGrade ? "85%" : "95%"
 
     return (
         <View>
@@ -34,7 +35,8 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                     src={`${BASE_URL}/files/clarity_characteristics.png?t=${Date.now()}`}
                     //  style={{ width: '5.5cm', height: '100%', objectFit: 'contain' }}
                     style={{
-                        width: isCutGrade, height: '85%', objectFit: 'contain',
+                        // height: '85%'
+                        width: isCutGrade, height: isGrade, objectFit: 'contain',
                         // ...data.GRADINGRESULTS.CutGrade && { backgroundColor: 'red' }
                     }}
                 />

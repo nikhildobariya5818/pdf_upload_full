@@ -2,7 +2,7 @@ const sampleData = {
   ReportDate: "March 02, 2022",
   GIANATURALDIAMONDGRADINGREPORT: {
     GIAReportNumber: "5426466687",
-    ShapeandCuttingStyle: "Square Modified Brilliant",
+    ShapeandCuttingStyle: "Heart Brilliant",
     Measurements: "5.25 x 5.15 x 4.04 mm",
   },
   GRADINGRESULTS: {

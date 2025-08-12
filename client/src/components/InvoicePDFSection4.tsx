@@ -9,7 +9,65 @@ const getImageFilename = (symbol: string) => {
     return `/sybols/${cleaned}.png`;
 };
 
+const getClarityImageStyles = (shapeType: string) => {
+    const shape = shapeType?.toLowerCase();
+
+    // <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+    //     <Image
+    //         src={`${BASE_URL}/files/clarity_characteristics.jpg?t=${Date.now()}`}
+    //         style={{
+    //             width: isCutGrade, height: isGrade, objectFit: 'contain',
+    //         }}
+    //     />
+    // </View>
+    // common container styles
+    const baseContainer = {
+        alignItems: 'center' as const,
+        justifyContent: 'center' as const,
+        overflow: 'hidden' as const
+    };
+
+    if (shape.includes("round")) {
+        return {
+            container: { ...baseContainer, height: '4.5cm', width: '100%', marginTop: '58px' },
+            image: { width: '100%', height: '85%', objectFit: 'contain' as const }
+        };
+    }
+    if (shape.includes("emerald") || shape.includes("oval")) {
+        return {
+            container: { ...baseContainer, height: '4.5cm', width: '100%', marginTop: '58px' },
+            image: { width: '100%', height: '95%', objectFit: 'contain' as const }
+        };
+    }
+    // if () {
+    if (shape.includes("square") || shape.includes("heart")) {
+        // if (shape.includes("marquise")) {
+        return {
+            container: {
+                ...baseContainer, height: '4.7cm', width: '100%', marginTop: '60px',
+                // backgroundColor: 'pink'
+            },
+            image: { width: '100%', height: '80%', objectFit: 'contain' as const }
+        };
+    }
+    if (shape.includes("marquise")) {
+        return {
+            container: { ...baseContainer, height: '5.5cm', width: '100%', marginTop: '36px' },
+            image: { width: '88%', height: '82%', objectFit: 'contain' as const }
+        };
+    }
+
+    // default
+    return {
+        container: { ...baseContainer, height: '4.5cm', width: '100%', marginTop: '58px' },
+        image: { width: '100%', height: '85%', objectFit: 'contain' as const }
+    };
+};
+
+
 export default function InvoicePDFSection4({ data }: { data: any }) {
+
+    const shapeType = data.GIANATURALDIAMONDGRADINGREPORT.ShapeandCuttingStyle
     const rawSymbolEntry = data.symbols?.[0]?.name || "";
     const symbolList = rawSymbolEntry
         .split("\n")
@@ -21,24 +79,26 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
     const isCutGrade = data.GRADINGRESULTS.CutGrade ? "100%" : "100%"
     const isGrade = data.GRADINGRESULTS.CutGrade ? "85%" : "95%"
 
+    const { container, image } = getClarityImageStyles(shapeType);
+
     return (
         <View>
             <View style={{ height: '140px', width: '100%', marginTop: '13px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
                     src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
-                    // style={styles.diagramImage}
                     style={{ width: 255, height: '100%', objectFit: 'contain' }}
                 />
             </View>
-            <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+            <View
+                // style={{ height: '4.5cm', width: '100%', marginTop: '58px', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}
+                style={container}
+            >
                 <Image
                     src={`${BASE_URL}/files/clarity_characteristics.jpg?t=${Date.now()}`}
-                    //  style={{ width: '5.5cm', height: '100%', objectFit: 'contain' }}
-                    style={{
-                        // height: '85%'
-                        width: isCutGrade, height: isGrade, objectFit: 'contain',
-                        // ...data.GRADINGRESULTS.CutGrade && { backgroundColor: 'red' }
-                    }}
+                    // style={{
+                    //     width: isCutGrade, height: isGrade, objectFit: 'contain',
+                    // }}
+                    style={image}
                 />
             </View>
 

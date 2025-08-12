@@ -26,7 +26,7 @@ const sampleData = {
   symbols: [
     {
       icon: null,
-      name: "Cloud\nCrystal\nFeather\nNeedle\nIndented Natural\nNatural",
+      name: "Cloud\nCrystal\nFeather\nIndented Natural\nNatural",
     },
   ],
   BARCODE12: {

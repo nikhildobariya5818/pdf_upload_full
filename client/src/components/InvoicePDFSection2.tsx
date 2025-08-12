@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     },
     separator: {
         flexGrow: 1,
+        height: 9,
+        marginHorizontal: 1,
         borderBottom: "1px dotted #4B4B4D",
     },
     fieldRow: {
@@ -263,13 +265,28 @@ export default function InvoicePDFSection2({ data }: any) {
                 <View style={styles.separator} />
                 <Text style={styles.fieldValue}>{additional.fluorescence}</Text>
             </View>
+            <View style={{ width: '96%' }}>
+                {/* {symbols && symbols.length > 0 && (
+                    <Text style={styles.fieldLabel} >
+                        Clarity Characteristics: {symbols.map((s: any) => s.name.replace(/\n/g, ", ")).join(", ")}
+                    </Text>
+                )} */}
+                {symbols && symbols.length > 0 && (
+                    <View style={{ flexDirection: "row", flexWrap: "wrap", width: '96%' }}>
+                        <Text style={styles.fieldLabel}>Clarity Characteristics: </Text>
+                        {symbols
+                            .map((s: any) => s.name.replace(/\n/g, ", ").split(" "))
+                            .flat()
+                            .map((word: any, index: number) => (
+                                <Text key={index} style={styles.fieldLabel}>
+                                    {word}
+                                    {index < symbols.length - 1 ? " " : ""}
+                                </Text>
+                            ))}
+                    </View>
+                )}
 
-            {symbols && symbols.length > 0 && (
-                <Text style={styles.fieldLabel}>
-                    Clarity Characteristics: {symbols.map((s: any) => s.name.replace(/\n/g, ", ")).join(", ")}
-                </Text>
-            )}
-
+            </View>
             <View style={[styles.fieldRow, { marginBottom: '2px' }]}>
                 <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>
                     Inscription

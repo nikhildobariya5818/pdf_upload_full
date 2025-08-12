@@ -166,8 +166,8 @@ export default function InvoicePDF({ data }: { data: any }) {
                     </View> */}
                     <View
                         style={{
-                            width: '184px',
-                            marginLeft: '34px',
+                            width: '183px',
+                            marginLeft: '35px',
                             marginTop: '7px',
                             position: 'relative',
                             height: '100%',

@@ -49,7 +49,7 @@ const sampleData = {
   address: "PLOT 23",
   cityState: "Surat, Gujarat",
   country: "India",
-  girdle: "FCA to F34 (30% C)",
+  girdle: "FCA to (30%)",
   culet: "121",
   cutGrade: "12",
   clarityCharacteristics: "polish",

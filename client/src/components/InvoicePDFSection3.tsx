@@ -45,44 +45,86 @@ export default function InvoicePDFSection3({ data }: any) {
     const commandValuefirstLine = commandValue.slice(0, commandValueLimit);
     const commandValueremaining = commandValue.length > commandValueLimit ? commandValue.slice(commandValueLimit) : '';
 
-    const renderWithLightBrackets = (text: string) => {
-        const parts = text.split(/(\(.*?\))/g);
-        // Splits and keeps bracketed text in array
+    // const renderWithLightBrackets = (text: string) => {
+    //     const parts = text.split(/(\(.*?\))/g);
+    //     // Splits and keeps bracketed text in array
 
-        return parts.map((part, index) => {
-            if (part.startsWith("(") && part.endsWith(")")) {
-                const inside = part.slice(1, -1); // content without parentheses
+    //     return parts.map((part, index) => {
+    //         if (part.startsWith("(") && part.endsWith(")")) {
+    //             const inside = part.slice(1, -1); // content without parentheses
+    //             return (
+    //                 <React.Fragment key={index}>
+    //                     <Text
+    //                         style={{
+    //                             fontFamily: 'Helvetica',
+    //                             // fontWeight: 'light',
+    //                             fontSize: 6,
+    //                             color: '#333',
+    //                         }}
+    //                     >
+
+    //                         {/* Preserve leading space if needed */}
+    //                         {part.startsWith(" (") ? " (" : "("}
+    //                     </Text>
+    //                     <Text style={styles.fieldValue}>{inside}</Text>
+    //                     <Text
+    //                         style={{
+    //                             fontFamily: 'Helvetica',
+    //                             // fontWeight: 'light',
+    //                             fontSize: 6,
+    //                             color: '#333',
+    //                         }}
+    //                     >
+    //                         )
+    //                     </Text>
+    //                 </React.Fragment>
+    //             );
+    //         }
+
+    //         // Normal text outside brackets
+    //         return (
+    //             <Text key={index} style={styles.fieldValue}>
+    //                 {part}
+    //             </Text>
+    //         );
+    //     });
+    // };
+
+
+    const helveticaLightStyle = {
+        fontFamily: "Helvetica-Light",
+        fontWeight: "light",
+        fontSize: 6,
+        color: "#333",
+    };
+
+    const renderWithLightBrackets = (text?: string) => {
+        if (!text) return null;
+
+        // keep bracket groups as separate array entries
+        const parts = text.split(/(\(.*?\))/g);
+
+        return parts.map((part, i) => {
+            // exact bracket chunk like "(30%)"
+            if (/^\(.*\)$/.test(part)) {
+                const inside = part.slice(1, -1); // remove parentheses
                 return (
-                    <React.Fragment key={index}>
-                        <Text
-                            style={{
-                                fontFamily: 'Helvetica',
-                                // fontWeight: 'light',
-                                fontSize: 6,
-                                color: '#333',
-                            }}
-                        >
-                            (
-                        </Text>
+                    <React.Fragment key={i}>
+                        <Text style={helveticaLightStyle}>(</Text>
                         <Text style={styles.fieldValue}>{inside}</Text>
-                        <Text
-                            style={{
-                                fontFamily: 'Helvetica',
-                                // fontWeight: 'light',
-                                fontSize: 6,
-                                color: '#333',
-                            }}
-                        >
-                            )
-                        </Text>
+                        <Text style={helveticaLightStyle}>)</Text>
                     </React.Fragment>
                 );
             }
 
-            // Normal text outside brackets
+            // normal chunk: convert trailing regular spaces into NBSPs so they don't get dropped
+            const withPreservedTrailingSpaces = part.replace(/ +$/g, (m) =>
+                "\u00A0".repeat(m.length)
+            );
+
             return (
-                <Text key={index} style={styles.fieldValue}>
-                    {part}
+                <Text key={i} style={styles.fieldValue}>
+                    {withPreservedTrailingSpaces}
                 </Text>
             );
         });

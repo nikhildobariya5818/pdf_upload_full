@@ -12,15 +12,6 @@ const getImageFilename = (symbol: string) => {
 const getClarityImageStyles = (shapeType: string) => {
     const shape = shapeType?.toLowerCase();
 
-    // <View style={{ height: '4.5cm', width: '100%', marginTop: '58px', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-    //     <Image
-    //         src={`${BASE_URL}/files/clarity_characteristics.jpg?t=${Date.now()}`}
-    //         style={{
-    //             width: isCutGrade, height: isGrade, objectFit: 'contain',
-    //         }}
-    //     />
-    // </View>
-    // common container styles
     const baseContainer = {
         alignItems: 'center' as const,
         justifyContent: 'center' as const,
@@ -40,7 +31,7 @@ const getClarityImageStyles = (shapeType: string) => {
         };
     }
     // if () {
-    if (shape.includes("square") || shape.includes("heart")) {
+    if (shape.includes("square") || shape.includes("heart") || shape.includes("square emerald")) {
         // if (shape.includes("marquise")) {
         return {
             container: {
@@ -60,7 +51,7 @@ const getClarityImageStyles = (shapeType: string) => {
     // default
     return {
         container: { ...baseContainer, height: '4.5cm', width: '100%', marginTop: '58px' },
-        image: { width: '100%', height: '85%', objectFit: 'contain' as const }
+        image: { width: '100%', height: '95%', objectFit: 'contain' as const }
     };
 };
 

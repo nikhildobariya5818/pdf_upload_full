@@ -1,28 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // InvoicePDFSection1.tsx
-import { View, Text, Svg, Path } from "@react-pdf/renderer";
+import { View, Text } from "@react-pdf/renderer";
 import { baseFont, commonStyles } from "./PDFStyles";
 
 
-export const RoundBracket = ({ side = "left", size = 9, customeMarignTop }: { side?: "left" | "right"; size?: number; customeMarignTop?: any }) => (
-    <Svg
-        width={size}
-        height={size * 1.8}
-        viewBox="0 0 10 15"
-        style={{ marginHorizontal: '-0.50px', alignSelf: "center", marginTop: customeMarignTop ? customeMarignTop : 6 }}
-    >
-        <Path
-            d={
-                side === "left"
-                    ? "M8,1 C3,5 3,10 8,14"
-                    : "M2,1 C7,5 7,10 2,14"
-            }
-            stroke="#000"
-            strokeWidth={0.8}
-            fill="none"
-        />
-    </Svg>
-);
 export default function InvoicePDFSection1({ data }: any) {
     const report = data.GIANATURALDIAMONDGRADINGREPORT || {};
     const grading = data.GRADINGRESULTS || {};

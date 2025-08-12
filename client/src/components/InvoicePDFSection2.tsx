@@ -9,8 +9,6 @@ import {
 } from '@react-pdf/renderer';
 import { baseFont, commonStyles } from './PDFStyles';
 import { BASE_URL } from './ReportProcessor';
-import { RoundBracket } from './InvoicePDFSection1';
-
 const styles = StyleSheet.create({
     diagramImage: {
         width: 180,

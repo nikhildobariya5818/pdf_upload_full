@@ -40,10 +40,10 @@ export default function InvoicePDFSection3({ data }: any) {
 
 
 
-    const commandValue = ADDITIONAL.comments || '';
-    const commandValueLimit = 33; // Adjust this number as per your PDF font size and width
-    const commandValuefirstLine = commandValue.slice(0, commandValueLimit);
-    const commandValueremaining = commandValue.length > commandValueLimit ? commandValue.slice(commandValueLimit) : '';
+    const commentsValue = ADDITIONAL.comments || '';
+    const commentsLineLimit = 33; // Adjust this number as per your PDF font size and width
+    const commentsFirstLine = commentsValue.slice(0, commentsLineLimit);
+    const commentsRemaining = commentsValue.length > commentsLineLimit ? commentsValue.slice(commentsLineLimit) : '';
 
     // const renderWithLightBrackets = (text: string) => {
     //     const parts = text.split(/(\(.*?\))/g);
@@ -404,10 +404,10 @@ export default function InvoicePDFSection3({ data }: any) {
                         letterSpacing: "-0.20",
                     }}>
                         {/* {ADDITIONAL.comments} */}
-                        {commandValuefirstLine}
+                        {commentsFirstLine}
                     </Text>
-                    {/* <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{commandValuefirstLine}</Text> */}
-                    {commandValueremaining && (
+                    {/* <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{commentsFirstLine}</Text> */}
+                    {commentsRemaining && (
                         <View style={{ width: '100%', }}>
                             <Text
                                 style={[{
@@ -419,7 +419,7 @@ export default function InvoicePDFSection3({ data }: any) {
                                     textAlign: 'left'
                                 }]}
                             >
-                                {commandValueremaining}
+                                {commentsRemaining}
                             </Text>
                         </View>
                     )}

@@ -359,11 +359,18 @@ const styles = StyleSheet.create({
         fontSize: 5,
         color: "#333",
     },
+    // separator: {
+    //     flexGrow: 1,
+    //     borderBottom: "0.50px dotted #4B4B4D",
+    //     marginHorizontal: "2px",
+    //     height: '5.70px',
+    // },
     separator: {
         flexGrow: 1,
-        borderBottom: "0.50px dotted #4B4B4D",
-        marginHorizontal: "2px",
-        height: '5.70px',
+        borderBottomWidth: 0.5,
+        borderBottomColor: "#4B4B4D",
+        borderStyle: "dotted", // instead of dotted     //dashed
+        dashArray: [0.5, 0.5], // [dotLength, gapLength] in points
     },
     fieldValue: {
         fontFamily: baseFont,

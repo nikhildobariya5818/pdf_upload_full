@@ -114,7 +114,10 @@ def extract_diagram_image_by_heading(page, doc, heading_text, save_path, fallbac
     if not heading_boxes:
         print(f"Could not find heading: {heading_text}")
         return None
+
     heading_rect = heading_boxes[0]
+
+    # Special handling for PROPORTIONS: fixed crop region, keep PNG
     if heading_text.upper().startswith("PROPORTIONS"):
         x0 = heading_rect.x0
         y0 = heading_rect.y1 + 20
@@ -122,16 +125,18 @@ def extract_diagram_image_by_heading(page, doc, heading_text, save_path, fallbac
         y1 = heading_rect.y1 + 150
         crop_rect = fitz.Rect(x0, y0, x1, y1)
         pix = page.get_pixmap(clip=crop_rect, dpi=300)
-        pix.save(save_path)
+        pix.save(save_path)  # PNG
         remove_white_background(save_path)
         print(f"Saved fixed region for 'PROPORTIONS'")
         return save_path
+
     images = page.get_images(full=True)
     candidate_imgs = [
         img for img in images
         if page.get_image_bbox(img).get_area() > 10000
     ]
     print(f"{heading_text}: Found {len(candidate_imgs)} large images.")
+
     min_dist = float('inf')
     chosen_img = None
     for img in candidate_imgs:
@@ -140,23 +145,53 @@ def extract_diagram_image_by_heading(page, doc, heading_text, save_path, fallbac
         if dist < min_dist:
             min_dist = dist
             chosen_img = img
+
+    def _save_pix_as_jpg(pix: fitz.Pixmap, out_jpg_path: str):
+        # Convert fitz.Pixmap to PIL Image and save as JPEG with white background if alpha present
+        if pix.n in (4, 5):  # has alpha channel
+            pil = Image.frombytes("RGBA", (pix.width, pix.height), pix.samples)
+            bg = Image.new("RGB", pil.size, (255, 255, 255))
+            bg.paste(pil, mask=pil.split()[-1])
+            bg.save(out_jpg_path, format="JPEG", quality=95)
+        else:
+            pil = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+            pil.save(out_jpg_path, format="JPEG", quality=95)
+
     if chosen_img:
         xref = chosen_img[0]
         pix = fitz.Pixmap(doc, xref)
-        pix.save(save_path)
-        remove_white_background(save_path)
-        print(f"Saved image for '{heading_text}' from xref={xref}")
-        return save_path
+        if heading_text.upper().startswith("CLARITY CHARACTERISTICS"):
+            # Force JPG for clarity characteristics
+            jpg_path = os.path.splitext(save_path)[0] + ".jpg"
+            _save_pix_as_jpg(pix, jpg_path)
+            print(f"Saved image for '{heading_text}' as JPG from xref={xref}")
+            return jpg_path
+        else:
+            # Keep PNG for other diagrams
+            pix.save(save_path)
+            remove_white_background(save_path)
+            print(f"Saved image for '{heading_text}' from xref={xref}")
+            return save_path
+
+    # Fallback crop when no image object is detected
     crop_rect = fitz.Rect(
         heading_rect.x0,
         heading_rect.y1 + 5,
         heading_rect.x0 + fallback_size[0],
-        heading_rect.y1 + fallback_size[1])
+        heading_rect.y1 + fallback_size[1]
+    )
     pix = page.get_pixmap(clip=crop_rect, dpi=300)
-    pix.save(save_path)
-    remove_white_background(save_path)
-    print(f"Saved fallback cropped region for '{heading_text}'")
-    return save_path
+
+    if heading_text.upper().startswith("CLARITY CHARACTERISTICS"):
+        jpg_path = os.path.splitext(save_path)[0] + ".jpg"
+        _save_pix_as_jpg(pix, jpg_path)
+        print(f"Saved fallback cropped region for '{heading_text}' as JPG")
+        return jpg_path
+    else:
+        pix.save(save_path)
+        remove_white_background(save_path)
+        print(f"Saved fallback cropped region for '{heading_text}'")
+        return save_path
 
 def extract_comments(text):
     lines = text.splitlines()
@@ -192,14 +227,13 @@ def extract_comments(text):
 
     return " ".join(comments_lines).strip() if comments_lines else None
 
-
-
 def process_gia_pdf(pdf_path):
     clear_output_directory()
     try:
         doc = fitz.open(pdf_path)
     except Exception as e:
         return {"error": f"Error opening PDF: {e}"}
+
     page = doc[0]
     text = page.get_text("text")
 
@@ -275,7 +309,8 @@ def process_gia_pdf(pdf_path):
         symbols.extend([{"icon": None, "name": char.strip()} for char in characteristics if char.strip()])
 
     proportions_img_path = os.path.join(OUTPUT_DIR, "proportions.png")
-    clarity_img_path = os.path.join(OUTPUT_DIR, "clarity_characteristics.png")
+    clarity_img_path = os.path.join(OUTPUT_DIR, "clarity_characteristics.jpg")  # explicit .jpg name
+
     proportions_img = extract_diagram_image_by_heading(page, doc, "PROPORTIONS", proportions_img_path)
     clarity_img = extract_diagram_image_by_heading(page, doc, "CLARITY CHARACTERISTICS", clarity_img_path)
 

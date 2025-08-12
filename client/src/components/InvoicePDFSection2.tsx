@@ -273,14 +273,20 @@ export default function InvoicePDFSection2({ data }: any) {
                 )} */}
                 {symbols && symbols.length > 0 && (
                     <View style={{ flexDirection: "row", flexWrap: "wrap", width: '96%' }}>
+                        {/* Label stays inline */}
                         <Text style={styles.fieldLabel}>Clarity Characteristics: </Text>
                         {symbols
-                            .map((s: any) => s.name.replace(/\n/g, ", ").split(" "))
+                            .map((s: any) =>
+                                s.name
+                                    .replace(/\n/g, ", ")
+                                    .replace(/([a-z])([A-Z])/g, "$1 $2")
+                                    .split(" ")
+                            )
                             .flat()
-                            .map((word: any, index: number) => (
+                            .map((word: any, index: any) => (
                                 <Text key={index} style={styles.fieldLabel}>
                                     {word}
-                                    {index < symbols.length - 1 ? " " : ""}
+                                    {" "}
                                 </Text>
                             ))}
                     </View>

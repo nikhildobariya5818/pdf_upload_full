@@ -372,13 +372,60 @@ export default function InvoicePDFSection3({ data }: any) {
                     }}>
                         Clarity char:  {data.clarityCharacteristics}
                     </Text>} */}
-
-                    {symbols && symbols.length > 0 && (
+                    {/* {symbols && symbols.length > 0 && (
                         <Text style={styles.fieldLabel}>
-                            Clarity char: {symbols.map((s: any) => s.name.replace(/\n/g, ", ")).join(", ")}
+                            Clarity char:{' '}
+                            {symbols
+                                .map((s: any) => s.name.replace(/\n/g, ', '))
+                                .map((word, idx) => (
+                                    <Text key={idx} wrap={false}>
+                                        {word}
+                                        {idx < symbols.length - 1 ? ', ' : ''}
+                                    </Text>
+                                ))}
                         </Text>
-                    )}
+                    )} */}
 
+                    {/* {symbols && symbols.length > 0 && (
+                        <Text style={styles.fieldLabel}>
+                            Clarity char:{' '}
+                            {symbols.map((s: any, idx: number) => {
+                                // Prepare each symbol text (replace newlines with commas)
+                                const symbolText = s.name.replace(/\n/g, ', ');
+
+                                // Wrap the whole thing including the comma after it
+                                const fullChunk =
+                                    idx < symbols.length - 1 ? `${symbolText}, ` : symbolText;
+
+                                return (
+                                    <Text key={idx} wrap={false}>
+                                        {fullChunk}
+                                    </Text>
+                                );
+                            })}
+                        </Text>
+                    )} */}
+                    {symbols && symbols.length > 0 && (
+                        <View style={{ flexDirection: "row", flexWrap: "wrap", width: '96%' }}>
+                            {/* Label stays inline */}
+                            <Text style={styles.fieldLabel}>Clarity char:{' '}</Text>
+                            {symbols
+                                .map((s: any) =>
+                                    s.name
+                                        .replace(/\n/g, ", ")
+                                        // Insert space before capital letters in camelCase or PascalCase
+                                        .replace(/([a-z])([A-Z])/g, "$1 $2")
+                                        .split(" ")
+                                )
+                                .flat()
+                                .map((word: any, index: any) => (
+                                    <Text key={index} style={styles.fieldLabel}>
+                                        {word}
+                                        {" "}
+                                    </Text>
+                                ))}
+                        </View>
+                    )}
                 </View>
                 <View>
                     <Text style={{

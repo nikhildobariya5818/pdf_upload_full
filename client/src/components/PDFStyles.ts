@@ -6,7 +6,7 @@ export const baseFont = "DINPro";
 export const commonStyles = StyleSheet.create({
   fieldRow: {
     flexDirection: "row",
-    alignItems: "baseline",
+    // alignItems: "baseline",
     marginBottom: "3.5px",
     width: "100%",
   },
@@ -27,7 +27,7 @@ export const commonStyles = StyleSheet.create({
   separator: {
     flexGrow: 1,
     borderBottom: "1px dotted #4B4B4D",
-    marginHorizontal: "2px",
+    marginHorizontal: "1px",
     height: 10,
   },
   fieldValue: {

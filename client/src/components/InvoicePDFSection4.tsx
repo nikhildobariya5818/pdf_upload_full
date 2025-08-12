@@ -158,7 +158,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
             {/* </View > */}
 
             {symbolList.length &&
-                <View style={{ position: 'absolute', top: '338px', left: "2px", width: '50%', }}>
+                <View style={{ position: 'absolute', top: '338px', left: "2px", width: '65%' }}>
                     <Image
                         src={`${BASE_URL}/files/key_to_symbols.png?t=${Date.now()}`}
                         style={{ width: "100%", height: '100%', objectFit: 'contain' }}

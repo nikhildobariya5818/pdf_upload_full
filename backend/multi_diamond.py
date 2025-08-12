@@ -84,8 +84,8 @@ def extract_key_to_symbols_image(doc, page_index, save_path):
         return None
     rect = text_instances[0]
     rect.y1 += 60
-    rect.x0 -= 5
-    rect.x1 += 5
+    rect.x0 -= 10
+    rect.x1 += 90
     pix = page.get_pixmap(clip=rect, dpi=300)
     pix.save(save_path)
     remove_white_background(save_path)

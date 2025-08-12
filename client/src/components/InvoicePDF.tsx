@@ -12,7 +12,6 @@ import { Font } from '@react-pdf/renderer';
 import InvoicePDFSection3 from './InvoicePDFSection3';
 const dinProRegular = '/fonts/DINPro-Light_13935.ttf';
 const dinProBold = '/fonts/DINPro-Medium_13936.ttf';
-
 Font.register({
     family: 'DINPro',
     fonts: [
@@ -31,6 +30,13 @@ Font.register({
     family: 'OCR',
     src: '/fonts/OCR-a___.ttf',
 });
+
+Font.register({
+    family: 'Helvetica-Light',
+    src: '/fonts/Helvetica-Light.ttf', // path to your light TTF file
+    fontWeight: 'light',
+});
+
 
 const styles = StyleSheet.create({
     page: {

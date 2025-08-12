@@ -252,20 +252,27 @@ export default function InvoicePDFSection2({ data }: any) {
                 </Text>
             )}
 
-
             <View style={[styles.fieldRow, { marginBottom: '2px' }]}>
-                {/* <Text style={styles.fieldLabel}>Inscription(s): </Text> */}
-                {/* <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>{additional.inscription}</Text> */}
-                {/* <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription</Text>
-                <RoundBracket side="left" size={5} />
-                <Text style={commonStyles.fieldLabel}>s</Text>
-                <RoundBracket side="right" size={5} />
-                <Text style={[styles.fieldLabel, { marginLeft: "1px" }]}>GIA  {additional.inscription}</Text> */}
-                <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription</Text>
-                <RoundBracket side="left" size={5} customeMarignTop={2} />
-                <Text style={commonStyles.fieldLabel}>s</Text>
-                <RoundBracket side="right" size={5} customeMarignTop={2} />
-                <Text style={[commonStyles.fieldLabel,]}>: GIA  {report.GIAReportNumber}</Text>
+                <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>
+                    Inscription
+                    <Text style={{
+                        fontFamily: 'Helvetica-Light',
+                        fontWeight: 'light',
+                        fontSize: 8,
+                        color: "#333",
+                    }}>(</Text>
+                    s
+                    <Text style={{
+                        fontFamily: 'Helvetica-Light',
+                        fontWeight: 'light',
+                        fontSize: 8,
+                        color: "#333",
+                    }}>)</Text>
+                    : {'\u00A0'}
+                </Text>
+                <Text style={commonStyles.fieldLabel}>
+                    GIA {report.GIAReportNumber}
+                </Text>
             </View>
             {additional.comments && <View style={[styles.fieldRow]}>
                 <Text style={[styles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>

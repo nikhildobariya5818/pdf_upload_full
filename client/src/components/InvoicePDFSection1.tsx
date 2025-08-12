@@ -143,12 +143,32 @@ export default function InvoicePDFSection1({ data }: any) {
 
                 <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}>
                     {/* <Text style={commonStyles.fieldLabel}>Inscription(s): </Text> */}
-                    <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription</Text>
-                    <RoundBracket side="left" size={5} />
-                    <Text style={commonStyles.fieldLabel}>s</Text>
-                    <RoundBracket side="right" size={5} />
-                    <Text style={[commonStyles.fieldLabel,]}>: GIA  {report.GIAReportNumber}</Text>
+                    {/* <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription(s) :</Text> */}
+                    <Text style={[commonStyles.fieldLabel,]}>GIA  {report.GIAReportNumber}</Text>
                 </View>
+                <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}>
+                    <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>
+                        Inscription
+                        <Text style={{
+                            fontFamily: 'Helvetica-Light',
+                            fontWeight: 'light',
+                            fontSize: 8,
+                            color: "#333",
+                        }}>(</Text>
+                        s
+                        <Text style={{
+                            fontFamily: 'Helvetica-Light',
+                            fontWeight: 'light',
+                            fontSize: 8,
+                            color: "#333",
+                        }}>)</Text>
+                        : {'\u00A0'}
+                    </Text>
+                    <Text style={commonStyles.fieldLabel}>
+                        GIA {report.GIAReportNumber}
+                    </Text>
+                </View>
+
                 {additional.comments && <View style={[commonStyles.fieldRow]}>
                     <Text style={[commonStyles.fieldValue, { textAlign: 'left' }]}>Comments: </Text>
                     {/* <Text style={[commonStyles.fieldLabel, { marginLeft: '1px', flex: 1, flexWrap: 'wrap' }]}> {additional.comments}</Text> */}

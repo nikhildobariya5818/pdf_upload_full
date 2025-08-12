@@ -2,6 +2,8 @@
 // InvoicePDFSection3.tsx
 import { View, Text, StyleSheet } from '@react-pdf/renderer';
 import { baseFont, commonStyles } from './PDFStyles';
+import React from 'react';
+
 
 export default function InvoicePDFSection3({ data }: any) {
     const GIA = data.GIANATURALDIAMONDGRADINGREPORT || {};
@@ -42,6 +44,51 @@ export default function InvoicePDFSection3({ data }: any) {
     const commandValueLimit = 33; // Adjust this number as per your PDF font size and width
     const commandValuefirstLine = commandValue.slice(0, commandValueLimit);
     const commandValueremaining = commandValue.length > commandValueLimit ? commandValue.slice(commandValueLimit) : '';
+
+    const renderWithLightBrackets = (text: string) => {
+        const parts = text.split(/(\(.*?\))/g);
+        // Splits and keeps bracketed text in array
+
+        return parts.map((part, index) => {
+            if (part.startsWith("(") && part.endsWith(")")) {
+                const inside = part.slice(1, -1); // content without parentheses
+                return (
+                    <React.Fragment key={index}>
+                        <Text
+                            style={{
+                                fontFamily: 'Helvetica',
+                                // fontWeight: 'light',
+                                fontSize: 6,
+                                color: '#333',
+                            }}
+                        >
+                            (
+                        </Text>
+                        <Text style={styles.fieldValue}>{inside}</Text>
+                        <Text
+                            style={{
+                                fontFamily: 'Helvetica',
+                                // fontWeight: 'light',
+                                fontSize: 6,
+                                color: '#333',
+                            }}
+                        >
+                            )
+                        </Text>
+                    </React.Fragment>
+                );
+            }
+
+            // Normal text outside brackets
+            return (
+                <Text key={index} style={styles.fieldValue}>
+                    {part}
+                </Text>
+            );
+        });
+    };
+
+
     return (
         <View>
             <View>
@@ -248,7 +295,7 @@ export default function InvoicePDFSection3({ data }: any) {
                 {data.girdle && <View style={[styles.fieldRow]}>
                     <Text style={styles.fieldLabel}>Girdle</Text>
                     <View style={styles.separator} />
-                    <Text style={styles.fieldValue}>{data.girdle}</Text>
+                    {renderWithLightBrackets(data.girdle)}
                 </View>}
                 {data.culet && <View style={[styles.fieldRow, { marginTop: '1px' }]}>
                     <Text style={styles.fieldLabel}>Culet</Text>

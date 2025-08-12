@@ -70,10 +70,30 @@ export default function InvoicePDFSection2({ data }: any) {
     const jobNumber = Math.floor(10000000 + Math.random() * 90000000); // Ensures 8-digit number
     const orCode = Math.floor(Math.random() * 30) + 1;
 
+    // const fieldValue = additional.comments || '';
+    // const firstLineLimit = 44; // Adjust this number as per your PDF font size and width
+    // const firstLine = fieldValue.slice(0, firstLineLimit);
+    // const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
     const fieldValue = additional.comments || '';
-    const firstLineLimit = 44; // Adjust this number as per your PDF font size and width
-    const firstLine = fieldValue.slice(0, firstLineLimit);
-    const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
+    const firstLineLimit = 44; // Adjust based on your PDF layout
+
+    // Split into words
+    const words = fieldValue.split(' ');
+    const firstLineWords: string[] = [];
+    const remainingWords: string[] = [];
+
+    let currentLength = 0;
+    for (const word of words) {
+        if ((currentLength + word.length + (firstLineWords.length > 0 ? 1 : 0)) <= firstLineLimit) {
+            firstLineWords.push(word);
+            currentLength += word.length + (firstLineWords.length > 1 ? 1 : 0); // +1 for space
+        } else {
+            remainingWords.push(word);
+        }
+    }
+
+    const firstLine = firstLineWords.join(' ');
+    const remaining = remainingWords.join(' ');
     return (
         <View>
             <View>

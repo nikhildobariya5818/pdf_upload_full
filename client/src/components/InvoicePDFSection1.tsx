@@ -10,10 +10,33 @@ export default function InvoicePDFSection1({ data }: any) {
     const additional = data.ADDITIONALGRADINGINFORMATION || {};
 
 
+    // const fieldValue = additional.comments || '';
+    // const firstLineLimit = 44; // Adjust this number as per your PDF font size and width
+    // const firstLine = fieldValue.slice(0, firstLineLimit);
+    // const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
+
+
     const fieldValue = additional.comments || '';
-    const firstLineLimit = 44; // Adjust this number as per your PDF font size and width
-    const firstLine = fieldValue.slice(0, firstLineLimit);
-    const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
+    const firstLineLimit = 44; // Adjust based on your PDF layout
+
+    // Split into words
+    const words = fieldValue.split(' ');
+    const firstLineWords: string[] = [];
+    const remainingWords: string[] = [];
+
+    let currentLength = 0;
+    for (const word of words) {
+        if ((currentLength + word.length + (firstLineWords.length > 0 ? 1 : 0)) <= firstLineLimit) {
+            firstLineWords.push(word);
+            currentLength += word.length + (firstLineWords.length > 1 ? 1 : 0); // +1 for space
+        } else {
+            remainingWords.push(word);
+        }
+    }
+
+    const firstLine = firstLineWords.join(' ');
+    const remaining = remainingWords.join(' ');
+
     return (
         <>
 
@@ -156,7 +179,7 @@ export default function InvoicePDFSection1({ data }: any) {
                     <Text style={[commonStyles.fieldLabel]} wrap={false}>{firstLine}</Text>
                 </View>}
                 {remaining && (
-                    <View style={{ width: '100%', }}>
+                    <View style={{ width: '100%', marginTop: '-4px' }}>
                         <Text
                             style={[commonStyles.fieldLabel, { textAlign: 'left' }]}
                         >

@@ -25,10 +25,44 @@ export default function InvoicePDFSection3({ data }: any) {
     const firstLine = fieldValue.slice(0, firstLineLimit);
     const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
 
-    const commentsValue = ADDITIONAL.comments || '';
-    const commentsLineLimit = 33; // Adjust this number as per your PDF font size and width
-    const commentsFirstLine = commentsValue.slice(0, commentsLineLimit);
-    const commentsRemaining = commentsValue.length > commentsLineLimit ? commentsValue.slice(commentsLineLimit) : '';
+    // const commentsValue = ADDITIONAL.comments || '';
+    // const commentsLineLimit = 33; // Adjust this number as per your PDF font size and width
+    // const commentsFirstLine = commentsValue.slice(0, commentsLineLimit);
+    // const commentsRemaining = commentsValue.length > commentsLineLimit ? commentsValue.slice(commentsLineLimit) : '';
+
+    // Put this near the top of the file
+    const splitAtWordBoundary = (raw: string, limit: number): [string, string] => {
+        if (!raw) return ["", ""];
+
+        // Normalize spaces and make sure punctuation is followed by a space
+        const text = raw
+            .replace(/\s+/g, " ")
+            .replace(/([.,;:!?])(?=\S)/g, "$1 ") // add space after punctuation if missing
+            .trim();
+
+        if (text.length <= limit) return [text, ""];
+
+        // Find the last space at or before the limit
+        const cut = text.lastIndexOf(" ", limit);
+
+        if (cut === -1) {
+            // First token is longer than the limit. Don't cut the word:
+            const firstSpace = text.indexOf(" ");
+            if (firstSpace === -1) return [text, ""]; // single very-long token
+            // Put the whole first word on line 1, rest on line 2
+            return [text.slice(0, firstSpace), text.slice(firstSpace + 1)];
+        }
+
+        return [text.slice(0, cut), text.slice(cut + 1)];
+    };
+    const commentsValue = ADDITIONAL.comments || "";
+    const commentsLineLimit = 33;
+
+    const [commentsFirstLine, commentsRemaining] = splitAtWordBoundary(
+        commentsValue,
+        commentsLineLimit
+    );
+
 
     const helveticaLightStyle = {
         fontFamily: "Helvetica-Light",
@@ -370,7 +404,6 @@ export default function InvoicePDFSection3({ data }: any) {
                     </Text>
                 </View>
                 {ADDITIONAL.comments && <View
-                // style={{ marginTop: '1.5px' }}
                 >
                     <Text style={{
                         fontFamily: baseFont,
@@ -379,11 +412,9 @@ export default function InvoicePDFSection3({ data }: any) {
                         color: "#373435",
                         textAlign: "left",
                         letterSpacing: "-0.20",
-                    }}>
-                        {/* {ADDITIONAL.comments} */}
+                    }} wrap>
                         {commentsFirstLine}
                     </Text>
-                    {/* <Text style={[styles.fieldLabel, { marginLeft: '1px' }]}>{commentsFirstLine}</Text> */}
                     {commentsRemaining && (
                         <View style={{ width: '100%', }}>
                             <Text

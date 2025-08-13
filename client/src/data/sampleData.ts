@@ -16,7 +16,7 @@ const sampleData = {
     symmetry: "Excellent",
     fluorescence: "None",
     inscription: "GIA 5426466687",
-    comments: "Additional clouds are not shown. Pinpoints are not shown",
+    comments: "Additional Pinpoints are not shown.Clouds are not showing",
   },
   PROPORTIONS: "output/pclarity_characteristics.png",
   CLARITYCHARACTERISTICS: "output/proportions.png",

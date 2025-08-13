@@ -9,87 +9,26 @@ export default function InvoicePDFSection3({ data }: any) {
     const GIA = data.GIANATURALDIAMONDGRADINGREPORT || {};
     const GRADING = data.GRADINGRESULTS || {};
     const ADDITIONAL = data.ADDITIONALGRADINGINFORMATION || {};
-    // const SYMBOLS = data.symbols || [];
     const symbols = data.symbols || []
     const reportNo = GIA.GIAReportNumber;
     const shape = GIA.ShapeandCuttingStyle;
     const measurements = GIA.Measurements;
     const carat = GRADING.CaratWeight;
     const color = GRADING.ColorGrade;
-    // const clarity = GRADING.ClarityGrade;
-    // const cut = GRADING.CutGrade;
 
     const polish = ADDITIONAL.polish;
     const symmetry = ADDITIONAL.symmetry;
     const fluorescence = ADDITIONAL.fluorescence;
-    // const inscription = ADDITIONAL.inscription;
-
-    // const clarityChar = SYMBOLS.length > 0 ? SYMBOLS[0]?.name?.replace(/\n/g, ', ') : '--';
-
-    // const todayDate = new Date().toLocaleDateString('en-US', {
-    //     year: 'numeric',
-    //     month: 'long',
-    //     day: 'numeric',
-    // });
 
     const fieldValue = data?.reportType || '';
     const firstLineLimit = 8; // Adjust this number as per your PDF font size and width
     const firstLine = fieldValue.slice(0, firstLineLimit);
     const remaining = fieldValue.length > firstLineLimit ? fieldValue.slice(firstLineLimit) : '';
 
-
-
-
     const commentsValue = ADDITIONAL.comments || '';
     const commentsLineLimit = 33; // Adjust this number as per your PDF font size and width
     const commentsFirstLine = commentsValue.slice(0, commentsLineLimit);
     const commentsRemaining = commentsValue.length > commentsLineLimit ? commentsValue.slice(commentsLineLimit) : '';
-
-    // const renderWithLightBrackets = (text: string) => {
-    //     const parts = text.split(/(\(.*?\))/g);
-    //     // Splits and keeps bracketed text in array
-
-    //     return parts.map((part, index) => {
-    //         if (part.startsWith("(") && part.endsWith(")")) {
-    //             const inside = part.slice(1, -1); // content without parentheses
-    //             return (
-    //                 <React.Fragment key={index}>
-    //                     <Text
-    //                         style={{
-    //                             fontFamily: 'Helvetica',
-    //                             // fontWeight: 'light',
-    //                             fontSize: 6,
-    //                             color: '#333',
-    //                         }}
-    //                     >
-
-    //                         {/* Preserve leading space if needed */}
-    //                         {part.startsWith(" (") ? " (" : "("}
-    //                     </Text>
-    //                     <Text style={styles.fieldValue}>{inside}</Text>
-    //                     <Text
-    //                         style={{
-    //                             fontFamily: 'Helvetica',
-    //                             // fontWeight: 'light',
-    //                             fontSize: 6,
-    //                             color: '#333',
-    //                         }}
-    //                     >
-    //                         )
-    //                     </Text>
-    //                 </React.Fragment>
-    //             );
-    //         }
-
-    //         // Normal text outside brackets
-    //         return (
-    //             <Text key={index} style={styles.fieldValue}>
-    //                 {part}
-    //             </Text>
-    //         );
-    //     });
-    // };
-
 
     const helveticaLightStyle = {
         fontFamily: "Helvetica-Light",
@@ -136,9 +75,6 @@ export default function InvoicePDFSection3({ data }: any) {
             <View>
                 <Text style={styles.fieldLabel}>{data.ReportDate}</Text>
             </View>
-
-
-
             {/* <View style={{
                 flexDirection: "row",
                 alignItems: "baseline",
@@ -153,12 +89,6 @@ export default function InvoicePDFSection3({ data }: any) {
                     {/* First line: label + separator + first part of value */}
                     <View style={styles.fieldRow}>
                         <Text style={styles.fieldLabel}>Report Type</Text>
-                        {/* <View style={{
-                            flexGrow: 1,
-                            borderBottom: "1px dotted #000",
-                            marginHorizontal: "2px",
-                            // height: 1, // remove height if causing layout shifts
-                        }} /> */}
                         <View style={styles.separator} />
                         <Text style={[styles.fieldValue]} wrap={false}>{firstLine}</Text>
 
@@ -495,12 +425,6 @@ const styles = StyleSheet.create({
         fontSize: 5,
         color: "#333",
     },
-    // separator: {
-    //     flexGrow: 1,
-    //     borderBottom: "0.50px dotted #4B4B4D",
-    //     marginHorizontal: "2px",
-    //     height: '5.70px',
-    // },
     separator: {
         flexGrow: 1,
         borderBottomWidth: 0.5,

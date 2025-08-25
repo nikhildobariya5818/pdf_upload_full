@@ -145,11 +145,11 @@ export default function InvoicePDFSection1({ data }: any) {
                     <Text style={commonStyles.fieldValue}>{additional.fluorescence}</Text>
                 </View>
 
-                <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}>
-                    {/* <Text style={commonStyles.fieldLabel}>Inscription(s): </Text> */}
-                    {/* <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription(s) :</Text> */}
-                    <Text style={[commonStyles.fieldLabel,]}>GIA  {report.GIAReportNumber}</Text>
-                </View>
+                {/* <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}> */}
+                {/* <Text style={commonStyles.fieldLabel}>Inscription(s): </Text> */}
+                {/* <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>Inscription(s) :</Text> */}
+                {/* <Text style={[commonStyles.fieldLabel,]}>GIA  {report.GIAReportNumber}</Text> */}
+                {/* </View> */}
                 <View style={[commonStyles.fieldRow, { marginBottom: '2.5px' }]}>
                     <Text style={[commonStyles.fieldLabel, { marginRight: -1 }]}>
                         Inscription

@@ -26,6 +26,7 @@ interface ProportionData {
   depth: string;
   table: string;
   // clarityCharacteristics: string;
+  pdfname: string;
 }
 
 export const BASE_URL = "http://localhost:8000";
@@ -49,7 +50,7 @@ const ReportProcessor = () => {
     country: 'India',
     girdle: '',
     culet: 'NON',
-
+    pdfname: '',
   });
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,7 +120,12 @@ const ReportProcessor = () => {
       const formattedDate = `${day}-${month}-${year}`;
 
       // Create the file name with the format reportNumber-DD/MM/YYYY
-      const fileName = `${mergedData.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}/${formattedDate}.pdf`;
+      // const fileName = `${mergedData.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}/${formattedDate}.pdf`;
+      let fileName = `${mergedData.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}/${formattedDate}.pdf`;
+
+      if (proportions.pdfname && proportions.pdfname.trim() !== '') {
+        fileName = `${mergedData.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}/${formattedDate}-${proportions.pdfname.trim()}.pdf`;
+      }
 
       const blob = await pdf(<InvoicePDF data={mergedData} />).toBlob();
 
@@ -157,6 +163,7 @@ const ReportProcessor = () => {
         country: 'India',
         girdle: '',
         culet: 'NON',
+        pdfname: ''
       });
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

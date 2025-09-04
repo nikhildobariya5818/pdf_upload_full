@@ -10,6 +10,7 @@ import barcode
 from barcode.writer import ImageWriter
 import random
 from PIL import Image
+import numpy as np
 
 OUTPUT_DIR = 'output'
 
@@ -29,6 +30,7 @@ def remove_white_background(image_path):
             new_data.append(item)
     img.putdata(new_data)
     img.save(image_path, "PNG")
+    
 
 def create_and_save_qr_code(report_number, folder_path):
     url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
@@ -77,18 +79,43 @@ def extract_report_date(text):
         return match.group(1)
     return None
 
+
+
+def darken_entire_image(image_path, factor=0.5):
+    """
+    Darken the whole image uniformly.
+    factor < 1.0 makes it darker (e.g., 0.5 = 50% brightness).
+    """
+    im = Image.open(image_path).convert("RGBA")
+    arr = np.array(im).astype(np.float32)
+
+    # Scale RGB channels, keep alpha unchanged
+    arr[..., :3] = np.clip(arr[..., :3] * factor, 0, 255)
+
+    Image.fromarray(arr.astype(np.uint8), mode="RGBA").save(image_path)
+
+
 def extract_key_to_symbols_image(doc, page_index, save_path):
     page = doc[page_index]
     text_instances = page.search_for("KEY TO SYMBOLS*")
     if not text_instances:
         return None
+
     rect = text_instances[0]
     rect.y1 += 60
     rect.x0 -= 10
     rect.x1 += 90
+
+    # Extract image from page
     pix = page.get_pixmap(clip=rect, dpi=300)
     pix.save(save_path)
+
+    # Remove white background (make transparent)
     remove_white_background(save_path)
+
+    # Darken entire image (text + symbols)
+    darken_entire_image(save_path, factor=0.4)  # smaller = darker
+
     return save_path
 
 def extract_notes_image(doc, page_index, save_path):

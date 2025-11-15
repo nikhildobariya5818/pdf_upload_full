@@ -1,11 +1,17 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+import os
 
-import single_diamond
+# Import routers (these files should be in same directory)
+# import single_diamond
 import multi_diamond
 
 app = FastAPI(title="GIA PDF API")
+
+# Ensure output directory exists (so StaticFiles mount won't fail)
+OUTPUT_DIR = os.getenv("OUTPUT_DIR", "output")
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # Enable CORS
 app.add_middleware(
@@ -17,11 +23,11 @@ app.add_middleware(
 )
 
 # Serve static files (images & JSONs)
-app.mount("/files", StaticFiles(directory="output"), name="files")
+app.mount("/output", StaticFiles(directory=OUTPUT_DIR), name="output")
 
-# Include routes from both files
-app.post("/upload-pdf/")(single_diamond.upload_pdf)
-app.post("/upload-multi-pdf/")(multi_diamond.upload_multi_pdf)
+# Register routers (they define their own paths)
+# app.include_router(single_diamond.router)
+app.include_router(multi_diamond.router)
 
 @app.get("/hello")
 def hello():

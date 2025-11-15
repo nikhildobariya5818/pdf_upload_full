@@ -11,10 +11,10 @@ from barcode.writer import ImageWriter
 import random
 from PIL import Image
 import numpy as np
-from auth.dependencies import get_current_user
+# from auth.dependencies import get_current_user
 from typing import Optional, List, Tuple
 
-router = APIRouter(prefix="/pdf", tags=["PDF Processing"], dependencies=[Depends(get_current_user)])
+router = APIRouter(tags=["multi-diamond"])
 
 BASE_OUTPUT_DIR = os.getenv("OUTPUT_DIR", "output")
 os.makedirs(BASE_OUTPUT_DIR, exist_ok=True)

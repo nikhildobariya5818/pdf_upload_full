@@ -10,6 +10,7 @@ import barcode
 from barcode.writer import ImageWriter
 import random
 from PIL import Image
+import numpy as np
 
 OUTPUT_DIR = 'output'
 
@@ -29,6 +30,7 @@ def remove_white_background(image_path):
             new_data.append(item)
     img.putdata(new_data)
     img.save(image_path, "PNG")
+    
 
 def create_and_save_qr_code(report_number, folder_path):
     url = f"https://www.gia.edu/report-check?reportno={report_number.strip().replace(' ', '')}"
@@ -77,19 +79,100 @@ def extract_report_date(text):
         return match.group(1)
     return None
 
+
+
+def darken_reds_and_greens(image_path, sat_boost=2.0, val_mul=0.5,
+                           red_center=0.0, green_center=120.0, hue_tol=20):
+    """
+    Make red and green symbols much darker & more vivid.
+    Black/gray text stays unchanged.
+    """
+    im = Image.open(image_path).convert("RGBA")
+    arr = np.array(im)
+
+    r, g, b, a = arr[..., 0].astype(np.float32), arr[..., 1].astype(np.float32), arr[..., 2].astype(np.float32), arr[..., 3]
+    r1, g1, b1 = r/255.0, g/255.0, b/255.0
+
+    # HSV conversion
+    maxc = np.maximum(np.maximum(r1, g1), b1)
+    minc = np.minimum(np.minimum(r1, g1), b1)
+    v = maxc
+    c = maxc - minc
+    s = np.where(maxc == 0, 0, c / np.where(maxc == 0, 1, maxc))
+
+    h = np.zeros_like(v)
+    mask_r = (maxc == r1) & (c != 0)
+    mask_g = (maxc == g1) & (c != 0)
+    mask_b = (maxc == b1) & (c != 0)
+
+    h[mask_r] = (60 * ((g1 - b1) / c) % 360)[mask_r]
+    h[mask_g] = (60 * ((b1 - r1) / c) + 120)[mask_g]
+    h[mask_b] = (60 * ((r1 - g1) / c) + 240)[mask_b]
+
+    def hue_close(hue_center):
+        d1 = np.abs(h - hue_center)
+        d2 = np.abs(h - (hue_center + 360))
+        return np.minimum(d1, d2) <= hue_tol
+
+    mask_red = hue_close(red_center)
+    mask_green = hue_close(green_center)
+
+    # Stronger filtering: only high saturation & brightness
+    mask = (mask_red | mask_green) & (s > 0.35) & (v > 0.35)
+
+    # Apply darker + more saturated look
+    s = np.where(mask, np.clip(s * sat_boost, 0, 1), s)
+    v = np.where(mask, np.clip(v * val_mul, 0, 1), v)
+
+    # HSV → RGB
+    h6 = h / 60.0
+    i = np.floor(h6).astype(int) % 6
+    f = h6 - np.floor(h6)
+
+    p = v * (1 - s)
+    q = v * (1 - s * f)
+    t = v * (1 - s * (1 - f))
+
+    r2 = np.choose(i, [v, q, p, p, t, v])
+    g2 = np.choose(i, [t, v, v, q, p, p])
+    b2 = np.choose(i, [p, p, t, v, v, q])
+
+    gray = (s == 0)
+    r2 = np.where(gray, v, r2)
+    g2 = np.where(gray, v, g2)
+    b2 = np.where(gray, v, b2)
+
+    out = np.stack([np.clip(r2*255, 0, 255).astype(np.uint8),
+                    np.clip(g2*255, 0, 255).astype(np.uint8),
+                    np.clip(b2*255, 0, 255).astype(np.uint8),
+                    a.astype(np.uint8)], axis=-1)
+
+    Image.fromarray(out, mode="RGBA").save(image_path)
+
+
+
 def extract_key_to_symbols_image(doc, page_index, save_path):
     page = doc[page_index]
     text_instances = page.search_for("KEY TO SYMBOLS*")
     if not text_instances:
         return None
+
     rect = text_instances[0]
     rect.y1 += 60
     rect.x0 -= 10
     rect.x1 += 90
+
     pix = page.get_pixmap(clip=rect, dpi=300)
     pix.save(save_path)
+
+    # Remove white background first
     remove_white_background(save_path)
+
+    # Darken ONLY red & green (avoid black text)
+    darken_reds_and_greens(save_path,sat_boost=2.5, val_mul=0.5)
+
     return save_path
+
 
 def extract_notes_image(doc, page_index, save_path):
     page = doc[page_index]

@@ -59,7 +59,46 @@ export default function InvoicePDFSection1({ data }: any) {
                 <View style={commonStyles.fieldRow}>
                     <Text style={commonStyles.fieldLabel}>Shape and Cutting Style</Text>
                     <View style={commonStyles.separator} />
-                    <Text style={commonStyles.fieldValue}>{report.ShapeandCuttingStyle}</Text>
+                    {(() => {
+                        const raw = (report.ShapeandCuttingStyle || '').trim();
+                        if (!raw) {
+                            return <Text style={commonStyles.fieldValue}></Text>;
+                        }
+
+                        const firstLineLimit = 24;
+
+                        const words = raw.split(/\s+/);
+                        const firstLineWords = [];
+                        let currentLen = 0;
+
+                        for (const w of words) {
+                            const addLen = (firstLineWords.length > 0 ? 1 : 0) + w.length;
+                            if (currentLen + addLen <= firstLineLimit) {
+                                firstLineWords.push(w);
+                                currentLen += addLen;
+                            } else {
+                                break;
+                            }
+                        }
+
+                        if (firstLineWords.length === words.length) {
+                            return <Text style={commonStyles.fieldValue}>{raw}</Text>;
+                        }
+
+                        const firstLine = firstLineWords.join(' ');
+                        const remaining = words.slice(firstLineWords.length).join(' ');
+
+                        return (
+                            <View style={commonStyles.shapeFieldValueContainer}>
+                                <Text style={[commonStyles.fieldValue]}>
+                                    {firstLine}
+                                </Text>
+                                <Text style={[commonStyles.fieldValue]}>
+                                    {remaining}
+                                </Text>
+                            </View>
+                        );
+                    })()}
                 </View>
 
                 <View style={commonStyles.fieldRow}>

@@ -17,6 +17,13 @@ export const commonStyles = StyleSheet.create({
     color: "#333",
     letterSpacing: "-0.20",
   },
+  shapeFieldValueContainer: {
+    flexDirection: "column",
+    alignItems: "flex-end",
+    padding: 0,
+    margin: 0,
+    width: "48%",
+  },
   ReportDate: {
     fontFamily: baseFont,
     fontWeight: "normal",

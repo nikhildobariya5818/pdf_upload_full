@@ -9,7 +9,7 @@ export default function InvoicePDFSection5({ data }: { data: any }) {
             {/* QR Code */}
             <View style={styles.qrContainer}>
                 <Image
-                    src={`${BASE_URL}/files/qrcode.png?t=${Date.now()}`}
+                    src={`${BASE_URL}/output/qrcode.png?t=${Date.now()}`}
                     style={styles.qrImage}
                 />
             </View>
@@ -17,7 +17,7 @@ export default function InvoicePDFSection5({ data }: { data: any }) {
             {/* Barcode and number */}
             <View style={styles.barcodeRow}>
                 <Image
-                    src={`${BASE_URL}/files/barcode10.png?t=${Date.now()}`}
+                    src={`${BASE_URL}/output/barcode10.png?t=${Date.now()}`}
                     style={styles.barcodeImage}
                 />
                 <Text style={styles.barcodeText}>

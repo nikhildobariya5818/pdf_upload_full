@@ -76,7 +76,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
         <View>
             <View style={{ height: '140px', width: '100%', marginTop: '13px', alignItems: 'center', justifyContent: 'center', }}>
                 <Image
-                    src={`${BASE_URL}/files/proportions.png?t=${Date.now()}`}
+                    src={`${BASE_URL}/output/proportions.png?t=${Date.now()}`}
                     style={{ width: 255, height: '100%', objectFit: 'contain' }}
                 />
             </View>
@@ -85,7 +85,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 style={container}
             >
                 <Image
-                    src={`${BASE_URL}/files/clarity_characteristics.jpg?t=${Date.now()}`}
+                    src={`${BASE_URL}/output/clarity_characteristics.jpeg?t=${Date.now()}`}
                     // style={{
                     //     width: isCutGrade, height: isGrade, objectFit: 'contain',
                     // }}
@@ -211,7 +211,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
             {symbolList.length &&
                 <View style={{ position: 'absolute', top: '338px', left: "2px", width: '65%' }}>
                     <Image
-                        src={`${BASE_URL}/files/key_to_symbols.png?t=${Date.now()}`}
+                        src={`${BASE_URL}/output/key_to_symbols.png?t=${Date.now()}`}
                         style={{ width: "100%", height: '100%', objectFit: 'contain' }}
                     />
                 </View>
@@ -226,7 +226,7 @@ export default function InvoicePDFSection4({ data }: { data: any }) {
                 }}
             >
                 {/* <Image
-                    src={`${BASE_URL}/files/notes.png?t=${Date.now()}`}
+                    src={`${BASE_URL}/output/notes.png?t=${Date.now()}`}
                     style={{ width: "100%", height: '100%', objectFit: 'contain' }}
                 /> */}
                 <Image

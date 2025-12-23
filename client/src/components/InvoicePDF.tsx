@@ -78,7 +78,7 @@ export default function InvoicePDF({ data }: { data: any }) {
     return (
         <Document>
             <Page size={[1224, 792]} style={styles.page}>
-                {/* <Image src={'/basiSctucutre.jpg'} style={styles.backgroundImage} /> */}
+                <Image src={'/small-basiSctucutre.jpeg'} style={styles.backgroundImage} />
                 {/* Title section */}
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>{data?.GIANATURALDIAMONDGRADINGREPORT?.GIAReportNumber}</Text>
